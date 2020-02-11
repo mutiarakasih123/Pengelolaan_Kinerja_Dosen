@@ -68,5 +68,9 @@ Route::get('/tu', function () {
     return view('tu.tu-navbar');
 });
 
+Route::get('/admin.users-daftar ', function () {
+    return view('admin.users-daftar');
+});
+
 
 

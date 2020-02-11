@@ -120,7 +120,7 @@ span.price {
     <div class="container">
       <form action="/daftar" method="POST">
       @csrf
-      <center><h3>Form Daftar</h3></center>
+      <center><h3>Form User</h3></center>
         <div class="row">
         <div class="col-50">
             <label for="name"><i class="fa fa-user"></i> Nama</label>

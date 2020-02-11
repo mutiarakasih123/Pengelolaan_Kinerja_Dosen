@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Menu</title>
+    <title>Menu Admin</title>
         <link href="/assets/css/bootstrap4.4.min.css" rel="stylesheet"/>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="crossorigin=""/>
         <link href="/assets/css/style.css" rel="stylesheet"/>
@@ -47,10 +47,10 @@
           <a class="nav-link text-white active" href="/admin">Dashboard</a>
         </li> -->
         <li class="nav-item">
-          <a class="nav-link text-white" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapsePendidikan" href="#collapsePendidikan">coba Halaman </a>
+          <a class="nav-link text-white" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapsePendidikan" href="#collapsePendidikan">Menu Admin </a>
           <nav class="nav nav-pills flex-column" class="collapse" id="collapsePendidikan">
-      <a class="nav-link ml-3 my-1" href="#item-1-1">Pendidikan Formal</a>
-      <a class="nav-link ml-3 my-1" href="#item-1-2">Diklat Pra Jabatan</a>
+      <a class="nav-link ml-3 my-1" href="#item-1-1">Users</a>
+      <a class="nav-link ml-3 my-1" href="#item-1-2">Kegiatan Dosen</a>
       </nav>
         </li>
         
