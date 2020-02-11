@@ -55,7 +55,7 @@ body {
   border-radius: 15px;
 }
 
-input[type=text] {
+input[type=text], select {
   width: 100%;
   margin-bottom: 20px;
   padding: 12px;
@@ -118,7 +118,8 @@ span.price {
 <div class="row">
   <div class="col-60">
     <div class="container">
-      <form action="/action_page.php">
+      <form action="/daftar" method="POST">
+      @csrf
       <center><h3>Form Register</h3></center>
         <div class="row">
         <div class="col-50">
@@ -129,19 +130,36 @@ span.price {
             <label for="nip"><i class="fa fa-address-card-o"></i> Nip</label>
             <input type="text" id="adr" name="nip" placeholder="Enter nip">
             <label for="jabatan"><i class="fa fa-user"></i> Jabatan</label>
-            <input type="text" id="city" name="jabatan" placeholder="Enter jabatan">
+            <select name="jabatan" class='form-control'>
+              <option>pilih jabatan...</option>
+              <option>Jabatan2</option>
+              <option>Jabatan3</option>
+            </select>
+            <label for="prodi"><i class="fa fa-user"></i> Prodi</label>
+            <select name="prodi" class='form-control'>
+              <option>Pilih Prodi...</option>
+              <option>Teknik Informatika</option>
+              <option>Teknik Mesin</option>
+              <option>Teknik Akuntansi</option>
+            </select>
           </div>
 
           <div class="col-50">
-            <label for="prodi"><i class="fa fa-user"></i> Prodi</label>
-            <input type="text" id="city" name="prodi" placeholder="Enter Prodi">
+            <label for="prodi"><i class="fa fa-user"></i> Jurusan</label>
+            <select name="jurusan" class='form-control'>
+              <option>Pilih jurusan...</option>
+              <option>Teknik Informatika</option>
+              <option>Teknik Mesin</option>
+              <option>Teknik Akuntansi</option>
+            </select>
+            
             <label for="tgl_lahir"><i class="fa fa-address-card-o"></i> Tanggal Lahir</label>
-            <input type="date" style="height:40px" id="city" placeholder="tgl_lahir">
+            <input type="date" name="tgl_lahir" style="height:40px" id="city" placeholder="tgl_lahir">
             <br></br>
             <label for="password"><i class="fa fa-address-card-o"></i> Password</label>
             <input type="text" id="password" name="password" placeholder="Enter Password">
             <label for="expyear"><i class="fa fa-address-card-o"></i>Ulangi Password</label>
-            <input type="text" id="password" name="password" placeholder="Ulangi Password">
+            <input type="text" id="password" name="ulangi_password" placeholder="Ulangi Password">
               </div>
           </div>
           

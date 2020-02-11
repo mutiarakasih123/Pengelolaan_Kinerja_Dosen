@@ -12,28 +12,29 @@ use Illuminate\Http\Request;
 |
 */
 Route::get('/login', 'UserController@viewLogin');
-Route::post('/', 'UserController@Login');
-Route::post('/login', 'UserController@Login');
+Route::post('/login', 'UserController@login');
 
-Route::get('/register-dosen', 'UserController@viewregister');
-Route::post('/register-dosen', 'UserController@register');
+Route::get('/daftar', 'UserController@viewregister');
+Route::post('/daftar', 'UserController@daftar');
 
-//Testing
-Route::get('/admin-navbar', function () {
-    return view('admin.admin-navbar');
-});
-
- Route::get('/navbar', function () {
-     return view('navbar');
- });
 
 Route::get('/', function () {
-       return view('login');
+       return view('home');
+})->middleware('auth');
+
+
+Route::get('/keluar', function () {
+    session(['accessId' => null]);
+    return redirect("/login");
 });
 
 Route::get('/admin', function () {
-    return view('admin-navbar');
-});
+    return view('admin.admin-navbar');
+})->middleware('auth');
+
+Route::get('/dosen', function () {
+    return view('dosen.dosen-navbar');
+})->middleware('auth');
 
 Route::get('/register-dosen', function () {
     return view('register-dosen');
@@ -63,7 +64,7 @@ Route::get('/admin-navbar', function () {
     return view('admin.admin-navbar');
 });
 
-Route::get('/tu-navbar', function () {
+Route::get('/tu', function () {
     return view('tu.tu-navbar');
 });
 

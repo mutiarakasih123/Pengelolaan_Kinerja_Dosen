@@ -26,12 +26,11 @@ class UserController extends Controller
                             WHERE email = ? LIMIT 1', [$email]);
         if(count($users) > 0){
             $user = $users[0];
-            if(Hash::check($password, $user->password)){
-                echo("login <br/>");
+            if(md5($password) == $user->password){
                 session(['userId' => $user->id_user ]);
                 session(['email' => $user->email ]);
-                session(['accessId' => $user->accesName]);
-                if ($user->accessId == 1){
+                session(['accessId' => $user->accesname]);
+                 if ($user->accessId == 1){
                     return redirect('/admin');
                 }
                 else if ($user->accessId == 2){
@@ -47,5 +46,21 @@ class UserController extends Controller
             return view('login')->with('message', 'Username tidak terdaftar.');
         }
      }
+     public function daftar(Request $request)
+     {
+         $name = $request->input('name');
+         $email = $request->input('email');
+         $nip = $request->input('nip');
+         $jabatan = $request->input('jabatan');
+         $jurusan = $request->input('jurusan');
+         $prodi = $request->input('prodi');
+         $tgl_lahir = $request->input('tgl_lahir');
+         $password = $request->input('password');
+         $ulangi_password = $request->input('ulangi_password');
+
+         DB::insert("INSERT INTO `tbluser`(`id_user`, `nama`, `nip`, `jabatan`, `tgl_lahir`, `jurusan`, `prodi`, `email`, `password`, `id_akses`) 
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", [null, $name, $nip, $jabatan, $tgl_lahir, $jurusan, $prodi, $email, md5($password), 2]);  
+        return redirect("/login");  
+    }
        
 }
