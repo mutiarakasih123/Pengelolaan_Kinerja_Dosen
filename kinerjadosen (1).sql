@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Feb 2020 pada 14.48
+-- Waktu pembuatan: 12 Feb 2020 pada 16.36
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.1
 
@@ -199,9 +199,11 @@ CREATE TABLE `tbluser` (
 --
 
 INSERT INTO `tbluser` (`id_user`, `nama`, `nip`, `jabatan`, `tgl_lahir`, `jurusan`, `prodi`, `email`, `password`, `id_akses`) VALUES
-(1, 'admin', 1234567, 'admin', '1987-03-06', 'admin', 'admin', 'admin@gmail.com', '123', 1),
+(1, 'admin', 1234567, 'admin', '1987-03-06', 'admin', 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 1),
 (2, 'Dosen1', 1234567, 'Dosen', '1986-03-25', 'Teknik Informatika', 'IF', 'Dosen1@gmail.com', 'dosen1', 2),
-(3, 'Tu1', 12345678, 'tu', '1980-03-25', 'Teknik informatika', 'IF', 'tu1@yahoo.com', 'tu1', 3);
+(3, 'Tu1', 12345678, 'tu', '1980-03-25', 'Teknik informatika', 'IF', 'tu1@yahoo.com', 'tu1', 3),
+(4, 'mutiara', 35155, 'Jabatan2', '1997-03-15', 'Teknik Informatika', 'Teknik Informatika', 'mutiara612@yahoo.co.id', '202cb962ac59075b964b07152d234b70', 2),
+(5, 'coba', 123, 'Jabatan3', '2020-02-05', 'Teknik Informatika', 'Teknik Informatika', 'coba@yaho.com', '202cb962ac59075b964b07152d234b70', 2);
 
 --
 -- Indexes for dumped tables
@@ -293,7 +295,7 @@ ALTER TABLE `tblunsur`
 -- AUTO_INCREMENT untuk tabel `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
