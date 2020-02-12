@@ -18,14 +18,57 @@
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
-        user-select: none;
-      }
+		user-select: none;
+		
+	  }
+	.container {
+		background-color: #a39c9b;
+		padding: 5px 20px 15px 20px;
+		border: 1px solid lightgrey;
+		border-radius: 15px;
+		Height: 370px;
+		width: 50px;
+		}
+		input[type=text] {
+		width: 25%;
+		margin-bottom: 20px;
+		padding: 12px;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		}
 
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
 		      }
+          table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: center;
+  padding: 16px;
+}
+
+th:first-child, td:first-child {
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+
+.fa-check {
+  color: green;
+}
+
+.fa-remove {
+  color: red;
+}
     </style>
 	
 		<!-- Custom styles for this template -->
@@ -33,44 +76,34 @@
   </head>
   
   <body>
-	<div class="row"> 
-  @include('admin.admin-navbar')
+	<div class="row">
+      @include('admin.admin-navbar')
 	<main role="main" class="col-md-3 ml-sm-auto col-lg-10 px-4">
 	<div class="container-fluid">
 	@csrf
-  <table>
+ <a href="/admin.users-daftar" class="btn btn-sm btn-primary my-3">Tambah Users</a>
+	<table class="mt-3" action="/diklat-prajabatan" method="POST">
+		<center> <h3> Tabel Users </h3> </center>
   <tr>
-    <th style="width:50%">Features</th>
-    <th>Basic</th>
-    <th>Pro</th>
+    <th style="width:3%">No</th>
+    <th style="width:10%">Nama</th>
+    <th style="width:10%">Email</th>
+    <th style="width:5%">Nip</th>
+    <th style="width:7%">Email</th>
+    <th style="width:7%">Jabatan</th>
+    <th style="width:7%">Jurusan</th>
+    <th style="width:7%">Prodi</th>
+    <th style="width:10%">Tanggal Lahir</th>
+    <th style="width:7%">Aksi</th>
   </tr>
-  <tr>
-    <td>Sample text</td>
-    <td><i class="fa fa-remove"></i></td>
-    <td><i class="fa fa-check"></i></td>
-  </tr>
-  <tr>
-    <td>Sample text</td>
-    <td><i class="fa fa-check"></i></td>
-    <td><i class="fa fa-check"></i></td>
-  </tr>
-  <tr>
-    <td>Sample text</td>
-    <td><i class="fa fa-check"></i></td>
-    <td><i class="fa fa-check"></i></td>
-  </tr>
-  <tr>
-    <td>Sample text</td>
-    <td><i class="fa fa-remove"></i></td>
-    <td><i class="fa fa-check"></i></td>
-  </tr>
-  <tr>
-    <td>Sample text</td>
-    <td><i class="fa fa-check"></i></td>
-    <td><i class="fa fa-check"></i></td>
-  </tr>
-</table>
-  </div>
+  </table>
+<!-- <td>
+         <a class="btn btn-sm btn-primary" href="/update-spot-foto/'. $spots_foto[$i]->id .'">Edit</a>
+         <a class="btn btn-sm btn-danger" href="/delete-spot-foto/'. $spots_foto[$i]->id .'">Delete</a>
+    </td> -->
+		</main>
+	</div>
+</div>
 
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 		<script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>

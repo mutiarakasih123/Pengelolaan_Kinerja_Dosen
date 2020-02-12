@@ -117,7 +117,7 @@ span.price {
 <body>
 <div class="row">
   <div class="col-60">
-    <div class="container">
+      <div class="container">
       <form action="/user-daftar" method="POST">
       @csrf
       <center><h3>Form User</h3></center>

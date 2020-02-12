@@ -13,7 +13,7 @@
         <script src="/assets/js/bootstrap.min.js"></script>
         <script src="/assets/js/leaflet.js"></script>
         <script src="/assets/js/my-map.js"></script>
-        <style>
+        <!-- <style>
         /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -34,7 +34,7 @@
   background: #555;
 }
 
-</style>
+</style> -->
     </head>
 <body>
 <div class="container-fluid h-100">
@@ -49,7 +49,7 @@
         <li class="nav-item">
           <a class="nav-link text-white" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapsePendidikan" href="#collapsePendidikan">Menu Admin </a>
           <nav class="nav nav-pills flex-column" class="collapse" id="collapsePendidikan">
-      <a class="nav-link ml-3 my-1" href="admin.users-daftar">Users</a>
+      <a class="nav-link ml-3 my-1" href="admin.form-users">Users</a>
       <a class="nav-link ml-3 my-1" href="#item-1-2">Kegiatan Dosen</a>
       </nav>
         </li>

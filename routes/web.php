@@ -60,9 +60,9 @@ Route::get('/dosen-navbar', function () {
     return view('dosen.dosen-navbar');
 });
 
-Route::get('/admin-navbar', function () {
-    return view('admin.admin-navbar');
-});
+// Route::get('/admin-navbar', function () {
+//     return view('admin.admin-navbar');
+// });
 
 Route::get('/tu', function () {
     return view('tu.tu-navbar');
@@ -74,6 +74,10 @@ Route::get('/admin.users-daftar ', function () {
 
 Route::get('/admin.form-users ', function () {
     return view('admin.form-users');
+});
+
+Route::get('/admin.users-daftar ', function () {
+    return view('admin.users-daftar');
 });
 
 
