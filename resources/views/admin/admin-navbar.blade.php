@@ -49,7 +49,7 @@
         <li class="nav-item">
           <a class="nav-link text-white" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapsePendidikan" href="#collapsePendidikan">Menu Admin </a>
           <nav class="nav nav-pills flex-column" class="collapse" id="collapsePendidikan">
-      <a class="nav-link ml-3 my-1" href="#item-1-1">Users</a>
+      <a class="nav-link ml-3 my-1" href="admin.users-daftar">Users</a>
       <a class="nav-link ml-3 my-1" href="#item-1-2">Kegiatan Dosen</a>
       </nav>
         </li>

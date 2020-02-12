@@ -72,5 +72,9 @@ Route::get('/admin.users-daftar ', function () {
     return view('admin.users-daftar');
 });
 
+Route::get('/admin.form-users ', function () {
+    return view('admin.form-users');
+});
+
 
 
