@@ -71,6 +71,13 @@
           </nav>
         </li>
         <li class="nav-item">
+          <a class="nav-link text-white" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapsePendidikan" href="#collapsePendidikan">Riwayat Kegiatan</a>
+          <nav class="nav nav-pills flex-column" class="collapse" id="collapsePendidikan">
+      <a class="nav-link ml-3 my-1" href="#item-1-1">Pendidikan</a>
+      <a class="nav-link ml-3 my-1" href="#item-1-2">Pelaksanaan Pendidikan</a>
+      </nav>
+        </li>
+        <li class="nav-item">
           <a class="nav-link bg-white p-1 mt-3 mx-3 rounded text-center" href="#"><?php echo(session('username')); ?> </a>
         </li> 
       </ul>

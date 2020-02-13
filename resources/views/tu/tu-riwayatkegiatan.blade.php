@@ -77,23 +77,21 @@ tr:nth-child(even) {
   
   <body>
 	<div class="row">
-      @include('admin.admin-navbar')
+      @include('tu.tu-navbar')
 	<main role="main" class="col-md-3 ml-sm-auto col-lg-10 px-4">
 	<div class="container-fluid">
 	@csrf
- <a href="/admin.users-daftar" class="btn btn-sm btn-primary my-3">Tambah Users</a>
-	<table class="mt-3" action="/diklat-prajabatan" method="POST">
-		<center> <h3> Tabel Users </h3> </center>
+ 	<table class="mt-3" action="/" method="POST">
+		<center> <h3> Riwayat Kegiatan </h3> </center>
   <tr>
     <th style="width:3%">No</th>
-    <th style="width:10%">Nama</th>
-    <th style="width:10%">Email</th>
-    <th style="width:5%">Nip</th>
-    <th style="width:7%">Email</th>
-    <th style="width:7%">Jabatan</th>
-    <th style="width:7%">Jurusan</th>
-    <th style="width:7%">Prodi</th>
-    <th style="width:10%">Tanggal Lahir</th>
+    <th style="width:10%">Sub Unsur</th>
+    <th style="width:10%">Kegiatan</th>
+    <th style="width:5%">Jurusan</th>
+    <th style="width:5%">Prodi</th>
+    <th style="width:8%">Tahun Ajaran</th>
+    <th style="width:10%">Pengajar Teori</th>
+    <th style="width:10%">Pengajar Praktek</th>
     <th style="width:7%">Aksi</th>
     </tr>
   </table>

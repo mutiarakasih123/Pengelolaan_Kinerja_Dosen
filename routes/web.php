@@ -80,5 +80,10 @@ Route::get('/admin.users-daftar ', function () {
     return view('admin.users-daftar');
 });
 
+Route::get('/tu.tu-riwayatkegiatan ', function () {
+    return view('tu.tu-riwayatkegiatan');
+});
+
+
 
 
