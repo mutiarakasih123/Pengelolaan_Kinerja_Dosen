@@ -118,13 +118,13 @@ span.price {
 <div class="row">
   <div class="col-60">
       <div class="container">
-      <form action="/user-daftar" method="POST">
+      <form action="/admin.users-daftar" method="POST">
       @csrf
       <center><h3>Form User</h3></center>
         <div class="row">
         <div class="col-50">
-            <label for="name"><i class="fa fa-user"></i> Nama</label>
-            <input type="text" id="fname" name="name" placeholder="Enter nama">
+            <label for="nama"><i class="fa fa-user"></i> Nama</label>
+            <input type="text" id="nama" name="nama" placeholder="Enter nama">
             <label for="email"><i class="fa fa-envelope"></i> Email</label>
             <input type="text" id="email" name="email" placeholder="Enter email">
             <label for="nip"><i class="fa fa-address-card-o"></i> Nip</label>
@@ -134,8 +134,9 @@ span.price {
               <option>pilih jabatan...</option>
               <option>Jabatan2</option>
               <option>Jabatan3</option>
+              <option>Tu informatika</option>
             </select>
-            <label for="prodi"><i class="fa fa-user"></i> Jurusan</label>
+            <label for="jurusan"><i class="fa fa-user"></i> Jurusan</label>
             <select name="jurusan" class='form-control'>
               <option>Pilih Jurusan...</option>
               <option>Teknik Informatika</option>
@@ -165,8 +166,8 @@ span.price {
           </div>
           
         </div>
-        
-        <input type="submit" value="Simpan" class="btn">
+
+        <input class="btn" type="submit" value="Simpan">
       </form>
     </div>
   </div>

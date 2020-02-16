@@ -4,7 +4,6 @@
      <!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="/dist/css/dashboard.css" />
@@ -82,25 +81,43 @@ tr:nth-child(even) {
 	<div class="container-fluid">
 	@csrf
  <a href="/admin.users-daftar" class="btn btn-sm btn-primary my-3">Tambah Users</a>
-	<table class="mt-3" action="/diklat-prajabatan" method="POST">
+	<table class="mt-3" action="/admin.form-users" method="POST">
 		<center> <h3> Tabel Users </h3> </center>
   <tr>
     <th style="width:3%">No</th>
     <th style="width:10%">Nama</th>
     <th style="width:10%">Email</th>
     <th style="width:5%">Nip</th>
-    <th style="width:7%">Email</th>
     <th style="width:7%">Jabatan</th>
     <th style="width:7%">Jurusan</th>
     <th style="width:7%">Prodi</th>
     <th style="width:10%">Tanggal Lahir</th>
     <th style="width:7%">Aksi</th>
     </tr>
-  </table>
-<!-- <td>
-         <a class="btn btn-sm btn-primary" href="/update-spot-foto/'. $spots_foto[$i]->id .'">Edit</a>
-         <a class="btn btn-sm btn-danger" href="/delete-spot-foto/'. $spots_foto[$i]->id .'">Delete</a>
-    </td> -->
+    <tbody>
+		<?php
+    $no 	= 1;
+      for($i = 0; $i ; $i++){
+    $btnEdit = ($interval->days <= 3) ? '&nbsp;' : '<a class="btn btn-sm btn-danger" 
+    href="/batal-pesanan/'. $orders[$i]->id .'">Batal</a>';
+    echo ('<tr>
+    <td>'.$no.'</td>
+    <td>'.$nama['nama'].'</td>
+    <td>'.$email['email'].'</td>
+    <td>'.$nip['nip'].'</td>
+    <td>'.$jabatan['jabatan'].'</td>
+    <td>'.$jurusan['jurusan'].'</td>
+    <td>'.$prodi['prodi'].'</td>
+    <td>'.$btnEdit['btn btn-sm btn-danger'].'</td>
+    </tr>');
+    $no++;
+  }?>
+    </tbody>
+    </table>
+  
+         <!-- <a class="btn btn-sm btn-primary" href="/update-spot-foto/'. $spots_foto[$i]->id .'">Edit</a>
+         <a class="btn btn-sm btn-danger" href="/delete-spot-foto/'. $spots_foto[$i]->id .'">Delete</a> -->
+  
 		</main>
 	</div>
 </div>

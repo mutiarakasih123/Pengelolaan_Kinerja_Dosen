@@ -17,6 +17,9 @@ Route::post('/login', 'UserController@login');
 Route::get('/daftar', 'UserController@viewregister');
 Route::post('/daftar', 'UserController@daftar');
 
+Route::get('/users-daftar', 'UserController@viewusers');
+Route::post('/users-daftar', 'UserController@users');
+
 
 Route::get('/', function () {
        return view('home');
@@ -34,6 +37,10 @@ Route::get('/admin', function () {
 
 Route::get('/dosen', function () {
     return view('dosen.dosen-navbar');
+})->middleware('auth');
+
+Route::get('/tu', function () {
+    return view('tu.tu-navbar');
 })->middleware('auth');
 
 Route::get('/register-dosen', function () {
@@ -64,9 +71,9 @@ Route::get('/dosen-navbar', function () {
 //     return view('admin.admin-navbar');
 // });
 
-Route::get('/tu', function () {
-    return view('tu.tu-navbar');
-});
+// Route::get('/tu', function () {
+//     return view('tu.tu-navbar');
+// });
 
 Route::get('/admin.users-daftar ', function () {
     return view('admin.users-daftar');

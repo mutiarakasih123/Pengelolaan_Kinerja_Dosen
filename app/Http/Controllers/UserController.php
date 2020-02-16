@@ -62,5 +62,22 @@ class UserController extends Controller
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", [null, $name, $nip, $jabatan, $tgl_lahir, $jurusan, $prodi, $email, md5($password), 2]);  
         return redirect("/login");  
     }
+    public function users(Request $request)
+     {
+         $name = $request->input('nama');
+         $email = $request->input('email');
+         $nip = $request->input('nip');
+         $jabatan = $request->input('jabatan');
+         $jurusan = $request->input('jurusan');
+         $prodi = $request->input('prodi');
+         $tgl_lahir = $request->input('tgl_lahir');
+         $password = $request->input('password');
+         $ulangi_password = $request->input('ulangi_password');
+
+         DB::insert("INSERT INTO `tbluser`(`id_user`, `nama`, `nip`, `jabatan`, `tgl_lahir`, `jurusan`, `prodi`, `email`, `password`, `id_akses`) 
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", [null, $name, $nip, $jabatan, $tgl_lahir, $jurusan, $prodi, $email, md5($password), 3]);  
+        return redirect("/admin.form-users"); 
+         
+    }
        
 }
