@@ -19,6 +19,7 @@ Route::post('/daftar', 'UserController@daftar');
 
 Route::get('/users-daftar', 'UserController@viewusers');
 Route::post('/users-daftar', 'UserController@users');
+Route::post('/admin.users-daftar', 'UserController@users');
 
 
 Route::get('/', function () {
@@ -81,10 +82,6 @@ Route::get('/admin.users-daftar ', function () {
 
 Route::get('/admin.form-users ', function () {
     return view('admin.form-users');
-});
-
-Route::get('/admin.users-daftar ', function () {
-    return view('admin.users-daftar');
 });
 
 Route::get('/tu.tu-riwayatkegiatan ', function () {

@@ -77,55 +77,56 @@ tr:nth-child(even) {
   <body>
 	<div class="row">
       @include('admin.admin-navbar')
-	<main role="main" class="col-md-3 ml-sm-auto col-lg-10 px-4">
+<main role="main" class="col-md-3 ml-sm-auto col-lg-10 px-4">
 	<div class="container-fluid">
 	@csrf
  <a href="/admin.users-daftar" class="btn btn-sm btn-primary my-3">Tambah Users</a>
 	<table class="mt-3" action="/admin.form-users" method="POST">
 		<center> <h3> Tabel Users </h3> </center>
-  <tr>
-    <th style="width:3%">No</th>
-    <th style="width:10%">Nama</th>
-    <th style="width:10%">Email</th>
-    <th style="width:5%">Nip</th>
-    <th style="width:7%">Jabatan</th>
-    <th style="width:7%">Jurusan</th>
-    <th style="width:7%">Prodi</th>
-    <th style="width:10%">Tanggal Lahir</th>
-    <th style="width:7%">Aksi</th>
-    </tr>
-    <tbody>
+      <tr>
+        <th style="width:3%">No</th>
+        <th style="width:10%">Nama</th>
+        <th style="width:10%">Email</th>
+        <th style="width:5%">NIP</th>
+        <th style="width:7%">Jabatan</th>
+        <th style="width:7%">Jurusan</th>
+        <th style="width:7%">Prodi</th>
+        <th style="width:10%">Tanggal Lahir</th>
+        <th style="width:7%">Aksi</th>
+      </tr>
+
+  <tbody>
 		<?php
-    $no 	= 1;
-      for($i = 0; $i ; $i++){
-    $btnEdit = ($interval->days <= 3) ? '&nbsp;' : '<a class="btn btn-sm btn-danger" 
-    href="/batal-pesanan/'. $orders[$i]->id .'">Batal</a>';
-    echo ('<tr>
-    <td>'.$no.'</td>
-    <td>'.$nama['nama'].'</td>
-    <td>'.$email['email'].'</td>
-    <td>'.$nip['nip'].'</td>
-    <td>'.$jabatan['jabatan'].'</td>
-    <td>'.$jurusan['jurusan'].'</td>
-    <td>'.$prodi['prodi'].'</td>
-    <td>'.$btnEdit['btn btn-sm btn-danger'].'</td>
-    </tr>');
-    $no++;
-  }?>
-    </tbody>
-    </table>
+        $no 	= 1;
+          for($i = 0; $i ; $i++){
+        $btnEdit = ($interval->days <= 3) ? '&nbsp;' : '<a class="btn btn-sm btn-danger" 
+        href="/batal-pesanan/'. $orders[$i]->id .'">Batal</a>';
+        echo ('<tr>
+        <td>'.$no.'</td>
+        <td>'.$nama['nama'].'</td>
+        <td>'.$email['email'].'</td>
+        <td>'.$nip['nip'].'</td>
+        <td>'.$jabatan['jabatan'].'</td>
+        <td>'.$jurusan['jurusan'].'</td>
+        <td>'.$prodi['prodi'].'</td>
+        <td>'.$btnEdit['btn btn-sm btn-danger'].'</td>
+        <td> <a class="btn btn-sm btn-primary">Tambah Users</a></td>
+        </tr>');
+        $no++;
+    }?>
+  </tbody>
+
+  </table>
   
-         <!-- <a class="btn btn-sm btn-primary" href="/update-spot-foto/'. $spots_foto[$i]->id .'">Edit</a>
-         <a class="btn btn-sm btn-danger" href="/delete-spot-foto/'. $spots_foto[$i]->id .'">Delete</a> -->
-  
-		</main>
+</main>
 	</div>
 </div>
 
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-		<script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
-	</body>
+</body>
+
 </html>

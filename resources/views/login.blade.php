@@ -69,6 +69,7 @@ input[type=text]:focus, input[type=password]:focus {
 }
 </style>
 </head>
+
 <body>
 <div class="bg-img">
 
@@ -89,12 +90,12 @@ input[type=text]:focus, input[type=password]:focus {
 
     
     <br></br>
-    <a href="/register-dosen" class="mt-2">buat Akun</a>
-    <!-- <input type="submit" value="masuk" class="btn btn-primary mt-2" style="width: 100px;"/> -->
+    <a href="/register-dosen" class="mt-2">Buat Akun</a>
     <p>Copyright &copy; Mutiara</p>
 
   </div>
   </form>
 
 </body>
+
 </html>

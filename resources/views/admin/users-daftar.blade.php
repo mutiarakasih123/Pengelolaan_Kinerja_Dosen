@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+
 body {
   /* background-color: #94bbe9; */
   font-family: Arial;
@@ -114,11 +116,12 @@ span.price {
 }
 </style>
 </head>
+
 <body>
 <div class="row">
   <div class="col-60">
       <div class="container">
-      <form action="/admin.users-daftar" method="POST">
+  <form action="/admin.users-daftar" method="POST">
       @csrf
       <center><h3>Form User</h3></center>
         <div class="row">
@@ -127,28 +130,28 @@ span.price {
             <input type="text" id="nama" name="nama" placeholder="Enter nama">
             <label for="email"><i class="fa fa-envelope"></i> Email</label>
             <input type="text" id="email" name="email" placeholder="Enter email">
-            <label for="nip"><i class="fa fa-address-card-o"></i> Nip</label>
+            <label for="nip"><i class="fa fa-address-card-o"></i> NIP</label>
             <input type="text" id="adr" name="nip" placeholder="Enter nip">
             <label for="jabatan"><i class="fa fa-user"></i> Jabatan</label>
             <select name="jabatan" class='form-control'>
-              <option>pilih jabatan...</option>
-              <option>Jabatan2</option>
-              <option>Jabatan3</option>
-              <option>Tu informatika</option>
+              <option>Pilih Jabatan...</option>
+              <option>Jabatan 2</option>
+              <option>Jabatan 3</option>
+              <option>TU Informatika</option>
             </select>
+
             <label for="jurusan"><i class="fa fa-user"></i> Jurusan</label>
             <select name="jurusan" class='form-control'>
               <option>Pilih Jurusan...</option>
               <option>Teknik Informatika</option>
               <option>Teknik Mesin</option>
-              
             </select>
           </div>
 
           <div class="col-50">
             <label for="prodi"><i class="fa fa-user"></i> Prodi</label>
             <select name="prodi" class='form-control'>
-              <option>Pilih prodi...</option>
+              <option>Pilih Prodi...</option>
               <option>Teknik Informatika</option>
               <option>Teknik Geomatika</option>
               <option>Teknik Multimedia dan Jaringan</option>
@@ -166,9 +169,9 @@ span.price {
           </div>
           
         </div>
-
-        <input class="btn" type="submit" value="Simpan">
+            <input type="submit" value="Simpan" class="btn">
       </form>
+      
     </div>
   </div>
 </div>
