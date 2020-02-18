@@ -81,42 +81,18 @@ tr:nth-child(even) {
 	<div class="container-fluid">
 	@csrf
  <a href="/admin.users-daftar" class="btn btn-sm btn-primary my-3">Tambah Users</a>
-	<table class="mt-3" action="/admin.form-users" method="POST">
-		<center> <h3> Tabel Users </h3> </center>
-      <tr>
-        <th style="width:3%">No</th>
-        <th style="width:10%">Nama</th>
-        <th style="width:10%">Email</th>
-        <th style="width:5%">NIP</th>
-        <th style="width:7%">Jabatan</th>
-        <th style="width:7%">Jurusan</th>
-        <th style="width:7%">Prodi</th>
-        <th style="width:10%">Tanggal Lahir</th>
-        <th style="width:7%">Aksi</th>
-      </tr>
+	<table class="mt-3" action="/user" method="POST">
+  <center> <h3> Tabel Users </h3> </center>
+    <input type="hidden" name="id_user" value="<?php echo($user->id_user); ?>" />
+    <input type="text" name="nama" class="form-control mb-2" value="<?php echo($user->nama); ?>" placeholder="Nama" />
+    <input type="email" name="email" class="form-control mb-2" value="<?php echo($user->email); ?>" placeholder="Email" />
+    <input type="text" name="nip" class="form-control mb-2" value="<?php echo($user->nip); ?>" placeholder="NIP" />
+    <input type="text" name="jabatan" class="form-control mb-2" value="<?php echo($user->jabatan); ?>" placeholder="Jabatan" />
+    <input type="text" name="jurusan" class="form-control mb-2" value="<?php echo($user->jurusan); ?>" placeholder="Jurusan" />
+    <input type="text" name="prodi" class="form-control mb-2" value="<?php echo($user->prodi); ?>" placeholder="Prodi" />
+    <input type="date" name="tgl_lahir" class="form-control mb-2" value="<?php echo($user->tgl_lahir); ?>" placeholder="Tanggal lahir" />
 
-  <tbody>
-		<?php
-        $no 	= 1;
-          for($i = 0; $i ; $i++){
-        $btnEdit = ($interval->days <= 3) ? '&nbsp;' : '<a class="btn btn-sm btn-danger" 
-        href="/batal-pesanan/'. $orders[$i]->id .'">Batal</a>';
-        echo ('<tr>
-        <td>'.$no.'</td>
-        <td>'.$nama['nama'].'</td>
-        <td>'.$email['email'].'</td>
-        <td>'.$nip['nip'].'</td>
-        <td>'.$jabatan['jabatan'].'</td>
-        <td>'.$jurusan['jurusan'].'</td>
-        <td>'.$prodi['prodi'].'</td>
-        <td>'.$btnEdit['btn btn-sm btn-danger'].'</td>
-        <td> <a class="btn btn-sm btn-primary">Tambah Users</a></td>
-        </tr>');
-        $no++;
-    }?>
-  </tbody>
-
-  </table>
+    </table>
   
 </main>
 	</div>

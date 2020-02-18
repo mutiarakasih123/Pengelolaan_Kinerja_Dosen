@@ -79,5 +79,30 @@ class UserController extends Controller
         return redirect("/admin.form-users"); 
          
     }
-       
+    public function viewListUsers(Request $request)
+    {
+        $users = DB::select ('SELECT  tbluser.id_user, tbluser.nama, tbluser.email, tbluser.nip, tbluser.jabatan, tbluser.jurusan, tbluser.prodi, 
+        tbluser.tgl_lahir from `tbluser` WHERE tbluser.id_akses = 3'); 
+
+       return view('admin.form-users')->with('users', $users);        
+    }
+    public function updateUser(Request $request)
+    {
+        $id = $request->input('id');
+        $name = $request->input('nama');
+        $nip = $request->input('nip');
+        $email = $request->input('email');
+        $jabatan = $request->input('jabatan');
+        $jurusan = $request->input('jurusan');
+        $prodi = $request->input('prodi');
+        $tgl_lahir = $request->input('tgl_lahir');
+
+        DB::update('UPDATE `tblUser` 
+                   SET `nama` = ?, `nip` = ?, `email` = ?, `date_birth` = ?, `jabatan` = ?,
+                   `jurusan` = ?, `prodi` = ?, `tgl_lahir` = ?,
+                   WHERE `tblUser`.`id` = ?', [$nama, $nip, $email, $jabatan, $jurusan, $prodi, $tgl_lahir]);
+        return view('/user/'. $id_user);
+    }
+
+        
 }

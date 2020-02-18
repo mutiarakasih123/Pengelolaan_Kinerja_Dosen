@@ -20,10 +20,12 @@ Route::post('/daftar', 'UserController@daftar');
 Route::get('/users-daftar', 'UserController@viewusers');
 Route::post('/users-daftar', 'UserController@users');
 Route::post('/admin.users-daftar', 'UserController@users');
+Route::post('/users', 'UserController@viewListUsers');
+Route::post('/user', 'UserController@updateUser');
 
 
 Route::get('/', function () {
-       return view('home');
+       return view('login');
 })->middleware('auth');
 
 
