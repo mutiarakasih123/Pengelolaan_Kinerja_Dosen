@@ -76,19 +76,37 @@ class UserController extends Controller
 
          DB::insert("INSERT INTO `tbluser`(`id_user`, `nama`, `nip`, `jabatan`, `tgl_lahir`, `jurusan`, `prodi`, `email`, `password`, `id_akses`) 
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", [null, $name, $nip, $jabatan, $tgl_lahir, $jurusan, $prodi, $email, md5($password), 3]);  
-        return redirect("/admin.form-users"); 
+        return redirect("/users"); 
          
     }
+    public function listUser(Request $request)
+    {
+        $name = $request->input('nama');
+        $email = $request->input('email');
+        $nip = $request->input('nip');
+        $jabatan = $request->input('jabatan');
+        $jurusan = $request->input('jurusan');
+        $prodi = $request->input('prodi');
+        $tgl_lahir = $request->input('tgl_lahir');
+        $password = $request->input('password');
+        $ulangi_password = $request->input('ulangi_password');
+
+        DB::insert("INSERT INTO `tbluser`(`id_user`, `nama`, `nip`, `jabatan`, `tgl_lahir`, `jurusan`, `prodi`, `email`, `password`, `id_akses`) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", [null, $name, $nip, $jabatan, $tgl_lahir, $jurusan, $prodi, $email, md5($password), 3]);  
+       return redirect("/admin.list_users"); 
+        
+   }
+
     public function viewListUsers(Request $request)
     {
         $users = DB::select ('SELECT  tbluser.id_user, tbluser.nama, tbluser.email, tbluser.nip, tbluser.jabatan, tbluser.jurusan, tbluser.prodi, 
         tbluser.tgl_lahir from `tbluser` WHERE tbluser.id_akses = 3'); 
 
-       return view('admin.form-users')->with('users', $users);        
+       return view('admin.list_users')->with('users', $users);        
     }
     public function updateUser(Request $request)
     {
-        $id = $request->input('id');
+        $id_user = $request->input('id_user');
         $name = $request->input('nama');
         $nip = $request->input('nip');
         $email = $request->input('email');
@@ -100,7 +118,7 @@ class UserController extends Controller
         DB::update('UPDATE `tblUser` 
                    SET `nama` = ?, `nip` = ?, `email` = ?, `date_birth` = ?, `jabatan` = ?,
                    `jurusan` = ?, `prodi` = ?, `tgl_lahir` = ?,
-                   WHERE `tblUser`.`id` = ?', [$nama, $nip, $email, $jabatan, $jurusan, $prodi, $tgl_lahir]);
+                   WHERE `tblUser`.`id_user` = ?', [$nama, $nip, $email, $jabatan, $jurusan, $prodi, $tgl_lahir]);
         return view('/user/'. $id_user);
     }
 

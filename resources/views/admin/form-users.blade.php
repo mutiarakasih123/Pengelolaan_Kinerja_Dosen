@@ -76,7 +76,7 @@ tr:nth-child(even) {
   
   <body>
 	<div class="row">
-      @include('admin.admin-navbar')
+  @include('admin.admin-navbar') 
 <main role="main" class="col-md-3 ml-sm-auto col-lg-10 px-4">
 	<div class="container-fluid">
 	@csrf
@@ -93,6 +93,7 @@ tr:nth-child(even) {
     <input type="date" name="tgl_lahir" class="form-control mb-2" value="<?php echo($user->tgl_lahir); ?>" placeholder="Tanggal lahir" />
 
     </table>
+    
   
 </main>
 	</div>

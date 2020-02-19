@@ -123,6 +123,7 @@ span.price {
       <div class="container">
   <form action="/admin.users-daftar" method="POST">
       @csrf
+      
       <center><h3>Form User</h3></center>
         <div class="row">
         <div class="col-50">

@@ -3,13 +3,12 @@
     <div class="col">
       <div class="row">
         <div class="col-12 shadow py-2">
-          <button class="btn sticky-top" data-toggle="collapse" href="#collapseExample" role="bu tton">
-            Menu
-          </button>   
+        <a href="/admin.users-daftar" class="btn btn-sm btn-primary">Tambah Users</a>
+             
           <a class="float-right mt-2" href="/keluar">Keluar</a>
         </div>
         <div class="col-12 content">
-            <h6 class="mt-4 mb-2">Daftar User</h6>
+            <center> <h6 class="mt-4 mb-2">Daftar User</h6> </center>
             <br />
             <table class="table shadow">
                 <thead>
@@ -34,8 +33,8 @@
                                 <td>'. $users[$i]->tgl_lahir .'</td>
                                 
                                 <td>
-                                    <a class="btn btn-sm btn-primary" href="/user/'. $users[$i]->id .'">Edit</a>
-                                    <a class="btn btn-sm btn-danger" href="/user-delete/'. $users[$i]->id .'">Delete</a>
+                                    <a class="btn btn-sm btn-primary" href="/user/'. $users[$i]->id_user .'">Edit</a>
+                                    <a class="btn btn-sm btn-danger" href="/user-delete/'. $users[$i]->id_user .'">Delete</a>
                                 </td>
                             </tr>');
                         }

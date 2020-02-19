@@ -18,9 +18,10 @@ Route::get('/daftar', 'UserController@viewregister');
 Route::post('/daftar', 'UserController@daftar');
 
 Route::get('/users-daftar', 'UserController@viewusers');
-Route::post('/users-daftar', 'UserController@users');
 Route::post('/admin.users-daftar', 'UserController@users');
-Route::post('/users', 'UserController@viewListUsers');
+Route::post('/admin.list_users', 'UserController@users');
+Route::get('/users', 'UserController@viewListUsers');
+Route::post('/daftaruser', 'UserController@listUsers');
 Route::post('/user', 'UserController@updateUser');
 
 
@@ -53,6 +54,7 @@ Route::get('/register-dosen', function () {
 Route::get('/navbar', function () {
     return view('home');
 });
+
 
 Route::get('/tu.tu-melaksanakankuliahan', function () {
     return view('tu.tu-melaksanakankuliahan');
