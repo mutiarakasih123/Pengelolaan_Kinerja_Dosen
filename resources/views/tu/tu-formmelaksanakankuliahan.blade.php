@@ -1,45 +1,53 @@
 <!doctype html>
 <html lang="en">
   <head>
-     <!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link rel="stylesheet" href="/dist/css/dashboard.css" />
-		
-	<title>Tata Usaha</title>
-	
-  <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+        <link href="/assets/css/bootstrap4.4.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="crossorigin=""/>
+        <link href="/assets/css/style.css" rel="stylesheet"/>
+        <script src="/assets/js/jquery-3.4.1.slim.min.js"></script>
+        <script src="/assets/js/popper.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="/assets/js/leaflet.js"></script>
+        <script src="/assets/js/my-map.js"></script>
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+    <style>
+                /* width */
+        ::-webkit-scrollbar {
+          width: 10px;
         }
-		      }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+          background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+          background: #555;
+        }
+
     </style>
-	
-		<!-- Custom styles for this template -->
-		<link href="dashboard.css" rel="stylesheet">
   </head>
   
   <body>
-	<div class="row"> 
-  @include('navbar')
-	<main role="main" class="col-md-3 ml-sm-auto col-lg-10 px-4">
+	<div class="container-fluid h-100">
+  @include('tu.tu-navbar')
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-10">
 	<div class="container-fluid">
 	@csrf
 		<form class="mt-3" action="/diklat-prajabatan" method="POST">
 				<center> <h3> Form Melaksanakan Kegiatan Dosen </h3> </center>
+      <div class="form-group row">
+		  </div>
         <div class="form-group row">
     	  <label for="jurusan" class="col-sm-2 col-form-label">Jurusan</label>
     	  <div class="col-sm-10">
@@ -47,8 +55,41 @@
      </div>
   </div>
   <div class="form-group row">
+      <label class="col-sm-2" for="inlineFormCustomSelectPref">Sub Unsur</label>
+			  <select class="custom-select col-sm-5" id="inlineFormCustomSelectPref"  >
+				  <option selected> Pilih Sub Unsur </option>
+				  <option value="1">Melaksanakan perkuliahan/tutorial dan membimbing,menguji serta menyelenggarakan 
+          pendidikan dilabratorium, praktek keguruan bengkel/studi/kebun/percobaan/teknologi pengajaran dan praktek lapangan</option>
+				  <option value="2">Membimbing seminar</option>
+			</select>
+      </div>
+      <div class="form-group row">
+      <label class="col-sm-2" for="inlineFormCustomSelectPref">Kegiatan</label>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+        <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+        <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+      </div>
+			  <!-- <select class="custom-select col-sm-5" id="inlineFormCustomSelectPref"  >
+				  <option selected> Pilih Kegiatan </option>
+				  <option value="1">Melaksanakan perkuliahan/tutorial dan 
+          membimbing,menguji serta menyelenggarakan 
+          pendidikan dilabratorium, praktek keguruan bengkel/studi/kebun/percobaan/teknologi 
+          pengajaran dan praktek lapangan</option>
+				  <option value="2">Membimbing seminar</option>
+			</select> -->
+      </div>
+      
+  <div class="form-group row">
         <label  class="col-sm-2 col-form-label">Prodi</label>
-        <input type="text" id="varchar" name="prodi" placeholder="Masukkan Prodi" style=" width: 42%;">
+         <select class="custom-select col-sm-5" id="inlineFormCustomSelectPref"  >
+				  <option selected> Pilih Prodi </option>
+				  <option value="1">Teknik Informatika</option>
+				  <option value="2">Multimedia </option>
+			</select>
     	</div>
   <div class="form-group row">
 		    <label class="col-sm-2" for="inlineFormCustomSelectPref">Tahun Ajaran</label>
@@ -85,6 +126,7 @@
 		      <a class = "btn btn-sm btn-primary" href="#">Batal</a>
 	</td>
   </div>
+  </form>
 
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 		<script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>

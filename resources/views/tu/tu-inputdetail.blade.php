@@ -1,15 +1,18 @@
 <!doctype html>
 <html lang="en">
   <head>
-     <!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link rel="stylesheet" href="/dist/css/dashboard.css" />
-		
-	<title>Tata Usaha</title>
+        <link href="/assets/css/bootstrap4.4.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="crossorigin=""/>
+        <link href="/assets/css/style.css" rel="stylesheet"/>
+        <script src="/assets/js/jquery-3.4.1.slim.min.js"></script>
+        <script src="/assets/js/popper.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="/assets/js/leaflet.js"></script>
+        <script src="/assets/js/my-map.js"></script>
 	
   <style>
       .bd-placeholder-img {
@@ -43,15 +46,12 @@
         }
 		      }
     </style>
-	
-		<!-- Custom styles for this template -->
-		<link href="dashboard.css" rel="stylesheet">
-  </head>
+	</head>
   
-  <body>
-	<div class="row"> 
-  @include('navbar')
-	<main role="main" class="col-md-3 ml-sm-auto col-lg-10 px-4">
+	<body>
+	<div class="container-fluid h-100">
+  @include('tu.tu-navbar')
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-10">
 	<div class="container-fluid">
 	@csrf
 	<form class="mt-3" action="/diklat-prajabatan" method="POST">
