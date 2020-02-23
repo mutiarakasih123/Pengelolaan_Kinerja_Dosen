@@ -4,8 +4,7 @@
       <div class="row">
         <div class="col-12 shadow py-2">
         <a href="/admin.users-daftar" class="btn btn-sm btn-primary">Tambah Users</a>
-             
-          <a class="float-right mt-2" href="/keluar">Keluar</a>
+        <a class="float-right mt-2" href="/keluar">Keluar</a>
         </div>
         <div class="col-12 content">
             <center> <h6 class="mt-4 mb-2">Daftar User</h6> </center>

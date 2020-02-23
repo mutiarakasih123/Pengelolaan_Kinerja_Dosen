@@ -136,16 +136,16 @@ span.price {
             <label for="jabatan"><i class="fa fa-user"></i> Jabatan</label>
             <select name="jabatan" class='form-control'>
               <option>Pilih Jabatan...</option>
-              <option>Jabatan 2</option>
-              <option>Jabatan 3</option>
-              <option>TU Informatika</option>
+              <option>Admin</option>
+              <option>Dosen</option>
+              <option>Tata Usaha Teknik Informatika</option>
             </select>
 
             <label for="jurusan"><i class="fa fa-user"></i> Jurusan</label>
             <select name="jurusan" class='form-control'>
               <option>Pilih Jurusan...</option>
               <option>Teknik Informatika</option>
-              <option>Teknik Mesin</option>
+              <option></option>
             </select>
           </div>
 
@@ -155,8 +155,10 @@ span.price {
               <option>Pilih Prodi...</option>
               <option>Teknik Informatika</option>
               <option>Teknik Geomatika</option>
-              <option>Teknik Multimedia dan Jaringan</option>
+              <option>Teknik Multimedia & Jaringan</option>
               <option>Animasi</option>
+              <option>Rekayasa Keamanan Siber</option>
+
             </select>
             
             <label for="tgl_lahir"><i class="fa fa-address-card-o"></i> Tanggal Lahir</label>
@@ -171,6 +173,7 @@ span.price {
           
         </div>
             <input type="submit" value="Simpan" class="btn">
+            
       </form>
       
     </div>
