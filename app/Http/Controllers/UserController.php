@@ -121,6 +121,9 @@ class UserController extends Controller
                    WHERE `tblUser`.`id_user` = ?', [$nama, $nip, $email, $jabatan, $jurusan, $prodi, $tgl_lahir]);
         return view('/user/'. $id_user);
     }
-
-        
+    public function getKegiatanByIdSubUnsur(Request $request)
+    {
+      return  DB::select('SELECT * FROM `tblkegiatan` WHERE `id_subunsur`=?',[$request->id]);
+    
+    }    
 }

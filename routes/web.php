@@ -24,6 +24,7 @@ Route::get('/users', 'UserController@viewListUsers');
 Route::post('/daftaruser', 'UserController@listUsers');
 Route::post('/user', 'UserController@updateUser');
 
+Route::get('/getKegiatanByIdSubUnsur/{id}', 'UserController@getKegiatanByIdSubUnsur');
 
 Route::get('/', function () {
        return view('login');

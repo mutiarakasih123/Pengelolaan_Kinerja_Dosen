@@ -28,34 +28,24 @@
         <label class="col-sm-2" for="subunsur">Sub Unsur</label>
 			    <select class="custom-select col-sm-5" id="subunsur"  >
               <option selected> Pilih Sub Unsur </option>
-              <option value="1">Melaksanakan perkuliahan/tutorial dan membimbing</option>
-              <option value="2">Membimbing seminar</option>
-              <option value="2">Membimbing kuliah kerja nyata</option>
+              <option value="3">Melaksanakan perkuliahan/tutorial dan membimbing</option>
+              <option value="4">Membimbing seminar</option>
+              <option value="5">Membimbing kuliah kerja nyata</option>
 			    </select>
       </div>
 
       <div class="form-group row">
         <label class="col-sm-2" for="kegiatan">Kegiatan</label>
-          <fieldset class="form-group">
-            <div class="row">
-               <legend class="col-form-label col-sm-2 pt-0"></legend>
-            <div class="col-sm-20">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                <label class="form-check-label" for="gridRadios1">Melaksanakan perkuliahan/ tutorial dan membimbing </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                <label class="form-check-label " for="gridRadios2"> Membimbing mahasiswa seminar	</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-                <label class="form-check-label" for="gridRadios3">Membimbing mahasiswa kuliah kerja nyata, pratek kerja nyata</label>
-            </div>
-            </div>
-            </div>
-          </fieldset>
+			    <select class="custom-select col-sm-5" id="kegiatan"  >
+              <option selected> Pilih Kegiatan </option>
+              <option value="1">Melaksanakan perkulihan/ tutorial dan membimbing, menguji serta			
+</option>
+              <option value="2">Membimbing seminar</option>
+              <option value="2">Membimbing kuliah kerja nyata</option>
+			    </select>
       </div>
+
+      
       
       <div class="form-group row">
                   <label  class="col-sm-2 col-form-label">Prodi</label>
@@ -96,12 +86,11 @@
                         <label  class="col-sm-2 col-form-label">Tanggal Selesai</label>
                         <input class="custom-select col-sm-5" type="date" id="date" name="date" placeholder="tanggal">
       </div>
-
-      <label class="p-3 rounded text-center" style="border: 4px dotted #ccc;width: 300px; 
-                        right: 200px; cursor: pointer;padding: inherit;margin-top: 10px;margin-right: 390px;margin-left: 390px;">
-                        <input class="invisible" type="file" name="image" style="position: absolute;">
-                        <h6>Upload File</h6>
-      </label>
+      <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Upload File </label>
+                        <input class="custom-select col-sm-5" type="file" name="image" >
+       </div>               
+     
 
       <td>
                         <a class="btn btn-sm btn-primary" href="tu.tu-inputdetail" style=" margin-left: 475px;">Simpan</a>
@@ -114,5 +103,18 @@
         <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+        <script>
+        $('#subunsur').change( event =>{
+          fetch("/getKegiatanByIdSubUnsur/"+ event.target.value)
+          .then(res => res.json())
+          .then(activities => {
+            $("#kegiatan")[0].innerHTML = null
+            activities.forEach(({ id_kegiatan, nama_kegiatan}) => {
+              $("#kegiatan")[0].add(new Option(nama_kegiatan, id_kegiatan))
+            })
 
+          })
+          
+        })
+        </script>
 	</body>

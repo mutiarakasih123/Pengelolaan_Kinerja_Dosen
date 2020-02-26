@@ -133,8 +133,8 @@
             <label for="jabatan"><i class="fa fa-user"></i> Jabatan</label>
             <select name="jabatan" class='form-control'>
               <option>pilih jabatan...</option>
-              <option>Jabatan2</option>
-              <option>Jabatan3</option>
+              <option>Dosen</option>
+              <option>Tata Usaha</option>
             </select>
             <label for="prodi"><i class="fa fa-user"></i> Jurusan</label>
             <select name="jurusan" class='form-control'>
