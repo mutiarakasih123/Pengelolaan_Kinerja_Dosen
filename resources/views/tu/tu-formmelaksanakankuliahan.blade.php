@@ -15,7 +15,7 @@
       </div>
 	<form class="mt-3" action="/tu.tu-formmelaksanakankuliahan" method="POST">
 
-				<center> <h3> Form Melaksanakan Kegiatan Dosen </h3> </center>
+				<center> <h3> Form Kegiatan Dosen </h3> </center>
     
       <div class="form-group row">
     	  <label for="jurusan" class="col-sm-2 col-form-label">Jurusan</label>
@@ -25,8 +25,8 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-2" for="inlineFormCustomSelectPref">Sub Unsur</label>
-			    <select class="custom-select col-sm-5" id="inlineFormCustomSelectPref"  >
+        <label class="col-sm-2" for="subunsur">Sub Unsur</label>
+			    <select class="custom-select col-sm-5" id="subunsur"  >
               <option selected> Pilih Sub Unsur </option>
               <option value="1">Melaksanakan perkuliahan/tutorial dan membimbing</option>
               <option value="2">Membimbing seminar</option>
@@ -35,7 +35,7 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-2" for="inlineFormCustomSelectPref">Kegiatan</label>
+        <label class="col-sm-2" for="kegiatan">Kegiatan</label>
           <fieldset class="form-group">
             <div class="row">
                <legend class="col-form-label col-sm-2 pt-0"></legend>
@@ -59,7 +59,7 @@
       
       <div class="form-group row">
                   <label  class="col-sm-2 col-form-label">Prodi</label>
-                <select class="custom-select col-sm-5" id="inlineFormCustomSelectPref"  >
+                <select class="custom-select col-sm-5" id="prodi"  >
                       <option selected> Pilih Prodi </option>
                       <option value="1">Teknik Informatika</option>
                       <option value="2">Teknik Geomatika</option>
@@ -70,8 +70,8 @@
       </div>
 
       <div class="form-group row">
-		                <label class="col-sm-2" for="inlineFormCustomSelectPref">Tahun Ajaran</label>
-			            <select class="custom-select col-sm-5" id="inlineFormCustomSelectPref"  >
+		                <label class="col-sm-2" for="th_ajaran">Tahun Ajaran</label>
+			            <select class="custom-select col-sm-5" id="th_ajaran"  >
                       <option selected> Pilih Tahun Ajaran </option>
                       <option value="1">2019/2020</option>
                       <option value="2">2020/2021</option>
@@ -79,8 +79,8 @@
 	    </div>
 
       <div class="form-group row">
-		                  <label class="col-sm-2" for="inlineFormCustomSelectPref">Semester</label>
-		              <select class="custom-select col-sm-5" id="inlineFormCustomSelectPref">
+		                  <label class="col-sm-2" for="semester">Semester</label>
+		              <select class="custom-select col-sm-5" id="semester">
                       <option selected> Pilih Semester</option>
                       <option value="1">Genap</option>
                       <option value="2">Ganjil</option>

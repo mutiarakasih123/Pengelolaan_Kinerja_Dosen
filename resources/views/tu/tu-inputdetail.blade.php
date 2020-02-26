@@ -52,11 +52,11 @@
 		   
 	<div class="form-group row">
         <label  class="col-sm-2 col-form-label">Kode Mata Kuliah</label>
-        <input type="text" id="varchar" name="prodi" placeholder="Masukkan Mata Kuliah" style=" width: 42%;">
+        <input type="text" id="varchar" name="kodematul" placeholder="Masukkan Mata Kuliah" style=" width: 42%;">
     </div>
 	<div class="form-group row">
         <label  class="col-sm-2 col-form-label">Nama Mata Kuliah</label>
-        <input type="text" id="varchar" name="prodi" placeholder="Nama Mata Kuliah" style=" width: 42%;">
+        <input type="text" id="varchar" name="namamakul" placeholder="Nama Mata Kuliah" style=" width: 42%;">
     </div>
 	
 <body>
@@ -71,21 +71,21 @@
     <div class="row">
     <div class="col-50">
 		<label  class="col-sm-4 col-form-label">Sks Teori</label>
-		<input type="text" id="fname" name="name" placeholder="Input Sks">
-	    <input type="text" id="fname" name="name" placeholder="Input Sesi">
+		<input type="text" id="fname" name="sks_teori" placeholder="Input Sks">
+	    <input type="text" id="fname" name="sesi_teori" placeholder="Input Sesi">
 			  <br></br>
 		<label  class="col-sm-4 col-form-label">Sks Praktek</label>
-        <input type="text" id="fname" name="name" placeholder="Input Sks">
-		<input type="text" id="fname" name="name" placeholder="Input Sesi">
+        <input type="text" id="fname" name="sks_praktek" placeholder="Input Sks">
+		<input type="text" id="fname" name="sese_praktek" placeholder="Input Sesi">
 
 		<center><h6>Input Nama Dosen</h6></center>
 
     <div class="row">
     	<table><label  class="col-sm-4 col-form-label">Pengajar Teori</label>
-            <input type="text" id="fname" name="name" placeholder="Input Nama Dosen" style=" width: 40%;"></table>
+            <input type="text" id="fname" name="namadosenpengajar_teori" placeholder="Input Nama Dosen" style=" width: 40%;"></table>
 			<button onclick="myCreateFunction()" style=" margin-center: 30px, width: 10px";> New row</button>
 		<table><label  class="col-sm-4 col-form-label">Pengajar Praktek</label>
-            <input type="text" id="fname" name="name" placeholder="Input Nama Dosen" style=" width: 40%;"></table>
+            <input type="text" id="fname" name="namadosenpengajar_praktek" placeholder="Input Nama Dosen" style=" width: 40%;"></table>
 			<button onclick="myCreateFunction()" style=" margin-center: 30px, width: 10px";> New row</button>
 
 	<script>
