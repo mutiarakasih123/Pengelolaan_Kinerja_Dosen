@@ -48,7 +48,7 @@
       
       
       <div class="form-group row">
-                  <label  class="col-sm-2 col-form-label">Prodi</label>
+                  <label  class="col-sm-2 col-form-label" for="prodi">Prodi</label>
                 <select class="custom-select col-sm-5" id="prodi"  >
                       <option selected> Pilih Prodi </option>
                       <option value="1">Teknik Informatika</option>
@@ -78,12 +78,12 @@
 	    </div>
 
       <div class="form-group row">
-                        <label  class="col-sm-2 col-form-label">Tanggal Mulai</label>
+                        <label  class="col-sm-2 col-form-label" for="tgl_mulai">Tanggal Mulai</label>
                         <input class="custom-select col-sm-5" type="date" id="date" name="date" placeholder="tanggal">
       </div>
 
       <div class="form-group row">
-                        <label  class="col-sm-2 col-form-label">Tanggal Selesai</label>
+                        <label  class="col-sm-2 col-form-label"for="tgl_selesai">Tanggal Selesai</label>
                         <input class="custom-select col-sm-5" type="date" id="date" name="date" placeholder="tanggal">
       </div>
       <div class="form-group row">

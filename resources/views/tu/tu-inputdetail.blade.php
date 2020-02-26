@@ -57,11 +57,11 @@
 		<center> <h3> Input Detail Pengajaran </h3> </center>
 		   
 	<div class="form-group row">
-        <label  class="col-sm-4 col-form-label">Kode Mata Kuliah</label>
+        <label  class="col-sm-4 col-form-label for="kodematul"">Kode Mata Kuliah</label>
         <input type="text" class="form-control col-sm-4" id="varchar" name="kodematul" placeholder="Masukkan Mata Kuliah" style=" width: 42%;">
     </div>
 	<div class="form-group row">
-        <label  class="col-sm-4 col-form-label">Nama Mata Kuliah</label>
+        <label  class="col-sm-4 col-form-label" for="kodematul">Nama Mata Kuliah</label>
         <input class="form-control col-sm-4" type="text" id="varchar" name="namamakul" placeholder="Nama Mata Kuliah" style=" width: 42%;">
     </div>
 
@@ -76,7 +76,7 @@
 	<div class="row form-group">
 		<label  class="col-sm-4 col-form-label">Sks Praktek</label>
         <input type="text" class="form-control col-sm-4" id="fname" name="sks_praktek" placeholder="Input Sks">
-		<input type="text" class="form-control col-sm-4" id="fname" name="sese_praktek" placeholder="Input Sesi">
+		<input type="text" class="form-control col-sm-4" id="fname" name="sesi_praktek" placeholder="Input Sesi">
 	</div>
 		<center><h6>Input Nama Dosen</h6></center>
 

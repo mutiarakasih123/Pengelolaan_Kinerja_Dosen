@@ -30,6 +30,8 @@
                                 <td>'. $users[$i]->jurusan .'</td>
                                 <td>'. $users[$i]->prodi .'</td>
                                 <td>'. $users[$i]->tgl_lahir .'</td>
+                                <td>'. $users[$i]->tgl_selesai .'</td>
+
                                 
                                 <td>
                                     <a class="btn btn-sm btn-primary" href="/user/'. $users[$i]->id_user .'">Edit</a>

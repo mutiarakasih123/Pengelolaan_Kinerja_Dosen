@@ -73,6 +73,10 @@ Route::get('/dosen-navbar', function () {
     return view('dosen.dosen-navbar');
 });
 
+Route::get('/tu.tu-listinput', function () {
+    return view('tu.tu-listinput');
+});
+
 // Route::get('/admin-navbar', function () {
 //     return view('admin.admin-navbar');
 // });
