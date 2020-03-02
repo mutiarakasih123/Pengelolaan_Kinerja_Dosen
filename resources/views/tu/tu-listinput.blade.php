@@ -9,7 +9,7 @@
         <div class="col-12 content">
             <center> <h6 class="mt-4 mb-2">Data Kegiatan Dosen</h6> </center>
             <br />
-            <table class="table shadow" action="/tu.tu-listinput" method="POST" >
+            <table class="table shadow" action="/listinput" method="POST" >
                 <thead>
                     <tr>
                     <td>No.</td><td>Jurusan</td><td>Sub Unsur</td><td>Kegiatan</td><td>Prodi</td>
