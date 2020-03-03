@@ -67,16 +67,19 @@
 
 
 	<center><h6>Input Sks Dosen</h6></center>
-
+	
     <div class="row form-group">
 		<label  class="col-sm-4 col-form-label">Sks Teori</label>
-		<input type="text" class="form-control col-sm-4" id="fname" name="sks_teori" placeholder="Input Sks">
-	    <input type="text" class="form-control col-sm-4" id="fname" name="sesi_teori" placeholder="Input Sesi">
+		<input type="text" class="form-control col-sm-2" id="fname" name="sks_teori" placeholder="Input Sks">
+	    <input type="text" class="form-control col-sm-2" id="fname" name="sesi_teori" placeholder="Input Sesi">
+		<input type="text" class="form-control col-sm-2" id="fname" name="nilai_teori" placeholder="Nilai">
 	</div>
+
 	<div class="row form-group">
 		<label  class="col-sm-4 col-form-label">Sks Praktek</label>
-        <input type="text" class="form-control col-sm-4" id="fname" name="sks_praktek" placeholder="Input Sks">
-		<input type="text" class="form-control col-sm-4" id="fname" name="sesi_praktek" placeholder="Input Sesi">
+        <input type="text" class="form-control col-sm-2" id="fname" name="sks_praktek" placeholder="Input Sks">
+		<input type="text" class="form-control col-sm-2" id="fname" name="sesi_praktek" placeholder="Input Sesi">
+		<input type="text" class="form-control col-sm-2" id="fname" name="niai_praktek" placeholder="Nilai">
 	</div>
 		<center><h6>Input Nama Dosen</h6></center>
 

@@ -31,6 +31,14 @@
               <option value="3">Melaksanakan perkuliahan/tutorial dan membimbing</option>
               <option value="4">Membimbing seminar</option>
               <option value="5">Membimbing kuliah kerja nyata</option>
+              <option value="6">Membimbing dan ikut membimbing dalam menghasilkan disertasi, tesis, skripsi dan laporan akhir studi</option>
+              <option value="7">Bertugas sebagai penguji pada ujian akhir</option>
+              <option value="8">Membina Kegiatan mahasiswa</option>
+              <option value="9">Mengembangkan program kuliah</option>
+              <option value="10">Mengembangkan bahan kuliah</option> 
+              <option value="12">Membimbing Akademik Dosen yang lebih rendah jabatannya</option>
+              <option value="13">Melaksanakan kegiatan Detasering dan pencangkokan Akademik Dosen</option>
+              <option value="14">Melakukan kegiatan pengembangan diri untuk meningkatan kompetensi</option>
 			    </select>
       </div>
 
@@ -38,10 +46,13 @@
         <label class="col-sm-2" for="kegiatan">Kegiatan</label>
 			    <select class="custom-select col-sm-5" id="kegiatan"  >
               <option selected> Pilih Kegiatan </option>
-              <option value="1">Melaksanakan perkulihan/ tutorial dan membimbing, menguji serta			
-</option>
-              <option value="2">Membimbing seminar</option>
-              <option value="2">Membimbing kuliah kerja nyata</option>
+              <option value="4">Melaksanakan perkulihan/ tutorial dan membimbing, menguji serta</option>
+              <option value="5">Membimbing seminar</option>
+              <option value="6">Membimbing kuliah kerja nyata</option>
+              <option value="7">Pembimbing Utama</option>
+              <option value="8">Pembimbing pendamping/pembantu</option>
+              <option value="6">Membimbing kuliah kerja nyata</option>
+              <option value="6">Membimbing kuliah kerja nyata</option>
 			    </select>
       </div>
 

@@ -6,6 +6,13 @@
         <a class="float-left bg-blue href="#"><?php echo(session('email')); ?> </a>
         <a class="float-right mt-2" href="/keluar">Keluar</a>
         </div>
+    <nav class="navbar navbar-right bg-right">
+    <div class="col-12 shadow py-2">
+    <form class="form-inline">
+        <input class="form-control mr-sm-8" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </nav>
         <div class="col-12 content">
             <center> <h6 class="mt-4 mb-2">Data Kegiatan Dosen</h6> </center>
             <br />
@@ -19,38 +26,35 @@
                         <td>File</td>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php
-                        for($i = 0; $i < count($users); $i++){
-                            $no = $i + 1;
+                <!-- <tbody> -->
+                     <!-- 
+                        // for($i = 0; $i < count($users); $i++){
+                        //     $no = $i + 1;
                             
-                            echo('<tr>
-                                <td>'. $no .'</td>
-                                <td>'. $users[$i]->jurusan.'</td>
-                                <td>'. $users[$i]->subunsur .'</td>
-                                <td>'. $users[$i]->kegiatan .'</td>
-                                <td>'. $users[$i]->prodi .'</td>
-                                <td>'. $users[$i]->semester .'</td>
-                                <td>'. $users[$i]->tgl_mulai .'</td>
-                                <td>'. $users[$i]->tgl_selesai .'</td>
-                                <td>'. $users[$i]->kodemakul .'</td>
-                                <td>'. $users[$i]->namamakul .'</td>
-                                <td>'. $users[$i]->sks_praktek .'</td>
-                                <td>'. $users[$i]->sesi_praktek .'</td>
-                                <td>'. $users[$i]->namadosenpengajar_teori .'</td>
-                                <td>'. $users[$i]->namadosenpengajar_praktek .'</td>
-                                <td>'. $users[$i]->file .'</td>
+                            // echo('<tr>
+                            //     <td>'. $no .'</td>
+                            //     <td>'. $users[$i]->jurusan.'</td>
+                            //     <td>'. $users[$i]->subunsur .'</td>
+                            //     <td>'. $users[$i]->kegiatan .'</td>
+                            //     <td>'. $users[$i]->prodi .'</td>
+                            //     <td>'. $users[$i]->semester .'</td>
+                            //     <td>'. $users[$i]->tgl_mulai .'</td>
+                            //     <td>'. $users[$i]->tgl_selesai .'</td>
+                            //     <td>'. $users[$i]->kodemakul .'</td>
+                            //     <td>'. $users[$i]->namamakul .'</td>
+                            //     <td>'. $users[$i]->sks_praktek .'</td>
+                            //     <td>'. $users[$i]->sesi_praktek .'</td>
+                            //     <td>'. $users[$i]->namadosenpengajar_teori .'</td>
+                            //     <td>'. $users[$i]->namadosenpengajar_praktek .'</td>
+                            //     <td>'. $users[$i]->file .'</td>
                                                 
-                                <td>
-                                    <a class="btn btn-sm btn-primary" href="/user/'. $users[$i]->id_user .'">Edit</a>
-                                    <a class="btn btn-sm btn-danger" href="/user-delete/'. $users[$i]->id_user .'">Delete</a>
-                                </td>
-                            </tr>');
-                        }
-                    ?>
-                </tbody>
+                                // <td>
+                                //     <a class="btn btn-sm btn-primary" href="/user/'. $users[$i]->id_user .'">Edit</a>
+                                //     <a class="btn btn-sm btn-danger" href="/user-delete/'. $users[$i]->id_user .'">Delete</a>
+                                // </td>
+                            
+                
             </table>
-            
         </div>
       </div>
     </div>
