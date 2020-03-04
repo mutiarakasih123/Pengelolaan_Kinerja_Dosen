@@ -54,7 +54,7 @@
         </nav> -->
        </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="tu.tu-formmelaksanakankuliahan">Pelaksanaan Pendidikan</a>
+          <a class="nav-link text-white" href="forminput">Pelaksanaan Pendidikan</a>
           <!-- <nav class="nav nav-pills flex-column" class="collapse " id="collapsePelaksanaanPendidikan" >
           <a class="nav-link ml-3 my-1" href="tu.tu-melaksanakankuliahan">Melaksanakan perkuliahan</a>
           <a class="nav-link ml-3 my-1" href="#item-2-2">Membimbing seminar</a>

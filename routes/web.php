@@ -24,6 +24,8 @@ Route::get('/users', 'UserController@viewListUsers');
 Route::post('/daftaruser', 'UserController@listUsers');
 Route::post('/user', 'UserController@updateUser');
 
+Route::get('/forminput', 'TataUsahaController@forminput');
+
 Route::get('/getKegiatanByIdSubUnsur/{id}', 'UserController@getKegiatanByIdSubUnsur');
 
 Route::get('/', function () {
@@ -48,6 +50,10 @@ Route::get('/tu', function () {
     return view('tu.tu-navbar');
 })->middleware('auth');
 
+Route::get('/forminput', function () {
+    return view('tu.tu-formmelaksanakankuliahan');
+});
+
 Route::get('/register-dosen', function () {
     return view('register-dosen');
 });
@@ -57,13 +63,7 @@ Route::get('/navbar', function () {
 });
 
 
-Route::get('/tu.tu-melaksanakankuliahan', function () {
-    return view('tu.tu-melaksanakankuliahan');
-});
 
-Route::get('/tu.tu-formmelaksanakankuliahan', function () {
-    return view('tu.tu-formmelaksanakankuliahan');
-});
 
 Route::get('/tu.tu-inputdetail', function () {
     return view('tu.tu-inputdetail');

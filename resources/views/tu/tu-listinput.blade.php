@@ -20,41 +20,33 @@
                 <thead>
                     <tr>
                     <td>No.</td><td>Jurusan</td><td>Sub Unsur</td><td>Kegiatan</td><td>Prodi</td>
-                        <td>Tahun Ajaran </td><td>Semester</td><td>Tanggal Mulai</td>
-                        <td>Tanggal Selesai</td><td>Kode Mata Kuliah</td><td>Nama Mata Kuliah</td>
-                        <td>sks Teori</td><td>sks Praktek</td><td>Pengajar Teori</td><td>Pengajar Praktek</td>
-                        <td>File</td>
+                        <td>Pengajar Teori</td><td>Pengajar Praktek</td><td>File</td><td></td>
                     </tr>
                 </thead>
-                <!-- <tbody> -->
-                     <!-- 
-                        // for($i = 0; $i < count($users); $i++){
-                        //     $no = $i + 1;
+                <tbody>
+                   <?php
+                        for($i = 0; $i < count($input); $i++){
+                            $no = $i + 1;
                             
-                            // echo('<tr>
-                            //     <td>'. $no .'</td>
-                            //     <td>'. $users[$i]->jurusan.'</td>
-                            //     <td>'. $users[$i]->subunsur .'</td>
-                            //     <td>'. $users[$i]->kegiatan .'</td>
-                            //     <td>'. $users[$i]->prodi .'</td>
-                            //     <td>'. $users[$i]->semester .'</td>
-                            //     <td>'. $users[$i]->tgl_mulai .'</td>
-                            //     <td>'. $users[$i]->tgl_selesai .'</td>
-                            //     <td>'. $users[$i]->kodemakul .'</td>
-                            //     <td>'. $users[$i]->namamakul .'</td>
-                            //     <td>'. $users[$i]->sks_praktek .'</td>
-                            //     <td>'. $users[$i]->sesi_praktek .'</td>
-                            //     <td>'. $users[$i]->namadosenpengajar_teori .'</td>
-                            //     <td>'. $users[$i]->namadosenpengajar_praktek .'</td>
-                            //     <td>'. $users[$i]->file .'</td>
+                            echo('<tr>
+                              <td>'. $no .'</td>
+                              <td>'. $input[$i]->jurusan.'</td>
+                              <td>'. $input[$i]->subunsur .'</td>
+                              <td>'. $input[$i]->kegiatan .'</td>
+                              <td>'. $input[$i]->prodi .'</td>
+                              <td>'. $input[$i]->namadosenpengajar_teori .'</td>
+                              <td>'. $input[$i]->namadosenpengajar_praktek .'</td>
+                            <td>'. $input[$i]->file .'</td>
                                                 
-                                // <td>
-                                //     <a class="btn btn-sm btn-primary" href="/user/'. $users[$i]->id_user .'">Edit</a>
-                                //     <a class="btn btn-sm btn-danger" href="/user-delete/'. $users[$i]->id_user .'">Delete</a>
-                                // </td>
-                            
-                
-            </table>
+                              <td>
+                                  <a class="btn btn-sm btn-primary" href="/user/'. $forminput[$i]->id_user .'">Detail</a>
+                                 
+                              </td>
+                            </tr>');
+                        }
+                        ?>
+                        </tbody>
+                   </table>
         </div>
       </div>
     </div>

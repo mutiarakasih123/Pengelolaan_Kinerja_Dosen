@@ -13,15 +13,17 @@
           <main role="main" class="col-md-25 ml-sm-auto col-lg-25 px-25">
       <div class="container-fluid">
       </div>
-	<form class="mt-3" action="/formmelaksanakankuliahan" method="POST">
+	<form class="mt-3" action="/formmelaksanakankuliaha" method="POST">
 
 				<center> <h3> Form Kegiatan Dosen </h3> </center>
     
-      <div class="form-group row">
-    	  <label for="jurusan" class="col-sm-2 col-form-label">Jurusan</label>
-    	<div class="col-sm-10">
-     	 	<input type="text" readonly class="form-control-plaintext" id="jurusan" value="Teknik Informatika">
-      </div>
+        <div class="form-group row">
+        <label class="col-sm-2" for="jurusan">Jurusan</label>
+			    <select class="custom-select col-sm-5" id="jurusan"  >
+              <option selected> Pilih Jurusan </option>
+              <option value="3">Teknik Informatika</option>
+              <option value="4">Teknik Mesin</option>
+              </select>
       </div>
 
       <div class="form-group row">
