@@ -24,7 +24,9 @@ Route::get('/users', 'UserController@viewListUsers');
 Route::post('/daftaruser', 'UserController@listUsers');
 Route::post('/user', 'UserController@updateUser');
 
-Route::get('/forminput', 'TataUsahaController@forminput');
+Route::get('/forminput', 'TataUsahaController@viewforminput');
+
+Route::get('/user-delete/{id}', 'UserController@deleteuser');
 
 Route::get('/getKegiatanByIdSubUnsur/{id}', 'UserController@getKegiatanByIdSubUnsur');
 

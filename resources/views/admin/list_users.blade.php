@@ -32,7 +32,7 @@
                                 <td>'. $users[$i]->tgl_lahir .'</td>
                                                                 
                                 <td>
-                                    <a class="btn btn-sm btn-primary" href="/users/'. $users[$i]->id_user .'">Edit</a>
+                                    <a class="btn btn-sm btn-primary" href="//'. $users[$i]->id_user .'">Edit</a>
                                     <a class="btn btn-sm btn-danger" href="/user-delete/'. $users[$i]->id_user .'">Hapus</a>
                                 </td>
                             </tr>');

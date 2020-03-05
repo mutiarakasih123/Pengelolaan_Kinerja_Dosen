@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\File;
 
 class TataUsahaController extends Controller
 {
-    public function forminput(Request $request)
+    public function viewforminput(Request $request)
     {
          $jurusan = $request->input('jurusan');
          $subunsur = $request->input('subunsur');

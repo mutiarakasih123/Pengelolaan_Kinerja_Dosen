@@ -126,4 +126,9 @@ class UserController extends Controller
       return  DB::select('SELECT * FROM `tblkegiatan` WHERE `id_subunsur`=?',[$request->id]);
     
     }    
+    public function deleteuser(Request $request)
+    {
+        DB::delete('DELETE FROM `tbluser` WHERE `tbluser`.`id_user` = ?', [$request->id]);
+        return redirect('/users');
+    }
 }
