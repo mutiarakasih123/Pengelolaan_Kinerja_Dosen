@@ -133,13 +133,8 @@ span.price {
             <input type="text" id="email" name="email" placeholder="Enter email">
             <label for="nip"><i class="fa fa-address-card-o"></i> NIP</label>
             <input type="text" id="adr" name="nip" placeholder="Enter nip">
-            <label for="jabatan"><i class="fa fa-user"></i> Jabatan</label>
-            <select name="jabatan" class='form-control'>
-              <option>Pilih Jabatan...</option>
-              <option>Admin</option>
-              <option>Dosen</option>
-              <option>Tata Usaha Teknik Informatika</option>
-            </select>
+            <label for="jabatan"><i class="fa fa-address-card-o"></i> Jabatan</label>
+            <input type="text" id="adr" name="jabatan" placeholder="Enter jabatan">
 
             <label for="jurusan"><i class="fa fa-user"></i> Jurusan</label>
             <select name="jurusan" class='form-control'>

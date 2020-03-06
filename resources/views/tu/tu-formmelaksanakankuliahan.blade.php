@@ -76,8 +76,8 @@
 		                <label class="col-sm-2" for="th_ajaran">Tahun Ajaran</label>
 			            <select class="custom-select col-sm-5" id="th_ajaran"  >
                       <option selected> Pilih Tahun Ajaran </option>
-                      <option value="1">2019/2020</option>
-                      <option value="2">2020/2021</option>
+                      <option value="1">2019</option>
+                      <option value="2">2020</option>
 			            </select>
 	    </div>
 

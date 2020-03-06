@@ -25,6 +25,7 @@ Route::post('/daftaruser', 'UserController@listUsers');
 Route::post('/user', 'UserController@updateUser');
 
 Route::get('/forminput', 'TataUsahaController@viewforminput');
+Route::post('/input', 'TataUsahaController@input');
 
 Route::get('/user-delete/{id}', 'UserController@deleteuser');
 
