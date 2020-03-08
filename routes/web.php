@@ -14,8 +14,8 @@ use Illuminate\Http\Request;
 Route::get('/login', 'UserController@viewLogin');
 Route::post('/login', 'UserController@login');
 
-Route::get('/daftar', 'UserController@viewregister');
-Route::post('/daftar', 'UserController@daftar');
+// Route::get('/daftar', 'UserController@viewregister');
+// Route::post('/daftar', 'UserController@daftar');
 
 Route::get('/users-daftar', 'UserController@viewusers');
 Route::post('/admin.users-daftar', 'UserController@users');
@@ -26,9 +26,10 @@ Route::post('/daftaruser', 'UserController@listUsers');
 // Route::post('/user', 'UserController@updateUser');
 
 Route::post('/inputdetail', 'TataUsahaController@inputKegiatan');
+Route::get('/tu.tu-inputdetail', 'TataUsahaController@input');
 
-Route::get('/forminput', 'TataUsahaController@viewforminput');
-Route::post('/input', 'TataUsahaController@input');
+// Route::get('/forminput', 'TataUsahaController@viewforminput');
+// Route::post('/input', 'TataUsahaController@input');
 
 Route::get('/user-delete/{id}', 'UserController@deleteuser');
 
