@@ -91,8 +91,7 @@
       echo "<div class='alert alert-danger p-1 m-2'>",  $message , "</div>";
       }?>
       <br></br>
-    <a href="/register-dosen" class="mt-2">Buat Akun</a>
-    <p>Copyright &copy; Mutiara</p>
+      <p>Copyright &copy; Mutiara</p>
 
   </div>
   </form>

@@ -73,9 +73,11 @@ class UserController extends Controller
          $tgl_lahir = $request->input('tgl_lahir');
          $password = $request->input('password');
          $ulangi_password = $request->input('ulangi_password');
+         $hak_akses = $request->input('hak_akses');
+
 
          DB::insert("INSERT INTO `tbluser`(`id_user`, `nama`, `nip`, `jabatan`, `tgl_lahir`, `jurusan`, `prodi`, `email`, `password`, `id_akses`) 
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", [null, $name, $nip, $jabatan, $tgl_lahir, $jurusan, $prodi, $email, md5($password), 3]);  
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", [null, $name, $nip, $jabatan, $tgl_lahir, $jurusan, $prodi, $email, md5($password), $hak_akses]);  
         return redirect("/users"); 
          
     }
@@ -100,27 +102,28 @@ class UserController extends Controller
     public function viewListUsers(Request $request)
     {
         $users = DB::select ('SELECT  tbluser.id_user, tbluser.nama, tbluser.email, tbluser.nip, tbluser.jabatan, tbluser.jurusan, tbluser.prodi, 
-        tbluser.tgl_lahir from `tbluser` WHERE tbluser.id_akses = 3'); 
+        tbluser.tgl_lahir, tblakses.nama_akses from `tbluser`
+        LEFT JOIN tblakses on tbluser.id_akses=tblakses.id_akses'); 
 
        return view('admin.list_users')->with('users', $users);        
     }
-    public function updateUser(Request $request)
-    {
-        $id_user = $request->input('id_user');
-        $name = $request->input('nama');
-        $nip = $request->input('nip');
-        $email = $request->input('email');
-        $jabatan = $request->input('jabatan');
-        $jurusan = $request->input('jurusan');
-        $prodi = $request->input('prodi');
-        $tgl_lahir = $request->input('tgl_lahir');
+    // public function updateUser(Request $request)
+    // {
+    //     $id_user = $request->input('id_user');
+    //     $name = $request->input('nama');
+    //     $nip = $request->input('nip');
+    //     $email = $request->input('email');
+    //     $jabatan = $request->input('jabatan');
+    //     $jurusan = $request->input('jurusan');
+    //     $prodi = $request->input('prodi');
+    //     $tgl_lahir = $request->input('tgl_lahir');
 
-        DB::update('UPDATE `tblUser` 
-                   SET `nama` = ?, `nip` = ?, `email` = ?, `date_birth` = ?, `jabatan` = ?,
-                   `jurusan` = ?, `prodi` = ?, `tgl_lahir` = ?,
-                   WHERE `tblUser`.`id_user` = ?', [$nama, $nip, $email, $jabatan, $jurusan, $prodi, $tgl_lahir]);
-        return view('/user/'. $id_user);
-    }
+    //     DB::update('UPDATE `tblUser` 
+    //                SET `nama` = ?, `nip` = ?, `email` = ?, `date_birth` = ?, `jabatan` = ?,
+    //                `jurusan` = ?, `prodi` = ?, `tgl_lahir` = ?,
+    //                WHERE `tblUser`.`id_user` = ?', [$nama, $nip, $email, $jabatan, $jurusan, $prodi, $tgl_lahir]);
+    //     return view('/user/'. $id_user);
+    // }
     public function getKegiatanByIdSubUnsur(Request $request)
     {
       return  DB::select('SELECT * FROM `tblkegiatan` WHERE `id_subunsur`=?',[$request->id]);
@@ -130,5 +133,29 @@ class UserController extends Controller
     {
         DB::delete('DELETE FROM `tbluser` WHERE `tbluser`.`id_user` = ?', [$request->id]);
         return redirect('/users');
+    }
+    public function userEdit(Request $request)
+    {
+        $user=DB:: select('select * from `tbluser` WHERE `tbluser`.`id_user` = ?', [$request->id])[0];
+        return view('admin.users-edit')->with('user', $user);   
+    }
+
+    public function userEditPost(Request $request)
+    {
+        $id_user = $request->input('id_user');
+        $name = $request->input('nama');
+        $nip = $request->input('nip');
+        $email = $request->input('email');
+        $jabatan = $request->input('jabatan');
+        $jurusan = $request->input('jurusan');
+        $prodi = $request->input('prodi');
+        $tgl_lahir = $request->input('tgl_lahir');
+        $hak_akses = $request->input('hak_akses');
+
+        DB::update('UPDATE `tblUser` 
+                   SET `nama` = ?, `nip` = ?, `email` = ?, `jabatan` = ?,
+                   `jurusan` = ?, `prodi` = ?, `tgl_lahir` = ?, `id_akses`= ?
+                   WHERE `tblUser`.`id_user` = ?', [$name, $nip, $email, $jabatan, $jurusan, $prodi, $tgl_lahir, $hak_akses, $id_user]);
+        return redirect('/users');   
     }
 }

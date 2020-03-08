@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                     <td>No.</td><td>Nama</td><td>Email</td><td>NIP</td><td>Jabatan</td>
-                        <td>Jurusan</td><td>Prodi</td><td>Tanggal Lahir</td><td>Aksi</td>
+                        <td>Jurusan</td><td>Prodi</td><td>Tanggal Lahir</td><td>Nama Akses</td><td>Aksi</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,9 +30,12 @@
                                 <td>'. $users[$i]->jurusan .'</td>
                                 <td>'. $users[$i]->prodi .'</td>
                                 <td>'. $users[$i]->tgl_lahir .'</td>
+                                <td>'. $users[$i]->nama_akses .'</td>
+
+
                                                                 
                                 <td>
-                                    <a class="btn btn-sm btn-primary" href="//'. $users[$i]->id_user .'">Edit</a>
+                                    <a class="btn btn-sm btn-primary" href="/usersedit/'. $users[$i]->id_user .'">Edit</a>
                                     <a class="btn btn-sm btn-danger" href="/user-delete/'. $users[$i]->id_user .'">Hapus</a>
                                 </td>
                             </tr>');

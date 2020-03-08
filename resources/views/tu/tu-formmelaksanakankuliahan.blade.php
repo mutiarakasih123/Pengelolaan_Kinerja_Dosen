@@ -13,13 +13,13 @@
           <main role="main" class="col-md-25 ml-sm-auto col-lg-25 px-25">
       <div class="container-fluid">
       </div>
-	<form class="mt-3" action="/formmelaksanakankuliaha" method="POST">
+	<form class="mt-3" action="/tu.tu-inputdetail" method="POST">
 
 				<center> <h3> Form Kegiatan Dosen </h3> </center>
     
         <div class="form-group row">
         <label class="col-sm-2" for="jurusan">Jurusan</label>
-			    <select class="custom-select col-sm-5" id="jurusan"  >
+			    <select class="custom-select col-sm-5" name="jurusan" id="jurusan"  >
               <option selected> Pilih Jurusan </option>
               <option value="3">Teknik Informatika</option>
               <option value="4">Teknik Mesin</option>
@@ -28,7 +28,7 @@
 
       <div class="form-group row">
         <label class="col-sm-2" for="subunsur">Sub Unsur</label>
-			    <select class="custom-select col-sm-5" id="subunsur"  >
+			    <select class="custom-select col-sm-5" name="subunsur" id="subunsur"  >
               <option selected> Pilih Sub Unsur </option>
               <option value="3">Melaksanakan perkuliahan/tutorial dan membimbing</option>
               <option value="4">Membimbing seminar</option>
@@ -46,7 +46,7 @@
 
       <div class="form-group row">
         <label class="col-sm-2" for="kegiatan">Kegiatan</label>
-			    <select class="custom-select col-sm-5" id="kegiatan"  >
+			    <select class="custom-select col-sm-5" name="kegiatan" id="kegiatan"  >
               <option selected> Pilih Kegiatan </option>
               <option value="4">Melaksanakan perkulihan/ tutorial dan membimbing, menguji serta</option>
               <option value="5">Membimbing seminar</option>
@@ -62,7 +62,7 @@
       
       <div class="form-group row">
                   <label  class="col-sm-2 col-form-label" for="prodi">Prodi</label>
-                <select class="custom-select col-sm-5" id="prodi"  >
+                <select class="custom-select col-sm-5" name="prodi" id="prodi"  >
                       <option selected> Pilih Prodi </option>
                       <option value="1">Teknik Informatika</option>
                       <option value="2">Teknik Geomatika</option>
@@ -74,16 +74,16 @@
 
       <div class="form-group row">
 		                <label class="col-sm-2" for="th_ajaran">Tahun Ajaran</label>
-			            <select class="custom-select col-sm-5" id="th_ajaran"  >
+			            <select class="custom-select col-sm-5" name="th_ajaran" id="th_ajaran"  >
                       <option selected> Pilih Tahun Ajaran </option>
-                      <option value="1">2019</option>
-                      <option value="2">2020</option>
+                      <option value="1">2019/2020</option>
+                      <option value="2">2020/2021</option>
 			            </select>
 	    </div>
 
       <div class="form-group row">
 		                  <label class="col-sm-2" for="semester">Semester</label>
-		              <select class="custom-select col-sm-5" id="semester">
+		              <select class="custom-select col-sm-5" name="semester" id="semester">
                       <option selected> Pilih Semester</option>
                       <option value="1">Genap</option>
                       <option value="2">Ganjil</option>
@@ -92,12 +92,12 @@
 
       <div class="form-group row">
                         <label  class="col-sm-2 col-form-label" for="tgl_mulai">Tanggal Mulai</label>
-                        <input class="custom-select col-sm-5" type="date" id="date" name="date" placeholder="tanggal">
+                        <input class="custom-select col-sm-5" type="date" id="date" name="tgl_mulai" placeholder="tanggal">
       </div>
 
       <div class="form-group row">
                         <label  class="col-sm-2 col-form-label"for="tgl_selesai">Tanggal Selesai</label>
-                        <input class="custom-select col-sm-5" type="date" id="date" name="date" placeholder="tanggal">
+                        <input class="custom-select col-sm-5" type="date" id="date" name="tgl_selesai" placeholder="tanggal">
       </div>
       <div class="form-group row">
       <label class="col-sm-2 col-form-label">Upload File </label>
@@ -106,7 +106,7 @@
      
 
       <td>
-                        <a class="btn btn-sm btn-primary" href="tu.tu-inputdetail" style=" margin-left: 475px;">Simpan</a>
+                        <button class="btn btn-sm btn-primary" style=" margin-left: 475px;">Simpan</button>
                         <a class = "btn btn-sm btn-primary" href="#">Batal</a>
 	    </td>
 
