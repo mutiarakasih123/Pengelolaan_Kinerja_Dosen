@@ -65,29 +65,35 @@
         <input class="form-control col-sm-4" type="text" id="varchar" name="namamakul" placeholder="Nama Mata Kuliah" style=" width: 42%;">
     </div>
 
-
+	<div class="row form-group">
+	<label  class="col-sm-4 col-form-label">Jumlah SKS</label>
+	<input class="form-control col-sm-4" type="text" id="varchar" name="jumlah_sks" placeholder="jumlah Sks" style=" width: 42%;">
+	</div>
 	<center><h6>Input Sks Dosen</h6></center>
 	
     <div class="row form-group">
 		<label  class="col-sm-4 col-form-label">Sks Teori</label>
 		<input type="text" class="form-control col-sm-2" id="fname" name="sks_teori" placeholder="Input Sks">
 	    <input type="text" class="form-control col-sm-2" id="fname" name="sesi_teori" placeholder="Input Sesi">
-		<input type="text" class="form-control col-sm-2" id="fname" name="nilai_teori" placeholder="Nilai">
+		<input type="text" class="form-control col-sm-2" id="fname" name="bobot_sksteori" placeholder="Bobot Sks/sesi">
 	</div>
 
 	<div class="row form-group">
 		<label  class="col-sm-4 col-form-label">Sks Praktek</label>
         <input type="text" class="form-control col-sm-2" id="fname" name="sks_praktek" placeholder="Input Sks">
 		<input type="text" class="form-control col-sm-2" id="fname" name="sesi_praktek" placeholder="Input Sesi">
-		<input type="text" class="form-control col-sm-2" id="fname" name="niai_praktek" placeholder="Nilai">
+		<input type="text" class="form-control col-sm-2" id="fname" name="bobot_skspraktek" placeholder="Bobot Sks/sesi">
 	</div>
+
 		<center><h6>Input Nama Dosen</h6></center>
 
 	<div class="fom-group row">
-    	<label  class="col-sm-4 col-form-label">Pengajar Teori</label>
+    	<label  class="col-sm-4 col-form-label">Dosen Pengajar</label>
 		<div NamaDosenPengajar class="col-sm-8">
 			<a onclick="adddosenpengajar()" class="btn btn-sm btn-primary"> New row</a>
-            <input type="text" id="fname" class="form-control" name="namadosenpengajar_teori" placeholder="Input Nama Dosen" ><br>
+            <input type="text" id="fname" class="form-control col-sm-4" name="namadosenpengajar" placeholder="Input Nama Dosen" ><br>
+			<input type="text" id="fname" class="form-control col-sm-4" name="sksteori_real" placeholder="Input Sks Teori Real" ><br>
+
 		</div>
 		</div>
 		<div class="fom-group row">
