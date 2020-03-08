@@ -69,6 +69,18 @@
 	<label  class="col-sm-4 col-form-label">Jumlah SKS</label>
 	<input class="form-control col-sm-4" type="text" id="varchar" name="jumlah_sks" placeholder="jumlah Sks" style=" width: 42%;">
 	</div>
+
+	<div class="row form-group">
+	<label  class="col-sm-4 col-form-label">Kelas</label>
+	<select class="custom-select col-sm-4" id="kelas"  >
+        <option selected> Pilih Kelas </option>
+		<option value="1">Pagi</option>
+        <option value="2">Malam</option>
+		</select>
+	</div>
+	
+
+
 	<center><h6>Input Sks Dosen</h6></center>
 	
     <div class="row form-group">
@@ -91,32 +103,17 @@
     	<label  class="col-sm-4 col-form-label">Dosen Pengajar</label>
 		<div NamaDosenPengajar class="col-sm-8">
 			<a onclick="adddosenpengajar()" class="btn btn-sm btn-primary"> New row</a>
-            <input type="text" id="fname" class="form-control col-sm-4" name="namadosenpengajar" placeholder="Input Nama Dosen" ><br>
-			<input type="text" id="fname" class="form-control col-sm-4" name="sksteori_real" placeholder="Input Sks Teori Real" ><br>
-
+            <input type="text" id="fname" class="form-control col-sm-4" name="namadosenpengajar" placeholder="Input Nama Dosen" >
+			<input type="text" id="fname" class="form-control col-sm-4" name="sksteori_real" placeholder="Input Sks Teori Real" >
+			<input type="text" id="fname" class="form-control col-sm-4" name="skspraktek_real" placeholder="Input Sks Praktek Real" >
 		</div>
-		</div>
-		<div class="fom-group row">
-    	<label  class="col-sm-4 col-form-label">Pengajar Praktek</label>
-		<div NamaDosenPraktek class="col-sm-8">
-			<a onclick="adddosenpraktek()" class="btn btn-sm btn-primary"> New row</a>
-            <input type="text" id="fname" class="form-control" name="namadosenpengajar_praktek" placeholder="Input Nama Dosen" ><br>
-		</div>
-		</div>	
+	</div>
 	<script>
 			function adddosenpengajar() {
 			const input = `<input type="text" id="fname" class="form-control" name="namadosenpengajar_teori" placeholder="Input Nama Dosen" /><br>`
 			$("[NamaDosenPengajar]").html($("[NamaDosenPengajar]").html()+ input)
 			}
 
-			function adddosenpraktek() {
-			const input = `<input type="text" id="fname" class="form-control" name="namadosenpengajar_praktek" placeholder="Input Nama Dosen" /><br>`
-			$("[NamaDosenPraktek]").html($("[NamaDosenPraktek]").html()+ input)
-
-		}
-		// 	function myDeleteFunction() {
-  		// 	document.getElementById("").deleteRow(0);
-		// }
 	</script>
 	</form>
 	<td>	
