@@ -119,7 +119,7 @@
 	
 			function adddosenpengajar() {
 			const input = `<div  class="d-flex">
-            <input type="text" id="fname" class="form-control col-sm-4" name="namadosenpengajar" placeholder="Input Nama Dosen" >
+            <input type="text" id="fname" class="form-control col-sm-4" name="namadosen_pengajar" placeholder="Input Nama Dosen" >
 			<input type="text" id="fname" class="form-control col-sm-4" name="sksteori_real" placeholder="Input Sks Teori Real" >
 			<input type="text" id="fname" class="form-control col-sm-4" name="skspraktek_real" placeholder="Input Sks Praktek Real" >
 			<input type="text" id="fname" class="form-control col-sm-4" name="total" placeholder="Total" >

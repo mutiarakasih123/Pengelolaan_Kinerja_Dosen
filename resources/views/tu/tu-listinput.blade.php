@@ -29,8 +29,7 @@
                 <th>Nama Mata Kuliah</th>
                 <th>Jumlah Sks</th>
                 <th>Kelas</th>
-                <th>Sks Teori</th>
-                <th>Sks Praktek</th>
+                
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
@@ -54,13 +53,18 @@
                             <td>'. $listKegiatan[$i]->tgl_mulai .'</td>
                             <td>'. $listKegiatan[$i]->tgl_selesai .'</td>
                             <td>'. $listKegiatan[$i]->file .'</td>
+                            
+
                           </tr>
                           <tr style="border-bottom: 5px solid;">
                             <td>'. $listKegiatan[$i]->kodemakul .'</td>
                             <td>'. $listKegiatan[$i]->namamakul .'</td>
                             <td>'. $listKegiatan[$i]->jumlah_sks .'</td>
                             <td>'. $listKegiatan[$i]->kelas .'</td>
-                            
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
                             <th>&nbsp;</th>
                             <th>&nbsp;</th>
                             <th>&nbsp;</th>

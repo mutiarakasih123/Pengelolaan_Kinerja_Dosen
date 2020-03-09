@@ -14,23 +14,16 @@ use Illuminate\Http\Request;
 Route::get('/login', 'UserController@viewLogin');
 Route::post('/login', 'UserController@login');
 
-// Route::get('/daftar', 'UserController@viewregister');
-// Route::post('/daftar', 'UserController@daftar');
-
 Route::get('/users-daftar', 'UserController@viewusers');
 Route::post('/admin.users-daftar', 'UserController@users');
 Route::post('/admin.users-edit', 'UserController@userEditPost');
 Route::post('/admin.list_users', 'UserController@users');
 Route::get('/users', 'UserController@viewListUsers');
 Route::post('/daftaruser', 'UserController@listUsers');
-// Route::post('/user', 'UserController@updateUser');
 
 Route::post('/inputdetail', 'TataUsahaController@inputKegiatan');
 Route::get('/listKegiatan', 'TataUsahaController@listKegiatan');
 Route::get('/kegiatan/{id}', 'TataUsahaController@kegiatanDetail');
-
-// Route::get('/forminput', 'TataUsahaController@viewforminput');
-// Route::post('/input', 'TataUsahaController@input');
 
 Route::get('/user-delete/{id}', 'UserController@deleteuser');
 
@@ -87,13 +80,6 @@ Route::get('/tu.tu-listinput', function () {
     return view('tu.tu-listinput');
 });
 
-// Route::get('/admin-navbar', function () {
-//     return view('admin.admin-navbar');
-// });
-
-// Route::get('/tu', function () {
-//     return view('tu.tu-navbar');
-// });
 
 Route::get('/admin.users-daftar ', function () {
     return view('admin.users-daftar');
