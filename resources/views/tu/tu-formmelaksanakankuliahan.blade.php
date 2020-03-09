@@ -13,7 +13,7 @@
           <main role="main" class="col-md-25 ml-sm-auto col-lg-25 px-25">
       <div class="container-fluid">
       </div>
-	<form class="mt-3" action="/tu.tu-inputdetail" method="POST">
+	<form class="mt-3" action="/tu.tu-inputdetail" method="get">
 
 				<center> <h3> Form Kegiatan Dosen </h3> </center>
     

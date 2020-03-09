@@ -26,7 +26,8 @@ Route::post('/daftaruser', 'UserController@listUsers');
 // Route::post('/user', 'UserController@updateUser');
 
 Route::post('/inputdetail', 'TataUsahaController@inputKegiatan');
-Route::get('/tu.tu-inputdetail', 'TataUsahaController@input');
+Route::get('/listKegiatan', 'TataUsahaController@listKegiatan');
+Route::get('/kegiatan/{id}', 'TataUsahaController@kegiatanDetail');
 
 // Route::get('/forminput', 'TataUsahaController@viewforminput');
 // Route::post('/input', 'TataUsahaController@input');

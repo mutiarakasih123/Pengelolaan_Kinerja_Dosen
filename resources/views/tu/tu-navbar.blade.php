@@ -71,7 +71,7 @@
           </nav> -->
         </li>
         <li class="nav-item">
-        <a class="nav-link text-white" href="tu.tu-listinput">Data Kegiatan Dosen</a>
+        <a class="nav-link text-white" href="/listKegiatan">Data Kegiatan Dosen</a>
           <!-- <nav class="nav nav-pills flex-column" class="collapse" id="collapsePendidikan">
       <a class="nav-link ml-3 my-1" href="#item-1-1">Pendidikan</a>
       <a class="nav-link ml-3 my-1" href="#item-1-2">Pelaksanaan Pendidikan</a>

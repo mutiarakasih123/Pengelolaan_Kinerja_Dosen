@@ -51,7 +51,7 @@
 <body>
 	<div class="row">
 	<div class="col-30">
-	<form action="/inputdetail" method="POST">
+	<form action="/inputdetail" method="Get">
 		<div class="container">
 		
 		<center> <h3> Input Detail Pengajaran </h3> </center>
@@ -108,7 +108,7 @@
             <input type="text" id="fname" class="form-control col-sm-4" name="namadosenpengajar" placeholder="Input Nama Dosen" >
 			<input type="number" id="sksteori_real" class="form-control col-sm-4" name="sksteori_real"  placeholder="Input Sks Teori Real" >
 			<input type="number" id="skspraktek_real" class="form-control col-sm-4" name="skspraktek_real" onkeyup="sksTeorireal()"  placeholder="Input Sks Praktek Real" >
-			<input type="number" id="Total" class="form-control col-sm-4" name="Total" placeholder="Total" >
+			<input type="number" id="Total" class="form-control col-sm-4" name="total" placeholder="Total" >
 		
 		</div>
 		

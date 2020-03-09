@@ -41,12 +41,14 @@ class TataUsahaController extends Controller
                 $sesi_teori, $sesi_praktek, $nilai_teori,  $nilai_teori]);
                 return redirect("/forminput");        
     }
-    public function input(Request $request)
+    public function listKegiatan(Request $request)
     {
-       $input = DB::select('SELECT tblinput.id_input, tblinput.jurusan, tblinput.subunsur, tblinput.kegiatan, 
-                    tblinput.prodi, tblinput.th_ajaran, tblinput.semester, tblinput.tgl_mulai, tblinput.tgl_selesai
-                FROM tblinput 
-                WHERE tblinput.id_input = ?');
-        return view('tu.tu-listinput')->with('input', $input); 
+       $list = DB::select('SELECT * FROM `tblreportkegiatan`');
+        return view('tu.tu-listinput')->with('listKegiatan', $list); 
+    }
+    public function kegiatanDetail(Request $request)
+    {
+        $list = DB::select('SELECT * FROM `tblnilai_pengajar` where id_reportkegiatan = ?', [$request->id]);
+        return view('tu.tu-kegiatandetail')->with('kegiatanDetail', $list);
     }
 }

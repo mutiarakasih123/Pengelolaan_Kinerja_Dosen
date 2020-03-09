@@ -9,62 +9,28 @@
         <div class="col-12 content">
             <center> <h6 class="mt-4 mb-2">Data Kegiatan Dosen</h6> </center>
             <br />
-            <table class="table shadow" action="/forminput" method="POST" >
+            <table class="table shadow" >
                 <thead>
-                    <tr>
-                    <th>Jurusan</th>
-                    <th>Sub Unsur</th>
-                    <th>Kegiatan</th>
-                    <th>Prodi</th>
-                    <th>Tahun Ajaran </th>
-                    <th>Semester</th>
-                    <th>Tanggal Mulai</th>
-                    <th>Tanggal Selesai</th>
-                    <th>File</th>
-                    
-                    
-                    </tr>
-                <tr style="border-bottom: 5px solid;">
-                <th>Kode Mata Kuliah</th>
-                <th>Nama Mata Kuliah</th>
-                <th>Jumlah Sks</th>
-                <th>Kelas</th>
+                 <tr>
+                <th>Nama Dosen Pengajar</th>
                 <th>Sks Teori</th>
                 <th>Sks Praktek</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
-                
+                <th>Total</th>
+                                          
                 </tr>
                 </thead>
               <tbody>
               <?php
-                        for($i = 0; $i < count($listKegiatan); $i++){
+                        for($i = 0; $i < count($kegiatanDetail); $i++){
                             $no = $i + 1;
 
-                            echo('<tr onclick = "goToDetail('.$listKegiatan[$i]->id_reportkegiatan.')"> 
-                             <td>'. $listKegiatan[$i]->jurusan .'</td>
-                            <td>'. $listKegiatan[$i]->subunsur .'</td>
-                            <td>'. $listKegiatan[$i]->kegiatan .'</td>
-                            <td>'. $listKegiatan[$i]->prodi .'</td>
-                            <td>'. $listKegiatan[$i]->th_ajaran .'</td>
-                            <td>'. $listKegiatan[$i]->semester .'</td>
-                            <td>'. $listKegiatan[$i]->tgl_mulai .'</td>
-                            <td>'. $listKegiatan[$i]->tgl_selesai .'</td>
-                            <td>'. $listKegiatan[$i]->file .'</td>
-                          </tr>
-                          <tr style="border-bottom: 5px solid;">
-                            <td>'. $listKegiatan[$i]->kodemakul .'</td>
-                            <td>'. $listKegiatan[$i]->namamakul .'</td>
-                            <td>'. $listKegiatan[$i]->jumlah_sks .'</td>
-                            <td>'. $listKegiatan[$i]->kelas .'</td>
-                            
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
-                            
+                            echo('<tr> 
+                             <td>'. $kegiatanDetail[$i]->namadosen_pengajar .'</td>
+                            <td>'. $kegiatanDetail[$i]->sks_teori .'</td>
+                            <td>'. $kegiatanDetail[$i]->sks_praktek .'</td>
+                            <td>'. $kegiatanDetail[$i]->total .'</td>
+                  
+                                                   
                           </tr>');
                         }
 
