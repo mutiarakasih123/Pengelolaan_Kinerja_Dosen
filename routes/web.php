@@ -21,7 +21,7 @@ Route::post('/admin.list_users', 'UserController@users');
 Route::get('/users', 'UserController@viewListUsers');
 Route::post('/daftaruser', 'UserController@listUsers');
 
-Route::post('/inputdetail', 'TataUsahaController@inputKegiatan');
+Route::post('/inputKegiatan', 'TataUsahaController@inputKegiatan');
 Route::get('/listKegiatan', 'TataUsahaController@listKegiatan');
 Route::get('/kegiatan/{id}', 'TataUsahaController@kegiatanDetail');
 

@@ -22,24 +22,21 @@ class TataUsahaController extends Controller
          $tgl_mulai = $request->input('tgl_mulai');
          $tgl_selesai = $request->input('tgl_selesai');
         //  $file = $request->input('file');
-        //  $kodemakul = $request->input('kodemakul');
-        //  $namamakul = $request->input('namamakul');
-        //  $jumlah_sks = $request->input('jumlah_sks');
-        //  $kelas = $request->input('kelas');
-        //  $sks_teori = $request->input('sks_teori');
-        //  $sks_praktek = $request->input('sks_praktek');
+         $kodemakul = $request->input('kodemakul');
+         $namamakul = $request->input('namamakul');
+         $jumlah_sks = $request->input('jumlah_sks');
+         $kelas = $request->input('kelas');
+         $sksteori_real = $request->input('sksteori_real');
+         $skspraktek_real = $request->input('skspraktek_real');
         //  $nilai_teori = $request->input('nilai_teori');
         //  $nilai_praktek = $request->input('nilai_praktek');
-        //  $namadosenpengajar = $request->input('namadosenpengajar');
-        //  $total = $request->input('total');
+         $namadosenpengajar = $request->input('namadosenpengajar');
+         $total = $request->input('total');
                           
-         DB::insert("INSERT INTO `tblinput`(`id_input`, `jurusan`, `subunsur`, `kegiatan`, `prodi`,
-                                             `th_ajaran`, `semester`, `tgl_mulai`, `tgl_selesai`,
-                                            `kodemakul`, `namamakul`, `jumlah_sks`, `kelas`, `sks_teori`, 
-                                            `sks_praktek`, `nilai_teori`, `nilai_praktek`, `namadosenpengajar_teori`)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?))", [null, $jurusan, $subunsur, $kegiatan,
-                $prodi, $th_ajaran, $semester, $tgl_mulai, $tgl_selesai, null, null, null, null,
-                null, null, null, null]);
+         DB::insert("INSERT INTO `tblreportkegiatan`(`id_reportkegiatan`,`jurusan`, `subunsur`, `kegiatan`, `prodi`, `th_ajaran`, `semester`, `tgl_mulai`, `tgl_selesai`, 
+                                                    `kodemakul`, `namamakul`, `jumlah_sks`, `kelas`, `sksteori_real`, `skspraktek_real`, `namadosenpengajar`, `total`)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [null, $jurusan, $subunsur, $kegiatan, $prodi, $th_ajaran, $semester, $tgl_mulai, $tgl_selesai, $kodemakul, 
+                                                                    $namamakul, $jumlah_sks, $kelas, $sksteori_real, $skspraktek_real, $namadosenpengajar, $total ]);
                 return "ok";        
     }
     public function listKegiatan(Request $request)

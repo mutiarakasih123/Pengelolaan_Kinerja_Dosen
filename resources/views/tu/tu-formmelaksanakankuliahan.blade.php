@@ -1,4 +1,10 @@
 @include('tu.tu-navbar')
+<?php
+
+$jurusan = DB::select("select * from tbljurusan");
+$prodi = DB::select("select * from tblprodi");
+$th_ajaran = DB::select("select * from tblth_ajaran");
+?>
 <div class="col">
       <div class="row">
         <div class="col-12 shadow py-2">
@@ -11,7 +17,8 @@
           <main role="main" class="col-md-25 ml-sm-auto col-lg-25 px-25">
           <br />
       <div class="container-fluid">
-      <form  method ="Post" action="/inputdetail">
+      <form  method ="Post" action="/inputKegiatan">
+      @csrf
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" id="kegiatan-dosen-tab" data-toggle="tab" href="#kegiatan-dosen" role="tab" aria-controls="kegiatan-dosen" aria-selected="true">
@@ -34,9 +41,14 @@
         <label class="col-sm-2" for="jurusan">Jurusan</label>
 			    <select class="custom-select col-sm-5" name="jurusan" id="jurusan"  >
               <option selected> Pilih Jurusan </option>
-              <option value="3">Teknik Informatika</option>
-              <option value="4">Teknik Mesin</option>
-          </select>
+              <?php
+              for ($i=0;$i<count($jurusan);$i++){
+                echo("
+                <option value='".$jurusan[$i]->id_jurusan."''>".$jurusan[$i]->nama_jurusan."</option>
+                ");
+              }
+              ?>
+                   </select>
         </div>
 
       <div class="form-group row">
@@ -77,21 +89,28 @@
                   <label  class="col-sm-2 col-form-label" for="prodi">Prodi</label>
                 <select class="custom-select col-sm-5" name="prodi" id="prodi"  >
                       <option selected> Pilih Prodi </option>
-                      <option value="1">Teknik Informatika</option>
-                      <option value="2">Teknik Geomatika</option>
-                      <option value="2">Teknik Geomatika & Jaringan</option>
-                      <option value="2">Animasi</option>
-                      <option value="2">Rekayasa Keamanan Siber</option>
-			          </select>
+                      <?php
+              for ($i=0;$i<count($prodi);$i++){
+                echo("
+                <option value='".$prodi[$i]->id_prodi."''>".$prodi[$i]->nama_prodi."</option>
+                ");
+              }
+              ?>
+                 </select>
       </div>
 
       <div class="form-group row">
 		                <label class="col-sm-2" for="th_ajaran">Tahun Ajaran</label>
 			            <select class="custom-select col-sm-5" name="th_ajaran" id="th_ajaran"  >
                       <option selected> Pilih Tahun Ajaran </option>
-                      <option value="1">2019/2020</option>
-                      <option value="2">2020/2021</option>
-			            </select>
+                      <?php
+              for ($i=0;$i<count($th_ajaran);$i++){
+                echo("
+                <option value='".$th_ajaran[$i]->id_thajaran."''>".$th_ajaran[$i]->tahun_ajaran."</option>
+                ");
+              }
+              ?>
+  		            </select>
 	    </div>
 
       <div class="form-group row">
@@ -151,8 +170,8 @@
 	<label  class="col-sm-2 col-form-label">Kelas</label>
 	  <select class="custom-select col-sm-4" name ="kelas" id="kelas"  >
         <option selected> Pilih Kelas </option>
-		      <option value="1">Pagi</option>
-        <option value="2">Malam</option>
+		      <option>Pagi</option>
+        <option>Malam</option>
 		</select>
 	</div>
 
@@ -196,7 +215,7 @@
         <div class="d-flex">
           <div style="flex: 1">&nbsp;</div>
           <div class="d-flex flex-column">
-            <small>SKS Praktek Real</small>
+            <small>Total Sks</small>
             <input type="number" id="Total" class="form-control" name="total" placeholder="Total Sks" >
           </div>
         </div>
