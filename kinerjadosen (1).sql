@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Feb 2020 pada 16.36
+-- Waktu pembuatan: 17 Mar 2020 pada 19.52
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.1
 
@@ -41,6 +41,27 @@ INSERT INTO `tblakses` (`id_akses`, `nama_akses`) VALUES
 (1, 'Admin'),
 (2, 'Dosen'),
 (3, 'Tata Usaha');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbljurusan`
+--
+
+CREATE TABLE `tbljurusan` (
+  `id_jurusan` int(11) NOT NULL,
+  `nama_jurusan` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbljurusan`
+--
+
+INSERT INTO `tbljurusan` (`id_jurusan`, `nama_jurusan`) VALUES
+(1, 'Teknik Informatika'),
+(2, 'Teknik Mesin'),
+(5, 'Teknik Akuntansi'),
+(6, 'Teknik Geomatika');
 
 -- --------------------------------------------------------
 
@@ -88,23 +109,106 @@ INSERT INTO `tblkegiatan` (`id_kegiatan`, `nama_kegiatan`, `id_subunsur`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tblnilai_pengajar`
+--
+
+CREATE TABLE `tblnilai_pengajar` (
+  `id_nilaipengajar` int(11) NOT NULL,
+  `id_reportkegiatan` int(11) NOT NULL,
+  `namadosen_pengajar` varchar(50) NOT NULL,
+  `sks_teori` int(11) NOT NULL,
+  `sks_praktek` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tblnilai_pengajar`
+--
+
+INSERT INTO `tblnilai_pengajar` (`id_nilaipengajar`, `id_reportkegiatan`, `namadosen_pengajar`, `sks_teori`, `sks_praktek`, `total`) VALUES
+(1, 0, 'Riwinoto', 3, 2, 6),
+(2, 2, 'Riwinoto', 2, 3, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tblprodi`
+--
+
+CREATE TABLE `tblprodi` (
+  `id_prodi` int(11) NOT NULL,
+  `nama_prodi` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tblprodi`
+--
+
+INSERT INTO `tblprodi` (`id_prodi`, `nama_prodi`) VALUES
+(1, 'Teknik Informatika'),
+(2, 'Teknik Geomatika'),
+(3, 'Teknik Geomatika & Jaring'),
+(4, 'Animasi'),
+(5, 'Rekayasa Keamanan Siber');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tblreportkegiatan`
 --
 
 CREATE TABLE `tblreportkegiatan` (
   `id_reportkegiatan` int(11) NOT NULL,
-  `id_unsur` int(11) NOT NULL,
-  `id_subunsur` int(11) NOT NULL,
-  `id_kegiatan` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `jurusan` varchar(25) DEFAULT NULL,
+  `subunsur` varchar(100) DEFAULT NULL,
+  `kegiatan` varchar(50) DEFAULT NULL,
+  `prodi` varchar(50) DEFAULT NULL,
+  `th_ajaran` varchar(25) DEFAULT NULL,
+  `semester` varchar(25) DEFAULT NULL,
+  `tgl_mulai` date DEFAULT NULL,
+  `tgl_selesai` date DEFAULT NULL,
+  `file` text,
+  `kodemakul` varchar(50) DEFAULT NULL,
+  `namamakul` varchar(50) DEFAULT NULL,
+  `jumlah_sks` int(11) DEFAULT NULL,
+  `kelas` varchar(25) DEFAULT NULL,
+  `$sksteori_real` varchar(25) DEFAULT NULL,
+  `$skspraktek_real` varchar(25) DEFAULT NULL,
+  `namadosenpengajar` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tblreportkegiatan`
 --
 
-INSERT INTO `tblreportkegiatan` (`id_reportkegiatan`, `id_unsur`, `id_subunsur`, `id_kegiatan`, `id_user`) VALUES
-(1, 1, 1, 1, 5);
+INSERT INTO `tblreportkegiatan` (`id_reportkegiatan`, `jurusan`, `subunsur`, `kegiatan`, `prodi`, `th_ajaran`, `semester`, `tgl_mulai`, `tgl_selesai`, `file`, `kodemakul`, `namamakul`, `jumlah_sks`, `kelas`, `$sksteori_real`, `$skspraktek_real`, `namadosenpengajar`) VALUES
+(2, 'Teknik informatika', 'Melaksanakan perkuliahan/tutorial dan membimbing', 'Melaksanakan perkulihan/ tutorial dan membimbing, ', 'Teknik Informatika', '2019/2020', 'Genap', '2020-03-01', '2020-03-27', 'File', 'Tj123', 'budaya', 3, 'Malam', '1', '2', 'Riwinoto'),
+(3, 'Teknik informatika', 'Melaksanakan perkuliahan/tutorial dan membimbing', 'Melaksanakan perkulihan/ tutorial dan membimbing, ', 'Teknik Informatika', '2019/2020', 'Genap', '2020-03-01', '2020-03-27', 'File', 'Tj123', 'budaya', 3, 'Malam', '1', '2', 'Riwinoto'),
+(4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'Pilih Jurusan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'Pilih Jurusan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, '3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, '3', '3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, '1', '3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, '1', '3', NULL, '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, '1', '3', '4', '1', '1', '1', '2020-03-02', '2020-03-25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(13, '1', '3', '4', '1', '1', '1', '2020-03-02', '2020-03-25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, '1', '3', '4', '1', '1', '1', '2020-03-01', '2020-03-20', NULL, 'jjh123', 'budaya', NULL, NULL, NULL, NULL, NULL),
+(15, '1', '3', '4', '1', '1', '1', '2020-03-02', '2020-03-28', NULL, 'gggg11', 'eeee', 3, '1', NULL, NULL, NULL),
+(16, '1', '3', '4', '1', '1', '1', '2020-03-03', '2020-03-27', NULL, '22ddd', 'ggggg', 4, 'Pagi', '2', '1', 'riwinoto');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tblsks`
+--
+
+CREATE TABLE `tblsks` (
+  `id_sks` int(11) NOT NULL,
+  `id_kegiatan` int(11) NOT NULL,
+  `total_sks` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -167,6 +271,25 @@ INSERT INTO `tblsubunsur` (`id_subunsur`, `nama_subunsur`, `id_unsur`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tblth_ajaran`
+--
+
+CREATE TABLE `tblth_ajaran` (
+  `id_thajaran` int(11) NOT NULL,
+  `tahun_ajaran` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tblth_ajaran`
+--
+
+INSERT INTO `tblth_ajaran` (`id_thajaran`, `tahun_ajaran`) VALUES
+(1, '2019/2020'),
+(2, '2020/2021');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tblunsur`
 --
 
@@ -200,10 +323,11 @@ CREATE TABLE `tbluser` (
 
 INSERT INTO `tbluser` (`id_user`, `nama`, `nip`, `jabatan`, `tgl_lahir`, `jurusan`, `prodi`, `email`, `password`, `id_akses`) VALUES
 (1, 'admin', 1234567, 'admin', '1987-03-06', 'admin', 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 1),
-(2, 'Dosen1', 1234567, 'Dosen', '1986-03-25', 'Teknik Informatika', 'IF', 'Dosen1@gmail.com', 'dosen1', 2),
-(3, 'Tu1', 12345678, 'tu', '1980-03-25', 'Teknik informatika', 'IF', 'tu1@yahoo.com', 'tu1', 3),
-(4, 'mutiara', 35155, 'Jabatan2', '1997-03-15', 'Teknik Informatika', 'Teknik Informatika', 'mutiara612@yahoo.co.id', '202cb962ac59075b964b07152d234b70', 2),
-(5, 'coba', 123, 'Jabatan3', '2020-02-05', 'Teknik Informatika', 'Teknik Informatika', 'coba@yaho.com', '202cb962ac59075b964b07152d234b70', 2);
+(22, 'tu', 98765, 'TU Teknik Informatika', '2020-01-06', 'Teknik Informatika', 'Teknik Informatika', 'tu@gmail.com', 'f93f6389d0174fe733babc219344025e', 3),
+(23, 'coba', 1234, 'Tata Usaha', '2020-03-01', 'Teknik Informatika', 'Teknik Informatika', 'coba@gmail.com', '202cb962ac59075b964b07152d234b70', 3),
+(24, 'ribka', 123456, 'Tata Usaha', '2020-03-01', 'Teknik Informatika', 'Teknik Informatika', 'ribka@gmail.com', '202cb962ac59075b964b07152d234b70', 3),
+(25, 'mutiara', 678934, 'Dosen', '1997-03-15', 'Teknik Informatika', 'Teknik Informatika', 'mutiara@gmail.com', 'ce28eed1511f631af6b2a7bb0a85d636', 2),
+(26, 'Maryam', 98765, 'Tata Usaha', '1987-11-12', 'Teknik Informatika', 'Teknik Informatika', 'maryam@gmail.com', '8a16a1b13939aa7034128948c0c61591', 3);
 
 --
 -- Indexes for dumped tables
@@ -216,16 +340,40 @@ ALTER TABLE `tblakses`
   ADD PRIMARY KEY (`id_akses`);
 
 --
+-- Indeks untuk tabel `tbljurusan`
+--
+ALTER TABLE `tbljurusan`
+  ADD PRIMARY KEY (`id_jurusan`);
+
+--
 -- Indeks untuk tabel `tblkegiatan`
 --
 ALTER TABLE `tblkegiatan`
   ADD PRIMARY KEY (`id_kegiatan`);
 
 --
+-- Indeks untuk tabel `tblnilai_pengajar`
+--
+ALTER TABLE `tblnilai_pengajar`
+  ADD PRIMARY KEY (`id_nilaipengajar`);
+
+--
+-- Indeks untuk tabel `tblprodi`
+--
+ALTER TABLE `tblprodi`
+  ADD PRIMARY KEY (`id_prodi`);
+
+--
 -- Indeks untuk tabel `tblreportkegiatan`
 --
 ALTER TABLE `tblreportkegiatan`
   ADD PRIMARY KEY (`id_reportkegiatan`);
+
+--
+-- Indeks untuk tabel `tblsks`
+--
+ALTER TABLE `tblsks`
+  ADD PRIMARY KEY (`id_sks`);
 
 --
 -- Indeks untuk tabel `tblsubkegiatan`
@@ -238,6 +386,12 @@ ALTER TABLE `tblsubkegiatan`
 --
 ALTER TABLE `tblsubunsur`
   ADD PRIMARY KEY (`id_subunsur`);
+
+--
+-- Indeks untuk tabel `tblth_ajaran`
+--
+ALTER TABLE `tblth_ajaran`
+  ADD PRIMARY KEY (`id_thajaran`);
 
 --
 -- Indeks untuk tabel `tblunsur`
@@ -262,16 +416,40 @@ ALTER TABLE `tblakses`
   MODIFY `id_akses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT untuk tabel `tbljurusan`
+--
+ALTER TABLE `tbljurusan`
+  MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT untuk tabel `tblkegiatan`
 --
 ALTER TABLE `tblkegiatan`
   MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT untuk tabel `tblnilai_pengajar`
+--
+ALTER TABLE `tblnilai_pengajar`
+  MODIFY `id_nilaipengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `tblprodi`
+--
+ALTER TABLE `tblprodi`
+  MODIFY `id_prodi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT untuk tabel `tblreportkegiatan`
 --
 ALTER TABLE `tblreportkegiatan`
-  MODIFY `id_reportkegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_reportkegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT untuk tabel `tblsks`
+--
+ALTER TABLE `tblsks`
+  MODIFY `id_sks` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tblsubkegiatan`
@@ -286,6 +464,12 @@ ALTER TABLE `tblsubunsur`
   MODIFY `id_subunsur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT untuk tabel `tblth_ajaran`
+--
+ALTER TABLE `tblth_ajaran`
+  MODIFY `id_thajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `tblunsur`
 --
 ALTER TABLE `tblunsur`
@@ -295,7 +479,7 @@ ALTER TABLE `tblunsur`
 -- AUTO_INCREMENT untuk tabel `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
