@@ -39,6 +39,10 @@ Route::get('/keluar', function () {
     return redirect("/login");
 });
 
+Route::get('/home', function () {
+    return view('template');
+});
+
 Route::get('/admin', function () {
     return view('admin.admin-navbar');
 })->middleware('auth');

@@ -1,4 +1,4 @@
-body{
+/* body{
     height : 100vh;
     overflow : auto;
   }
@@ -6,4 +6,4 @@ body{
   .content{
     height: calc(100vh - 58px);
     overflow: auto;
-  }
+  } */
