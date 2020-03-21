@@ -1,9 +1,0 @@
-body{
-    height : 100vh;
-    overflow : auto;
-  }
-
-  .content{
-    height: calc(100vh - 58px);
-    overflow: auto;
-  }
