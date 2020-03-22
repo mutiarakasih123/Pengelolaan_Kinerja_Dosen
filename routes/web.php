@@ -29,6 +29,19 @@ Route::put('/users/update/{id}', 'UsersController@update');
 Route::get('/users/destroy/{id}', 'UsersController@destroy');
 Route::get('/users/show/{id}', 'UsersController@show');
 
+// for action menu Kaprodi
+Route::get('/Kaprodi', 'KaprodiController@index');
+Route::post('/Kaprodi/store', 'KaprodiController@store');
+Route::get('/Kaprodi/edit/{id}', 'KaprodiController@edit');
+Route::put('/Kaprodi/update/{id}', 'KaprodiController@update');
+Route::get('/Kaprodi/destroy/{id}', 'KaprodiController@destroy');
+
+// for action menu Jurusan
+Route::get('/Jurusan', 'JurusanController@index');
+Route::post('/Jurusan/store', 'JurusanController@store');
+Route::get('/Jurusan/edit/{id}', 'JurusanController@edit');
+Route::put('/Jurusan/update/{id}', 'JurusanController@update');
+Route::get('/Jurusan/destroy/{id}', 'JurusanController@destroy');
 
 Route::get('/users-daftar', 'UserController@viewusers');
 Route::post('/admin.users-daftar', 'UserController@users');
