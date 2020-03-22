@@ -11,14 +11,29 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+       return view('login');
+});
+
+// for action login
+Route::post('/login', 'login@index');
+Route::get('/home', function () { return view('dashboard'); });
 Route::get('/login', 'UserController@viewLogin');
-Route::post('/login', 'UserController@login');
+
+// for action menu users  
+Route::get('/users', 'UsersController@index');
+Route::get('users/create','UsersController@create');
+Route::post('/users/store', 'UsersController@store');
+Route::get('/users/edit/{id}', 'UsersController@edit');
+Route::put('/users/update/{id}', 'UsersController@update');
+Route::get('/users/destroy/{id}', 'UsersController@destroy');
+Route::get('/users/show/{id}', 'UsersController@show');
+
 
 Route::get('/users-daftar', 'UserController@viewusers');
 Route::post('/admin.users-daftar', 'UserController@users');
 Route::post('/admin.users-edit', 'UserController@userEditPost');
 Route::post('/admin.list_users', 'UserController@users');
-Route::get('/users', 'UserController@viewListUsers');
 Route::post('/daftaruser', 'UserController@listUsers');
 
 Route::post('/inputKegiatan', 'TataUsahaController@inputKegiatan');
@@ -29,9 +44,6 @@ Route::get('/user-delete/{id}', 'UserController@deleteuser');
 
 Route::get('/getKegiatanByIdSubUnsur/{id}', 'UserController@getKegiatanByIdSubUnsur');
 
-Route::get('/', function () {
-       return view('login');
-})->middleware('auth');
 
 
 Route::get('/keluar', function () {
@@ -39,9 +51,6 @@ Route::get('/keluar', function () {
     return redirect("/login");
 });
 
-Route::get('/home', function () {
-    return view('template');
-});
 
 Route::get('/admin', function () {
     return view('admin.admin-navbar');

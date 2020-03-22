@@ -1,3 +1,5 @@
+<?php
+    if (session('userId') === null) { ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,3 +101,9 @@
 </body>
 
 </html>
+
+<?php
+    } else {
+        return redirect()->to('/home')->send();
+    }
+?>
