@@ -20,6 +20,9 @@ Route::post('/login', 'login@index');
 Route::get('/home', function () { return view('dashboard'); });
 Route::get('/login', 'UserController@viewLogin');
 
+// for action logout
+Route::get('/logout', 'login@logout');
+
 // for action menu users  
 Route::get('/users', 'UsersController@index');
 Route::get('users/create','UsersController@create');
@@ -59,10 +62,7 @@ Route::get('/getKegiatanByIdSubUnsur/{id}', 'UserController@getKegiatanByIdSubUn
 
 
 
-Route::get('/keluar', function () {
-    session(['accessId' => null]);
-    return redirect("/login");
-});
+
 
 
 Route::get('/admin', function () {
