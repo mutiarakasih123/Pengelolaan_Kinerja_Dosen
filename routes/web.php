@@ -46,6 +46,24 @@ Route::get('/Jurusan/edit/{id}', 'JurusanController@edit');
 Route::put('/Jurusan/update/{id}', 'JurusanController@update');
 Route::get('/Jurusan/destroy/{id}', 'JurusanController@destroy');
 
+// for action menu Pelaksanaan  
+Route::get('/Pelaksanaan', 'PelaksanaanController@index');
+Route::get('Pelaksanaan/create','PelaksanaanController@create');
+Route::post('/Pelaksanaan/store', 'PelaksanaanController@store');
+Route::get('/Pelaksanaan/edit/{id}', 'PelaksanaanController@edit');
+Route::put('/Pelaksanaan/update/{id}', 'PelaksanaanController@update');
+Route::get('/Pelaksanaan/destroy/{id}', 'PelaksanaanController@destroy');
+Route::get('/Pelaksanaan/show/{id}', 'PelaksanaanController@show');
+
+
+
+
+
+
+
+
+
+
 Route::get('/users-daftar', 'UserController@viewusers');
 Route::post('/admin.users-daftar', 'UserController@users');
 Route::post('/admin.users-edit', 'UserController@userEditPost');
@@ -78,7 +96,7 @@ Route::get('/tu', function () {
 })->middleware('auth');
 
 Route::get('/forminput', function () {
-    return view('tu.tu-formmelaksanakankuliahan');
+    return view('/tu/tu-formmelaksanakankuliahan');
 });
 
 Route::get('/usersedit/{id}', 'UserController@userEdit');

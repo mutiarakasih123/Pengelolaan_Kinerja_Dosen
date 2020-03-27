@@ -41,13 +41,7 @@ $th_ajaran = DB::select("select * from tblth_ajaran");
         <label class="col-sm-2" for="jurusan">Jurusan</label>
 			    <select class="custom-select col-sm-5" name="jurusan" id="jurusan"  >
               <option selected> Pilih Jurusan </option>
-              <?php
-              for ($i=0;$i<count($jurusan);$i++){
-                echo("
-                <option value='".$jurusan[$i]->id_jurusan."''>".$jurusan[$i]->nama_jurusan."</option>
-                ");
-              }
-              ?>
+              
                    </select>
         </div>
 
@@ -73,7 +67,7 @@ $th_ajaran = DB::select("select * from tblth_ajaran");
         <label class="col-sm-2" for="kegiatan">Kegiatan</label>
 			    <select class="custom-select col-sm-5" name="kegiatan" id="kegiatan"  >
               <option selected> Pilih Kegiatan </option>
-              <option value="4">Melaksanakan perkulihan/ tutorial dan membimbing, menguji serta</option>
+              <option value="4">Melaksanakan perkulihan/ tutorial dan membimbing, menguji serta menyelenggarakan pendidikan di laboratorium, praktik keguruan bengkel/studio/kebun pada fakultas/sekolah tinggi/Akademik/Politeknik sendiri, pada fakultas lain dalam lingkungan Universitas/Institut sendiri, maupun di luar perguruan tinggi sendiri secara melembaga tiap sks (paling banyak 12 sks) per semester </option>
               <option value="5">Membimbing seminar</option>
               <option value="6">Membimbing kuliah kerja nyata</option>
               <option value="7">Pembimbing Utama</option>
@@ -89,13 +83,7 @@ $th_ajaran = DB::select("select * from tblth_ajaran");
                   <label  class="col-sm-2 col-form-label" for="prodi">Prodi</label>
                 <select class="custom-select col-sm-5" name="prodi" id="prodi"  >
                       <option selected> Pilih Prodi </option>
-                      <?php
-              for ($i=0;$i<count($prodi);$i++){
-                echo("
-                <option value='".$prodi[$i]->id_prodi."''>".$prodi[$i]->nama_prodi."</option>
-                ");
-              }
-              ?>
+                      
                  </select>
       </div>
 
@@ -103,13 +91,7 @@ $th_ajaran = DB::select("select * from tblth_ajaran");
 		                <label class="col-sm-2" for="th_ajaran">Tahun Ajaran</label>
 			            <select class="custom-select col-sm-5" name="th_ajaran" id="th_ajaran"  >
                       <option selected> Pilih Tahun Ajaran </option>
-                      <?php
-              for ($i=0;$i<count($th_ajaran);$i++){
-                echo("
-                <option value='".$th_ajaran[$i]->id_thajaran."''>".$th_ajaran[$i]->tahun_ajaran."</option>
-                ");
-              }
-              ?>
+                      
   		            </select>
 	    </div>
 
