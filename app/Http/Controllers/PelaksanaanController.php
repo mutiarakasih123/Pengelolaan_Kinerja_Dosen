@@ -171,9 +171,44 @@ class PelaksanaanController extends Controller
      * @param  \App\pelaksanaan  $pelaksanaan
      * @return \Illuminate\Http\Response
      */
-    public function show(pelaksanaan $pelaksanaan)
+    public function show($id)
     {
-        //
+        $pelaksanaan = pelaksanaan::find($id);
+        $kaprodi = kaprodi::all();
+        $jurusan = jurusan::all();
+        $users = DB::select('SELECT * from tbluser WHERE akses = 2 ');
+        $idP = $pelaksanaan->subUnsur;
+        if ($idP == 1) {
+            $unsur = subUnsur1::where('idPelaksanaan', $id)->first();
+            $sesi = sesi::where('idUnsur', $unsur->id)->where('unsur', 1)->get();
+        } elseif ($idP == 2) {
+            $unsur = subUnsur23::where('idPelaksanaan', $id)->first();
+            $sesi = sesi::where('idUnsur', $unsur->id)->where('unsur', 2)->get();
+        } elseif ($idP == 3) {
+            $unsur = subUnsur23::where('idPelaksanaan', $id)->first();
+            $sesi = sesi::where('idUnsur', $unsur->id)->where('unsur', 3)->get();
+        } elseif ($idP == 4) {
+            $unsur = subUnsur4::where('idPelaksanaan', $id)->first();
+            $sesi = "";
+        } elseif ($idP == 5) {
+            $unsur = subUnsur5::where('idPelaksanaan', $id)->first();
+            $sesi = "";
+        } elseif ($idP == 6) {
+            $unsur = subUnsur6::where('idPelaksanaan', $id)->first();
+            $sesi = "";
+        }else{
+            $unsur = '';
+            $sesi = '';
+        }
+
+        return view('pelaksanaan/details', [
+            'pelaksanaan' => $pelaksanaan,
+            'kaprodi' => $kaprodi,
+            'jurusan' => $jurusan,
+            'users' => $users,
+            'unsur' => $unsur,
+            'sesi' => $sesi,
+        ]);
     }
 
     /**
@@ -363,12 +398,13 @@ class PelaksanaanController extends Controller
             $subUnsur23 = subUnsur23::where('idPelaksanaan',$id)->first();
             sesi::where('idUnsur',$subUnsur23->id)->where('unsur', 3)->delete();
             $subUnsur23->delete();
+        }elseif ($pelaksanaan->subUnsur == 4) {
+            subUnsur4::where('idPelaksanaan',$id)->delete();
+        }elseif ($pelaksanaan->subUnsur == 5) {
+            subUnsur5::where('idPelaksanaan',$id)->delete();
+        }elseif ($pelaksanaan->subUnsur == 6) {
+            subUnsur6::where('idPelaksanaan',$id)->delete();
         }
-
-        // subUnsur4::where('idPelaksanaan',$id)->delete();
-        // subUnsur5::where('idPelaksanaan',$id)->delete();
-        // subUnsur6::where('idPelaksanaan',$id)->delete();
-
         $pelaksanaan->delete();
 
         return redirect('/Pelaksanaan');

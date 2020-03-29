@@ -56,7 +56,6 @@
                                     <option value="3" {{ $pelaksanaan->subUnsur == 3 ? "selected" : "" }}>Membimbing kuliah kerja nyata</option>
                                     <option value="4" {{ $pelaksanaan->subUnsur == 4 ? "selected" : "" }}>Membimbing disertasi, tesis, skripsi dan laporan akhir studi</option>
                                     <option value="5" {{ $pelaksanaan->subUnsur == 5 ? "selected" : "" }}>Bertugas sebagai penguji pada ujian akhir</option>
-                                    <option value="6" {{ $pelaksanaan->subUnsur == 6 ? "selected" : "" }}>Membina kegiatan mahasiswa</option>
                                 @endif
                                 @if (session('accessId') == 2)
                                     <option value="6" {{ $pelaksanaan->subUnsur == 6 ? "selected" : "" }}>Membina kegiatan mahasiswa</option>
