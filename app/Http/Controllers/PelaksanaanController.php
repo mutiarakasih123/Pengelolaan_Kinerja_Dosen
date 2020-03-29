@@ -128,11 +128,12 @@ class PelaksanaanController extends Controller
             ]);
             $idSubUnsur23 = $subUnsur23->id;
             for ($i=0; $i < $request->countDosen ; $i++) {
-                $sesi = sesi::create([
+                $idDosenG = $request['dosenU'.$i];
+                sesi::create([
                     'idUnsur' => $idSubUnsur23,
                     'unsur' => $request->subUnsur,
                     'sesiKe' => null,
-                    'idDosenG' => $request['dosenU'.$i],
+                    'idDosenG' => $idDosenG,
                     'idDosenT' => null,
                     'idDosenP' => null
                 ]);
@@ -187,7 +188,38 @@ class PelaksanaanController extends Controller
         $kaprodi = kaprodi::all();
         $jurusan = jurusan::all();
         $users = DB::select('SELECT * from tbluser WHERE akses = 2 ');
-        return view('pelaksanaan/edit', ['pelaksanaan' => $pelaksanaan, 'kaprodi' => $kaprodi, 'jurusan' => $jurusan, 'users' => $users]);
+        $idP = $pelaksanaan->subUnsur;
+        if ($idP == 1) {
+            $unsur = subUnsur1::where('idPelaksanaan', $id)->first();
+            $sesi = sesi::where('idUnsur', $unsur->id)->where('unsur', 1)->get();
+        } elseif ($idP == 2) {
+            $unsur = subUnsur23::where('idPelaksanaan', $id)->first();
+            $sesi = sesi::where('idUnsur', $unsur->id)->where('unsur', 2)->get();
+        } elseif ($idP == 3) {
+            $unsur = subUnsur23::where('idPelaksanaan', $id)->first();
+            $sesi = sesi::where('idUnsur', $unsur->id)->where('unsur', 3)->get();
+        } elseif ($idP == 4) {
+            $unsur = subUnsur4::where('idPelaksanaan', $id)->first();
+            $sesi = "";
+        } elseif ($idP == 5) {
+            $unsur = subUnsur5::where('idPelaksanaan', $id)->first();
+            $sesi = "";
+        } elseif ($idP == 6) {
+            $unsur = subUnsur6::where('idPelaksanaan', $id)->first();
+            $sesi = "";
+        }else{
+            $unsur = '';
+            $sesi = '';
+        }
+
+        return view('pelaksanaan/edit', [
+            'pelaksanaan' => $pelaksanaan,
+            'kaprodi' => $kaprodi,
+            'jurusan' => $jurusan,
+            'users' => $users,
+            'unsur' => $unsur,
+            'sesi' => $sesi,
+            ]);
     }
 
     /**
@@ -197,9 +229,116 @@ class PelaksanaanController extends Controller
      * @param  \App\pelaksanaan  $pelaksanaan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pelaksanaan $pelaksanaan)
+    public function update($id, Request $request)
     {
-        //
+        $this->validate($request,[
+            'kaprodi' => 'required',
+            'jurusan' => 'required',
+            'subUnsur' => 'required',
+            'kegiatan' => 'required',
+            'tahunAjaran' => 'required',
+            'semester' => 'required',
+            'Tmulai' => 'required',
+            'Tselesai' => 'required',
+        ]);
+        if ($request->subUnsur == 1) {
+            $this->validate($request,[
+                'kodeMK' => 'required',
+                'jumSks' => 'required',
+                'sksT' => 'required',
+                'namaMK' => 'required',
+                'kelas' => 'required',
+                'sksP' => 'required',
+            ]);
+        }
+        $pelaksanaan = pelaksanaan::find($id);
+        $pelaksanaan->idJurusan = $request->jurusan;
+        $pelaksanaan->subUnsur = $request->subUnsur;
+        $pelaksanaan->kegiatan = $request->kegiatan;
+        $pelaksanaan->idProdi = $request->kaprodi;
+        $pelaksanaan->thnAjaran = $request->tahunAjaran;
+        $pelaksanaan->semester = $request->semester;
+        $pelaksanaan->tglMulai =$request->Tmulai;
+        $pelaksanaan->tglSelesai = $request->Tselesai;
+        $pelaksanaan->save();
+        if ($request->subUnsur == 1) {
+            $subUnsur1 = subUnsur1::where('idPelaksanaan',$id)->first();
+            $subUnsur1->update([
+                'kodeMK' => $request->kodeMK,
+                'namaMK' => $request->namaMK,
+                'jumSKS' => $request->jumSks,
+                'kelas' => $request->kelas,
+                'jumSKST' => $request->sksT,
+                'jumSKSP' =>$request->sksP,
+            ]);
+            $idSubUnsur1 = $subUnsur1->id;
+            sesi::where('idUnsur',$idSubUnsur1)->where('unsur',$request->subUnsur)->delete();
+            if ($request->sksT > 4) {
+                for ($i=0; $i < $request->sksT ; $i++) {
+                    $n = $i+1;
+                    sesi::create([
+                        'idUnsur' => $idSubUnsur1,
+                        'unsur' => $request->subUnsur,
+                        'sesiKe' => $n,
+                        'idDosenT' => $request['dosenT'.$n],
+                        'idDosenP' => $request['dosenP'.$n]
+                    ]);
+                }
+            }else{
+                for ($i=0; $i < 4 ; $i++) {
+                    $n = $i+1;
+                    sesi::create([
+                        'idUnsur' => $idSubUnsur1,
+                        'unsur' => $request->subUnsur,
+                        'sesiKe' => $n,
+                        'idDosenT' => $request['dosenT'.$n],
+                        'idDosenP' => $request['dosenP'.$n]
+                    ]);
+                }
+            }
+        }elseif ($request->subUnsur == 2 || $request->subUnsur == 3) {
+            $subUnsur23 = subUnsur23::where('idPelaksanaan',$id)->first();
+            $subUnsur23->update([
+                'jmlMHS' => $request->jumMhs,
+                'jmlSKS' => $request->jumSksMhs
+            ]);
+            $idSubUnsur23 = $subUnsur23->id;
+            sesi::where('idUnsur',$idSubUnsur23)->where('unsur',$request->subUnsur)->delete();
+            for ($i=0; $i < $request->countDosen ; $i++) {
+                $idDosenG = $request['dosenU'.$i];
+                sesi::create([
+                    'idUnsur' => $idSubUnsur23,
+                    'unsur' => $request->subUnsur,
+                    'sesiKe' => null,
+                    'idDosenG' => $idDosenG,
+                    'idDosenT' => null,
+                    'idDosenP' => null
+                ]);
+            }
+        }elseif ($request->subUnsur == 4) {
+            subUnsur4::where('idPelaksanaan',$id)->update([
+                'jnsBimb' => $request->jnsBim,
+                'jmlMHS' => $request->jumMhsis,
+                'jmlSKS' => $request->jumSKS4,
+                'idDosen1' => $request->dosenPemb1,
+                'idDosen2' => $request->dosenPemb2,
+            ]);
+
+        }elseif ($request->subUnsur == 5) {
+            subUnsur5::where('idPelaksanaan',$id)->update([
+                'jmlMHS' => $request->jumMhsiswa,
+                'idDosenK' => $request->idDosenK,
+                'idDosenA' => $request->idDosenA
+            ]);
+        }elseif ($request->subUnsur == 6) {
+            subUnsur6::where('idPelaksanaan',$id)->update([
+                'idDosen' => session('userId'),
+                'jmlKeg' => $request->jumKeg,
+                'jmlSKS' => $request->jumSKSU6
+            ]);
+        }
+
+        return redirect('/Pelaksanaan');
     }
 
     /**
@@ -212,12 +351,25 @@ class PelaksanaanController extends Controller
     {
         $pelaksanaan = pelaksanaan::find($id);
         unlink('uploadFiles/'.$pelaksanaan->filePendukung);
+        if ($pelaksanaan->subUnsur == 1) {
+            $subUnsur1 = subUnsur1::where('idPelaksanaan',$id)->first();
+            sesi::where('idUnsur',$subUnsur1->id)->where('unsur', 1)->delete();
+            $subUnsur1->delete();
+        }elseif ($pelaksanaan->subUnsur == 2) {
+            $subUnsur23 = subUnsur23::where('idPelaksanaan',$id)->first();
+            sesi::where('idUnsur',$subUnsur23->id)->where('unsur', 2)->delete();
+            $subUnsur23->delete();
+        }elseif ($pelaksanaan->subUnsur == 3) {
+            $subUnsur23 = subUnsur23::where('idPelaksanaan',$id)->first();
+            sesi::where('idUnsur',$subUnsur23->id)->where('unsur', 3)->delete();
+            $subUnsur23->delete();
+        }
+
+        // subUnsur4::where('idPelaksanaan',$id)->delete();
+        // subUnsur5::where('idPelaksanaan',$id)->delete();
+        // subUnsur6::where('idPelaksanaan',$id)->delete();
+
         $pelaksanaan->delete();
-        subUnsur1::where('idPelaksanaan',$id)->delete();
-        subUnsur23::where('idPelaksanaan',$id)->delete();
-        subUnsur4::where('idPelaksanaan',$id)->delete();
-        subUnsur5::where('idPelaksanaan',$id)->delete();
-        subUnsur6::where('idPelaksanaan',$id)->delete();
 
         return redirect('/Pelaksanaan');
     }

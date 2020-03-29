@@ -27,6 +27,12 @@ $(function () {
         $('.hideJur').addClass('d-none');
         $('.Sjur' + id).removeClass('d-none');
     })
+    var kaprodi = $('#kaprodi').val();
+    if (kaprodi !== "" || kaprodi !== null) {
+        $('.hideJur').removeClass('d-none');
+        $('.hideJur').addClass('d-none');
+        $('.Sjur' + kaprodi).removeClass('d-none');
+    }
     $('#subUnsur').change(function () {
         var id = $(this).val();
         if (id == 1) {
@@ -83,6 +89,7 @@ $(function () {
         var count = $(this).val();
         $('.forRemoveCloneT').remove();
         for (let i = 0; i < count; i++) {
+            var sesi = $('#sesiKe'+i);
             let n = i + 1;
             var cloneT = $('#cloneDosenT').clone();
             cloneT.removeClass('d-none');
@@ -90,11 +97,21 @@ $(function () {
             cloneT.removeAttr('id');
             cloneT.children('label').text('Dosen Teori Sesi ' + n);
             cloneT.find('select').attr('name', 'dosenT' + n);
+            var select = cloneT.find('select').children('option');
+            select.each(function(){
+                if ($(this).val() !== "") {
+                    if ($(this).val() == sesi.attr('idDosenT')) {
+                        $(this).attr('selected','selected');
+
+                    }
+                }
+            });
             cloneT.appendTo('#tempatCloneT');
         }
     })
     if ($('#sksT').val() > 0) {
         for (let i = 0; i < $('#sksT').val(); i++) {
+            var sesi = $('#sesiKe'+i);
             let n = i + 1;
             var cloneT = $('#cloneDosenT').clone();
             cloneT.removeClass('d-none');
@@ -102,6 +119,15 @@ $(function () {
             cloneT.removeAttr('id');
             cloneT.children('label').text('Dosen Teori Sesi ' + n);
             cloneT.find('select').attr('name', 'dosenT' + n);
+            var select = cloneT.find('select').children('option');
+            select.each(function(){
+                if ($(this).val() !== "") {
+                    if ($(this).val() == sesi.attr('idDosenT')) {
+                        $(this).attr('selected','selected');
+
+                    }
+                }
+            });
             cloneT.appendTo('#tempatCloneT');
         }
     }
@@ -111,6 +137,7 @@ $(function () {
         $('.forRemoveCloneP').remove();
         if (count > 0) {
             for (let i = 0; i < 4; i++) {
+                var sesi = $('#sesiKe'+i);
                 let n = i + 1;
                 var cloneT = $('#cloneDosenP').clone();
                 cloneT.removeClass('d-none');
@@ -118,6 +145,14 @@ $(function () {
                 cloneT.removeAttr('id');
                 cloneT.children('label').text('Dosen Prakter Sesi ' + n);
                 cloneT.find('select').attr('name', 'dosenP' + n);
+                var select = cloneT.find('select').children('option');
+                select.each(function(){
+                    if ($(this).val() !== "") {
+                        if ($(this).val() == sesi.attr('idDosenP')) {
+                            $(this).attr('selected','selected');
+                        }
+                    }
+                });
                 cloneT.appendTo('#tempatCloneP');
             }
         } else {
@@ -126,6 +161,7 @@ $(function () {
     })
     if ($('#sksP').val() > 0) {
         for (let i = 0; i < 4; i++) {
+            var sesi = $('#sesiKe'+i);
             let n = i + 1;
             var cloneT = $('#cloneDosenP').clone();
             cloneT.removeClass('d-none');
@@ -133,6 +169,14 @@ $(function () {
             cloneT.removeAttr('id');
             cloneT.children('label').text('Dosen Prakter Sesi ' + n);
             cloneT.find('select').attr('name', 'dosenP' + n);
+            var select = cloneT.find('select').children('option');
+            select.each(function(){
+                if ($(this).val() !== "") {
+                    if ($(this).val() == sesi.attr('idDosenP')) {
+                        $(this).attr('selected','selected');
+                    }
+                }
+            });
             cloneT.appendTo('#tempatCloneP');
         }
     }
@@ -164,16 +208,36 @@ $(function () {
         $('#countDosen').val(no);
         minus();
     })
+    $('.btnplusEdit').click(function(){
+        var n = $(this).attr('sum');
+        var no = Number(n) + 1;
+        $(this).attr('sum', no);
+        // $(this).attr('id','btnPlus'+n);
+        var clone = $('#cloneDosenunsur'+n).clone();
+        clone.attr('id', 'cloneDosenunsur' + no);
+        clone.children('label').text('Nama Dosen Ke ' + no);
+        clone.children('input').remove();
+        clone.find('select').attr('name', 'dosenU' + n);
+        clone.find('#remove'+n).attr('id', 'remove'+no);
+        clone.find('.btnminus').attr('minus',no);
+        clone.find('.btnplusEdit').remove();
+        clone.appendTo('#tempatCloneSubUnsur2');
+        $('#remove'+n).addClass('d-none');
+        $('#remove'+no).removeClass('d-none');
+        $('#countDosen').val(no);
+        minus();
+    })
+    minus();
     function minus() {
         $('.btnminus').click(function () {
             var n = $(this).attr('minus');
             var no = Number(n) - 1;
             $('#cloneDosenunsur' + n).remove();
             $('#remove' + no).removeClass('d-none');
-            $('.btnplus').attr('sum', no);
+            $('.btnplusEdit').attr('sum', no);
             $('#countDosen').val(no);
+            $('#remove1').addClass('d-none');
         })
-
     }
 
 // function for sub unsur 4

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +24,7 @@ Route::get('/login', 'UserController@viewLogin');
 // for action logout
 Route::get('/logout', 'login@logout');
 
-// for action menu users  
+// for action menu users
 Route::get('/users', 'UsersController@index');
 Route::get('users/create','UsersController@create');
 Route::post('/users/store', 'UsersController@store');
@@ -46,7 +47,7 @@ Route::get('/Jurusan/edit/{id}', 'JurusanController@edit');
 Route::put('/Jurusan/update/{id}', 'JurusanController@update');
 Route::get('/Jurusan/destroy/{id}', 'JurusanController@destroy');
 
-// for action menu Pelaksanaan  
+// for action menu Pelaksanaan
 Route::get('/Pelaksanaan', 'PelaksanaanController@index');
 Route::get('Pelaksanaan/create','PelaksanaanController@create');
 Route::post('/Pelaksanaan/store', 'PelaksanaanController@store');

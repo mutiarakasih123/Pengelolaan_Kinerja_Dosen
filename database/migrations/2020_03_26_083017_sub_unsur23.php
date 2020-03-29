@@ -15,7 +15,7 @@ class SubUnsur23 extends Migration
     {
         Schema::create('subUnsur23', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('idpelaksanaan');
+            $table->integer('idPelaksanaan');
             $table->integer('jmlMHS');
             $table->integer('jmlSKS');
             $table->timestamps();
