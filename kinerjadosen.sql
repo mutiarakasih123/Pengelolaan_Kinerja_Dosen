@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2020 at 04:02 PM
+-- Generation Time: Mar 29, 2020 at 01:00 PM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.28
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,22 +25,214 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblakses`
+-- Table structure for table `migrations`
 --
 
-CREATE TABLE `tblakses` (
-  `id_akses` int(11) NOT NULL,
-  `nama_akses` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `tblakses`
+-- Dumping data for table `migrations`
 --
 
-INSERT INTO `tblakses` (`id_akses`, `nama_akses`) VALUES
-(1, 'Admin'),
-(2, 'Dosen'),
-(3, 'Tata Usaha');
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2020_03_23_145936_pelaksanaan', 1),
+(2, '2020_03_25_145640_sub_unsur1', 2),
+(3, '2020_03_25_150937_sesi', 2),
+(4, '2020_03_26_083017_sub_unsur2', 3),
+(5, '2020_03_26_083017_sub_unsur23', 4),
+(6, '2020_03_26_111410_sub_unsur4', 4),
+(7, '2020_03_26_112008_sub_unsur5', 4),
+(8, '2020_03_27_143214_sub_unsur6', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pelaksanaan`
+--
+
+CREATE TABLE `pelaksanaan` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `idJurusan` int(11) NOT NULL,
+  `subUnsur` int(11) NOT NULL,
+  `kegiatan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idProdi` int(11) NOT NULL,
+  `thnAjaran` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `semester` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tglMulai` date NOT NULL,
+  `tglSelesai` date NOT NULL,
+  `filePendukung` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `pelaksanaan`
+--
+
+INSERT INTO `pelaksanaan` (`id`, `idJurusan`, `subUnsur`, `kegiatan`, `idProdi`, `thnAjaran`, `semester`, `tglMulai`, `tglSelesai`, `filePendukung`, `created_at`, `updated_at`) VALUES
+(19, 6, 1, 'Melaksanakan perkulihan / tutorial dan membimbing, menguji serta menyelenggarakan pendidikan di laboratorium, praktik keguruan bengkel / studio / kebun pada fakultas / sekolah tinggi / Akademik / Politeknik sendiri, pada fakultas lain dalam lingkungan Universitas / Institut sendiri, maupun di luar perguruan tinggi sendiri secara melembaga tiap sks(paling banyak 12 sks) per semester', 2, '2019/2020', 'Genap', '2020-03-12', '2020-03-28', '1585322522_TA1.Revisi 1.docx', '2020-03-27 08:22:02', '2020-03-27 23:47:35'),
+(27, 5, 2, 'Membimbing mahasiswa seminar', 1, '2020/2021', 'Genap', '2020-03-25', '2020-03-28', '1585380489_TA1.Revisi 1.docx', '2020-03-28 00:28:09', '2020-03-28 00:28:09'),
+(28, 5, 3, 'Membimbing mahasiswa kuliah kerja nyata, pratek kerja nyata, praktek kerja lapangan', 1, '2020/2021', 'Ganjil', '2020-03-18', '2020-03-28', '1585469045_TA1.Revisi 1.docx', '2020-03-29 01:04:05', '2020-03-29 01:04:05'),
+(29, 6, 4, 'Membimbing dan ikut membimbing dalam menghasilkan disertasi, tesis, skripsi dan laporan akhir studi', 2, '2020/2021', 'Ganjil', '2020-03-28', '2020-03-14', '1585469265_TA1.Revisi 1.docx', '2020-03-29 01:07:45', '2020-03-29 01:07:45'),
+(30, 5, 5, 'Menguji mahasiswa yang mengikuti ujian akhir', 1, '2022/2023', 'Ganjil', '2020-03-28', '2020-03-20', '1585470550_TA1.Revisi 1.docx', '2020-03-29 01:29:10', '2020-03-29 01:29:10'),
+(32, 5, 6, 'Melakukan pembinaan kegiatan mahasiswa di bidang Akademik dan kemahasiswaan', 1, '2019/2020', 'Genap', '2020-03-19', '2020-03-28', '1585478734_TA1.Revisi 1.docx', '2020-03-29 03:45:34', '2020-03-29 03:45:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sesi`
+--
+
+CREATE TABLE `sesi` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `idUnsur` int(11) NOT NULL,
+  `unsur` int(11) DEFAULT NULL,
+  `sesiKe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `idDosenG` int(11) DEFAULT NULL,
+  `idDosenT` int(11) DEFAULT NULL,
+  `idDosenP` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sesi`
+--
+
+INSERT INTO `sesi` (`id`, `idUnsur`, `unsur`, `sesiKe`, `idDosenG`, `idDosenT`, `idDosenP`, `created_at`, `updated_at`) VALUES
+(37, 4, 1, '1', NULL, 28, 28, '2020-03-27 23:47:35', '2020-03-27 23:47:35'),
+(38, 4, 1, '2', NULL, 30, 28, '2020-03-27 23:47:35', '2020-03-27 23:47:35'),
+(39, 4, 1, '3', NULL, 30, 28, '2020-03-27 23:47:35', '2020-03-27 23:47:35'),
+(40, 4, 1, '4', NULL, NULL, 28, '2020-03-27 23:47:35', '2020-03-27 23:47:35'),
+(64, 8, 2, NULL, 28, NULL, NULL, '2020-03-29 00:19:33', '2020-03-29 00:19:33'),
+(70, 9, 3, NULL, 28, NULL, NULL, '2020-03-29 01:06:24', '2020-03-29 01:06:24'),
+(71, 9, 3, NULL, 28, NULL, NULL, '2020-03-29 01:06:24', '2020-03-29 01:06:24'),
+(72, 9, 3, NULL, 30, NULL, NULL, '2020-03-29 01:06:24', '2020-03-29 01:06:24'),
+(73, 9, 3, NULL, 30, NULL, NULL, '2020-03-29 01:06:24', '2020-03-29 01:06:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subunsur1`
+--
+
+CREATE TABLE `subunsur1` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `idPelaksanaan` int(11) NOT NULL,
+  `kodeMK` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `namaMK` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jumSKS` int(11) NOT NULL,
+  `kelas` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jumSKST` int(11) NOT NULL,
+  `jumSKSP` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subunsur1`
+--
+
+INSERT INTO `subunsur1` (`id`, `idPelaksanaan`, `kodeMK`, `namaMK`, `jumSKS`, `kelas`, `jumSKST`, `jumSKSP`, `created_at`, `updated_at`) VALUES
+(4, 19, 'as', 'asasas', 3, 'pagi', 3, 1, '2020-03-27 08:22:02', '2020-03-27 14:35:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subunsur4`
+--
+
+CREATE TABLE `subunsur4` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `idpelaksanaan` int(11) NOT NULL,
+  `jnsBimb` smallint(6) NOT NULL,
+  `jmlMHS` int(11) NOT NULL,
+  `jmlSKS` int(11) NOT NULL,
+  `idDosen1` int(11) NOT NULL,
+  `idDosen2` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subunsur4`
+--
+
+INSERT INTO `subunsur4` (`id`, `idpelaksanaan`, `jnsBimb`, `jmlMHS`, `jmlSKS`, `idDosen1`, `idDosen2`, `created_at`, `updated_at`) VALUES
+(2, 29, 1, 23, 12, 30, 30, '2020-03-29 01:07:45', '2020-03-29 01:26:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subunsur5`
+--
+
+CREATE TABLE `subunsur5` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `idpelaksanaan` int(11) NOT NULL,
+  `jmlMHS` int(11) NOT NULL,
+  `idDosenK` int(11) NOT NULL,
+  `idDosenA` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subunsur5`
+--
+
+INSERT INTO `subunsur5` (`id`, `idpelaksanaan`, `jmlMHS`, `idDosenK`, `idDosenA`, `created_at`, `updated_at`) VALUES
+(3, 30, 56, 30, 30, '2020-03-29 01:29:10', '2020-03-29 01:33:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subunsur6`
+--
+
+CREATE TABLE `subunsur6` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `idpelaksanaan` int(11) NOT NULL,
+  `idDosen` int(11) NOT NULL,
+  `jmlKeg` int(11) NOT NULL,
+  `jmlSKS` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subunsur6`
+--
+
+INSERT INTO `subunsur6` (`id`, `idpelaksanaan`, `idDosen`, `jmlKeg`, `jmlSKS`, `created_at`, `updated_at`) VALUES
+(3, 32, 28, 23, 2, '2020-03-29 03:45:34', '2020-03-29 03:45:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subunsur23`
+--
+
+CREATE TABLE `subunsur23` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `idPelaksanaan` int(11) NOT NULL,
+  `jmlMHS` int(11) NOT NULL,
+  `jmlSKS` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subunsur23`
+--
+
+INSERT INTO `subunsur23` (`id`, `idPelaksanaan`, `jmlMHS`, `jmlSKS`, `created_at`, `updated_at`) VALUES
+(8, 27, 24, 1, '2020-03-28 00:28:09', '2020-03-28 00:28:09'),
+(9, 28, 67, 3, '2020-03-29 01:04:05', '2020-03-29 01:04:05');
 
 -- --------------------------------------------------------
 
@@ -61,9 +253,9 @@ CREATE TABLE `tbljurusan` (
 --
 
 INSERT INTO `tbljurusan` (`id`, `nama_jurusan`, `idKaprodi`, `created_at`, `updated_at`) VALUES
-(1, 'Teknik Informatika', 1, NULL, NULL),
+(1, 'Teknik Informatika', 2, NULL, NULL),
 (5, 'Teknik Akuntansi', 1, NULL, NULL),
-(6, 'Teknik Geomatika', 1, NULL, NULL);
+(6, 'Teknik Geomatika', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -111,29 +303,6 @@ INSERT INTO `tblkegiatan` (`id_kegiatan`, `nama_kegiatan`, `id_subunsur`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblnilai_pengajar`
---
-
-CREATE TABLE `tblnilai_pengajar` (
-  `id_nilaipengajar` int(11) NOT NULL,
-  `id_reportkegiatan` int(11) NOT NULL,
-  `namadosen_pengajar` varchar(50) NOT NULL,
-  `sks_teori` int(11) NOT NULL,
-  `sks_praktek` int(11) NOT NULL,
-  `total` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tblnilai_pengajar`
---
-
-INSERT INTO `tblnilai_pengajar` (`id_nilaipengajar`, `id_reportkegiatan`, `namadosen_pengajar`, `sks_teori`, `sks_praktek`, `total`) VALUES
-(1, 0, 'Riwinoto', 3, 2, 6),
-(2, 2, 'Riwinoto', 2, 3, 4);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tblprodi`
 --
 
@@ -154,153 +323,6 @@ INSERT INTO `tblprodi` (`id`, `nama_prodi`, `created_at`, `updated_at`) VALUES
 (3, 'Teknik Geomatika & Jaring', NULL, NULL),
 (4, 'Animasi', NULL, NULL),
 (5, 'Rekayasa Keamanan Siber', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblreportkegiatan`
---
-
-CREATE TABLE `tblreportkegiatan` (
-  `id_reportkegiatan` int(11) NOT NULL,
-  `jurusan` varchar(25) DEFAULT NULL,
-  `subunsur` varchar(100) DEFAULT NULL,
-  `kegiatan` varchar(50) DEFAULT NULL,
-  `prodi` varchar(50) DEFAULT NULL,
-  `th_ajaran` varchar(25) DEFAULT NULL,
-  `semester` varchar(25) DEFAULT NULL,
-  `tgl_mulai` date DEFAULT NULL,
-  `tgl_selesai` date DEFAULT NULL,
-  `file` text DEFAULT NULL,
-  `kodemakul` varchar(50) DEFAULT NULL,
-  `namamakul` varchar(50) DEFAULT NULL,
-  `jumlah_sks` int(11) DEFAULT NULL,
-  `kelas` varchar(25) DEFAULT NULL,
-  `sksteori_real` int(11) DEFAULT NULL,
-  `skspraktek_real` int(11) DEFAULT NULL,
-  `namadosenpengajar` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tblreportkegiatan`
---
-
-INSERT INTO `tblreportkegiatan` (`id_reportkegiatan`, `jurusan`, `subunsur`, `kegiatan`, `prodi`, `th_ajaran`, `semester`, `tgl_mulai`, `tgl_selesai`, `file`, `kodemakul`, `namamakul`, `jumlah_sks`, `kelas`, `sksteori_real`, `skspraktek_real`, `namadosenpengajar`) VALUES
-(2, 'Teknik informatika', 'Melaksanakan perkuliahan/tutorial dan membimbing', 'Melaksanakan perkulihan/ tutorial dan membimbing, ', 'Teknik Informatika', '2019/2020', 'Genap', '2020-03-01', '2020-03-27', 'File', 'Tj123', 'budaya', 3, 'Malam', 1, 2, 'Riwinoto'),
-(3, 'Teknik informatika', 'Melaksanakan perkuliahan/tutorial dan membimbing', 'Melaksanakan perkulihan/ tutorial dan membimbing, ', 'Teknik Informatika', '2019/2020', 'Genap', '2020-03-01', '2020-03-27', 'File', 'Tj123', 'budaya', 3, 'Malam', 1, 2, 'Riwinoto'),
-(4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, 'Pilih Jurusan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 'Pilih Jurusan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, '3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(9, '3', '3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, '1', '3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(11, '1', '3', NULL, '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(12, '1', '3', '4', '1', '1', '1', '2020-03-02', '2020-03-25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(13, '1', '3', '4', '1', '1', '1', '2020-03-02', '2020-03-25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(14, '1', '3', '4', '1', '1', '1', '2020-03-01', '2020-03-20', NULL, 'jjh123', 'budaya', NULL, NULL, NULL, NULL, NULL),
-(15, '1', '3', '4', '1', '1', '1', '2020-03-02', '2020-03-28', NULL, 'gggg11', 'eeee', 3, '1', NULL, NULL, NULL),
-(16, '1', '3', '4', '1', '1', '1', '2020-03-03', '2020-03-27', NULL, '22ddd', 'ggggg', 4, 'Pagi', 2, 1, 'riwinoto');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblsks`
---
-
-CREATE TABLE `tblsks` (
-  `id_sks` int(11) NOT NULL,
-  `id_kegiatan` int(11) NOT NULL,
-  `total_sks` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblsubkegiatan`
---
-
-CREATE TABLE `tblsubkegiatan` (
-  `id_subkegiatan` int(11) NOT NULL,
-  `nama_subkegiatan` varchar(100) NOT NULL,
-  `id_kegiatan` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tblsubkegiatan`
---
-
-INSERT INTO `tblsubkegiatan` (`id_subkegiatan`, `nama_subkegiatan`, `id_kegiatan`) VALUES
-(1, 'Disertasi', 7),
-(2, 'Tesis', 7),
-(3, 'Skripsi\r\n', 7),
-(4, 'Laporan akhir Studi', 7),
-(5, 'Disertasi', 8),
-(6, 'Tesis\r\n', 8),
-(7, 'Skripsi\r\n', 8),
-(8, 'Laporan akhir Studi', 8);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblsubunsur`
---
-
-CREATE TABLE `tblsubunsur` (
-  `id_subunsur` int(11) NOT NULL,
-  `nama_subunsur` varchar(100) NOT NULL,
-  `id_unsur` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tblsubunsur`
---
-
-INSERT INTO `tblsubunsur` (`id_subunsur`, `nama_subunsur`, `id_unsur`) VALUES
-(1, 'Pendidikan Formal', 1),
-(2, 'Diklat Pra Jabatan', 1),
-(3, 'Melaksanakan perkuliahan/tutorial dan membimbing,menguji serta menyelenggarakan pendidikan dilabrato', 2),
-(4, 'Membimbing seminar\r\n', 2),
-(5, 'Membing kuliah kerja nyata,pratek kerja nyata, praktek kerja  lapangan', 2),
-(6, 'Membimbing dan ikut\r\nmembimbing dalam menghasilkan disertasi, tesis,skripsi dan laporan akhir studi', 2),
-(7, 'Bertugas sebagai penguji pada ujian akhir', 2),
-(8, 'Membina kegiatan mahasiswa', 2),
-(9, 'Mengembangkan program kuliah', 2),
-(10, 'Mengembangkan bahan kuliah', 2),
-(11, 'Mengembangkan bahan kuliah', 2),
-(12, 'Membimbing Akademik Dosen yang lebih rendah jabatannya', 2),
-(13, 'Melaksanakan kegiatan Detasering dan pencangkokan Akademik Dosen', 2),
-(14, 'Melakukan kegiatan\r\npengembangan diri untuk meningkatan kompetensi', 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblth_ajaran`
---
-
-CREATE TABLE `tblth_ajaran` (
-  `id_thajaran` int(11) NOT NULL,
-  `tahun_ajaran` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tblth_ajaran`
---
-
-INSERT INTO `tblth_ajaran` (`id_thajaran`, `tahun_ajaran`) VALUES
-(1, '2019/2020'),
-(2, '2020/2021');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblunsur`
---
-
-CREATE TABLE `tblunsur` (
-  `id_unsur` int(11) NOT NULL,
-  `nama_unsur` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -330,17 +352,60 @@ CREATE TABLE `tbluser` (
 INSERT INTO `tbluser` (`id`, `nama`, `nip`, `jabatan`, `tgl_lahir`, `jurusan`, `prodi`, `email`, `password`, `akses`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 1234567, 'Admin', '1987-03-06', 'Sistem Informasi', 'Teknik', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 1, NULL, '2020-03-22 04:23:04'),
 (28, 'dosen', 4567, 'Dosen', '2020-12-31', 'Sistem Informasi', 'Hukum', 'dosen@gmail.com', 'ce28eed1511f631af6b2a7bb0a85d636', 2, NULL, '2020-03-22 04:23:30'),
-(29, 'mutia', 3123123, 'Admin', '2020-03-25', 'Sistem Informasi', 'Teknik', 'acepalan3@gmail.com', 'ac0318e30823429fed4a311abbfab9a8', 1, '2020-03-22 03:50:41', '2020-03-22 04:22:21');
+(29, 'mutia', 3123123, 'TU', '2020-03-25', 'Sistem Informasi', 'Teknik', 'tu@gmail.com', 'b6b4ce6df035dcfaa26f3bc32fb89e6a', 3, '2020-03-22 03:50:41', '2020-03-23 07:33:48'),
+(30, 'tes dosen', 454442, 'Dosen', '2020-03-28', 'Hukum', 'Hukum', 'dosen2@gmail.com', 'b62f0ab35e8c2dcc22a627d1c6e39967', 2, '2020-03-27 12:55:08', '2020-03-27 12:55:08');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `tblakses`
+-- Indexes for table `migrations`
 --
-ALTER TABLE `tblakses`
-  ADD PRIMARY KEY (`id_akses`);
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pelaksanaan`
+--
+ALTER TABLE `pelaksanaan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sesi`
+--
+ALTER TABLE `sesi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subunsur1`
+--
+ALTER TABLE `subunsur1`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subunsur4`
+--
+ALTER TABLE `subunsur4`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subunsur5`
+--
+ALTER TABLE `subunsur5`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subunsur6`
+--
+ALTER TABLE `subunsur6`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subunsur23`
+--
+ALTER TABLE `subunsur23`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbljurusan`
@@ -355,52 +420,10 @@ ALTER TABLE `tblkegiatan`
   ADD PRIMARY KEY (`id_kegiatan`);
 
 --
--- Indexes for table `tblnilai_pengajar`
---
-ALTER TABLE `tblnilai_pengajar`
-  ADD PRIMARY KEY (`id_nilaipengajar`);
-
---
 -- Indexes for table `tblprodi`
 --
 ALTER TABLE `tblprodi`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tblreportkegiatan`
---
-ALTER TABLE `tblreportkegiatan`
-  ADD PRIMARY KEY (`id_reportkegiatan`);
-
---
--- Indexes for table `tblsks`
---
-ALTER TABLE `tblsks`
-  ADD PRIMARY KEY (`id_sks`);
-
---
--- Indexes for table `tblsubkegiatan`
---
-ALTER TABLE `tblsubkegiatan`
-  ADD PRIMARY KEY (`id_subkegiatan`);
-
---
--- Indexes for table `tblsubunsur`
---
-ALTER TABLE `tblsubunsur`
-  ADD PRIMARY KEY (`id_subunsur`);
-
---
--- Indexes for table `tblth_ajaran`
---
-ALTER TABLE `tblth_ajaran`
-  ADD PRIMARY KEY (`id_thajaran`);
-
---
--- Indexes for table `tblunsur`
---
-ALTER TABLE `tblunsur`
-  ADD PRIMARY KEY (`id_unsur`);
 
 --
 -- Indexes for table `tbluser`
@@ -413,10 +436,52 @@ ALTER TABLE `tbluser`
 --
 
 --
--- AUTO_INCREMENT for table `tblakses`
+-- AUTO_INCREMENT for table `migrations`
 --
-ALTER TABLE `tblakses`
-  MODIFY `id_akses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `pelaksanaan`
+--
+ALTER TABLE `pelaksanaan`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `sesi`
+--
+ALTER TABLE `sesi`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+
+--
+-- AUTO_INCREMENT for table `subunsur1`
+--
+ALTER TABLE `subunsur1`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `subunsur4`
+--
+ALTER TABLE `subunsur4`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `subunsur5`
+--
+ALTER TABLE `subunsur5`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `subunsur6`
+--
+ALTER TABLE `subunsur6`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `subunsur23`
+--
+ALTER TABLE `subunsur23`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbljurusan`
@@ -431,58 +496,16 @@ ALTER TABLE `tblkegiatan`
   MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT for table `tblnilai_pengajar`
---
-ALTER TABLE `tblnilai_pengajar`
-  MODIFY `id_nilaipengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `tblprodi`
 --
 ALTER TABLE `tblprodi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `tblreportkegiatan`
---
-ALTER TABLE `tblreportkegiatan`
-  MODIFY `id_reportkegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT for table `tblsks`
---
-ALTER TABLE `tblsks`
-  MODIFY `id_sks` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tblsubkegiatan`
---
-ALTER TABLE `tblsubkegiatan`
-  MODIFY `id_subkegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `tblsubunsur`
---
-ALTER TABLE `tblsubunsur`
-  MODIFY `id_subunsur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `tblth_ajaran`
---
-ALTER TABLE `tblth_ajaran`
-  MODIFY `id_thajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tblunsur`
---
-ALTER TABLE `tblunsur`
-  MODIFY `id_unsur` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
