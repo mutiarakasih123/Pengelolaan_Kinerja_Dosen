@@ -35,12 +35,22 @@
                             <a class="btn btn-outline-info btn-sm" href="/Pelaksanaan/show/{{ $data->idP }}" role="button">
                                 <i class="fas fa-eye"></i>
                             </a>
+                            @if (session('accessId') == 3 && $data->subUnsur !== 6)
                             <a class="btn btn-outline-primary btn-sm" href="/Pelaksanaan/edit/{{ $data->idP }}" role="button">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
                             <a class="btn btn-outline-danger btn-sm" href="/Pelaksanaan/destroy/{{ $data->idP }}" role="button">
                                 <i class="fas fa-trash"></i>
                             </a>
+                            @endif
+                            @if (session('accessId') == 2 && $data->subUnsur == 6)
+                                <a class="btn btn-outline-primary btn-sm" href="/Pelaksanaan/edit/{{ $data->idP }}" role="button">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a class="btn btn-outline-danger btn-sm" href="/Pelaksanaan/destroy/{{ $data->idP }}" role="button">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

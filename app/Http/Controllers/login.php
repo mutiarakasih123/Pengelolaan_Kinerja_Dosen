@@ -27,7 +27,6 @@ class login extends Controller
     }
 
     public function logout(Request $request){
-        // $request->session()->flush();
         $request->session()->forget('userId');
         $request->session()->forget('email');
         $request->session()->forget('accessId');
