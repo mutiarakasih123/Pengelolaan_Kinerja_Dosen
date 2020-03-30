@@ -77,7 +77,7 @@
 <div class="bg-img">
 
   <form action="login" method="POST" class="container">
-  @csrf
+  {{ csrf_field() }}
    <center> <h1>Login</h1> </center>
 
     <label for="email"><b>Email</b>
