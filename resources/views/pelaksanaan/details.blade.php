@@ -258,7 +258,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="dosenPemb1" class="col-sm-4 col-form-label text-right">Dosen Pembingbing 1</label>
+                    <label for="dosenPemb1" class="col-sm-4 col-form-label text-right">Dosen Pembimbing 1</label>
                     <div class="col-sm-5">
                         @foreach ($users as $data)
                             @if ($unsur->idDosen1 == $data->id)
@@ -276,7 +276,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="dosenPemb2" class="col-sm-4 col-form-label text-right">Dosen Pembingbing 2</label>
+                    <label for="dosenPemb2" class="col-sm-4 col-form-label text-right">Dosen Pembimbing 2</label>
                     <div class="col-sm-5">
                         @foreach ($users as $data)
                             @if ($unsur->idDosen2 == $data->id)
