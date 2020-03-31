@@ -226,7 +226,7 @@
                     @foreach ($sesi as $key => $item)
                     <div class="form-group row" id="cloneDosenunsur{{ $key+1}}">
                         <label for="dosenU" class="col-sm-3 col-form-label text-right">Nama Dosen Ke {{ $key+1 }}</label>
-                        <div class="col-sm-6">
+                        <div class="col-sm-5">
                             <select class="form-control" required name="dosenU{{ $key }}">
                                 <option value="">Select Nama Dosen</option>
                                 @foreach ($users as $data)
@@ -234,13 +234,21 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">SKS</div>
+                                </div>
+                                <input type="text" class="form-control text-center sksSub2" placeholder="SKS" readonly value="{{ number_format($unsur->jmlSKS/count($sesi),2,'.','') }}">
+                              </div>
+                        </div>
                         <div>
                             @if (($key+1) == 1)
                             <a href="javascrip:void(0)" class="btn btn-info btn-sm btnplusEdit" sum="{{ count($sesi) }}" style="height: 37px">
                                 <i class="fas fa-plus"></i>
                             </a>
                             @endif
-                            @if (count($sesi) < 2 || ($key+1) == count($sesi))
+                            @if (count($sesi) > 1 && ($key+1) == count($sesi))
                             <a href="javascrip:void(0)" class="btn btn-danger btn-sm btnminus" id="remove{{ $key+1 }}" minus="{{ $key+1 }}" sum="{{ count($sesi) }}" style="height: 37px"><i class="fas fa-minus"></i></a>
                             @else
                             <a href="javascrip:void(0)" class="btn btn-danger btn-sm d-none btnminus" id="remove{{ $key+1 }}" minus="{{ $key+1 }}" sum="{{ count($sesi) }}" style="height: 37px"><i class="fas fa-minus"></i></a>
@@ -287,8 +295,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="dosenPemb1" class="col-sm-4 col-form-label text-right">Dosen Pembingbing 1</label>
-                        <div class="col-sm-8">
+                        <label for="dosenPemb1" class="col-sm-4 col-form-label text-right">Dosen Pembimbing 1</label>
+                        <div class="col-sm-5">
                             <select class="form-control" required name="dosenPemb1">
                                 <option value="">Select Nama Dosen</option>
                                 @foreach ($users as $data)
@@ -296,16 +304,32 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">SKS</div>
+                                </div>
+                                <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->jmlSKS/2 }}">
+                              </div>
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <label for="dosenPemb2" class="col-sm-4 col-form-label text-right">Dosen Pembingbing 2</label>
-                        <div class="col-sm-8">
+                        <label for="dosenPemb2" class="col-sm-4 col-form-label text-right">Dosen Pembimbing 2</label>
+                        <div class="col-sm-5">
                             <select class="form-control" required name="dosenPemb2">
                                 <option value="">Select Nama Dosen</option>
                                 @foreach ($users as $data)
                                     <option value="{{ $data->id }}" {{ $unsur->idDosen2 == $data->id ? "selected" : "" }}>{{ $data->nama }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">SKS</div>
+                                </div>
+                                <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->jmlSKS/2 }}">
+                              </div>
                         </div>
                     </div>
                 </div>
@@ -325,7 +349,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="idDosenK" class="col-sm-4 col-form-label text-right">Ketua Penguji</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <select class="form-control" required name="idDosenK">
                                 <option value="">Select Nama Dosen</option>
                                 @foreach ($users as $data)
@@ -333,16 +357,32 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">SKS</div>
+                                </div>
+                                <input type="text" class="form-control text-center sksSub5K" placeholder="SKS" readonly value="{{ $unsur->jmlMHS/4 }}">
+                              </div>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label for="idDosenA" class="col-sm-4 col-form-label text-right">Anggota Penguji</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <select class="form-control" required name="idDosenA">
                                 <option value="">Select Nama Dosen</option>
                                 @foreach ($users as $data)
                                     <option value="{{ $data->id }}" {{ $unsur->idDosenA == $data->id ? "selected" : "" }}>{{ $data->nama }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">SKS</div>
+                                </div>
+                                <input type="text" class="form-control text-center sksSub5A" placeholder="SKS" readonly value="{{ ($unsur->jmlMHS/4)*0.5 }}">
+                              </div>
                         </div>
                     </div>
                 </div>
@@ -382,8 +422,8 @@
 
     {{-- clone for sub unsur 1 --}}
     <div class="form-group row d-none" id="cloneDosenT">
-        <label for="sksT" class="col-sm-3 col-form-label text-right">Nama Dosen</label>
-        <div class="col-sm-9">
+        <label for="sksT" class="col-sm-3 col-form-label text-right label">Nama Dosen</label>
+        <div class="col-sm-6">
             <select class="form-control" {{ old('subUnsur') == 1 ? "required" : "" }} name="dosenT">
                 <option value="">Select Nama Dosen</option>
                 @foreach ($users as $data)
@@ -392,16 +432,32 @@
             </select>
             <div class="invalid-feedback"></div>
         </div>
+        <div class="col-sm-3">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">SKS</div>
+                </div>
+                <input type="text" class="form-control text-center" placeholder="SKS" readonly value="1">
+              </div>
+        </div>
     </div>
     <div class="form-group row d-none" id="cloneDosenP">
-        <label for="sksP" class="col-sm-4 col-form-label text-right">Nama Dosen</label>
-        <div class="col-sm-8">
+        <label for="sksP" class="col-sm-4 col-form-label text-right label">Nama Dosen</label>
+        <div class="col-sm-5">
             <select class="form-control" {{ old('subUnsur') == 1 ? "required" : "" }} name="dosenP">
                 <option value="">Select Nama Dosen</option>
                 @foreach ($users as $data)
                     <option value="{{ $data->id }}">{{ $data->nama }}</option>
                 @endforeach
             </select>
+        </div>
+        <div class="col-sm-3">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">SKS</div>
+                </div>
+                <input type="text" class="form-control text-center sumSKSP" placeholder="SKS" readonly value="1">
+              </div>
         </div>
     </div>
 @endsection

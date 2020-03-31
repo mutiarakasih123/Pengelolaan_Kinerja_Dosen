@@ -95,7 +95,7 @@ $(function () {
             cloneT.removeClass('d-none');
             cloneT.addClass('forRemoveCloneT');
             cloneT.removeAttr('id');
-            cloneT.children('label').text('Dosen Teori Sesi ' + n);
+            cloneT.children('.label').text('Dosen Teori Sesi ' + n);
             cloneT.find('select').attr('name', 'dosenT' + n);
             var select = cloneT.find('select').children('option');
             select.each(function(){
@@ -117,7 +117,7 @@ $(function () {
             cloneT.removeClass('d-none');
             cloneT.addClass('forRemoveCloneT');
             cloneT.removeAttr('id');
-            cloneT.children('label').text('Dosen Teori Sesi ' + n);
+            cloneT.children('.label').text('Dosen Teori Sesi ' + n);
             cloneT.find('select').attr('name', 'dosenT' + n);
             var select = cloneT.find('select').children('option');
             select.each(function(){
@@ -143,8 +143,9 @@ $(function () {
                 cloneT.removeClass('d-none');
                 cloneT.addClass('forRemoveCloneP');
                 cloneT.removeAttr('id');
-                cloneT.children('label').text('Dosen Prakter Sesi ' + n);
+                cloneT.children('.label').text('Dosen Prakter Sesi ' + n);
                 cloneT.find('select').attr('name', 'dosenP' + n);
+                cloneT.find('.sumSKSP').val(Number(count)/4);
                 var select = cloneT.find('select').children('option');
                 select.each(function(){
                     if ($(this).val() !== "") {
@@ -167,8 +168,9 @@ $(function () {
             cloneT.removeClass('d-none');
             cloneT.addClass('forRemoveCloneP');
             cloneT.removeAttr('id');
-            cloneT.children('label').text('Dosen Prakter Sesi ' + n);
+            cloneT.children('.label').text('Dosen Prakter Sesi ' + n);
             cloneT.find('select').attr('name', 'dosenP' + n);
+            cloneT.find('.sumSKSP').val(Number($('#sksP').val())/4);
             var select = cloneT.find('select').children('option');
             select.each(function(){
                 if ($(this).val() !== "") {
@@ -185,7 +187,9 @@ $(function () {
     $('#jumMhs').keyup(function () {
         var sum = $(this).val();
         var sks = Number(sum) / 25;
+        var coun = Number($('#countDosen').val());
         $('#jumSksMhs').val(Math.ceil(sks));
+        $('.sksSub2').val(Number($('#jumSksMhs').val())/coun);
     })
     $('.btnplus').click(function () {
         var n = $(this).attr('sum');
@@ -206,6 +210,8 @@ $(function () {
             $('#remove' + i).addClass('d-none');
         }
         $('#countDosen').val(no);
+        var changeSKS = Number($('#jumSksMhs').val())/Number($('#countDosen').val());
+        $('.sksSub2').val(changeSKS.toFixed(2));
         minus();
     })
     $('.btnplusEdit').click(function(){
@@ -225,6 +231,8 @@ $(function () {
         $('#remove'+n).addClass('d-none');
         $('#remove'+no).removeClass('d-none');
         $('#countDosen').val(no);
+        var changeSKS = Number($('#jumSksMhs').val())/Number($('#countDosen').val());
+        $('.sksSub2').val(changeSKS.toFixed(2));
         minus();
     })
     minus();
@@ -235,8 +243,11 @@ $(function () {
             $('#cloneDosenunsur' + n).remove();
             $('#remove' + no).removeClass('d-none');
             $('.btnplusEdit').attr('sum', no);
+            $('.btnplus').attr('sum', no);
             $('#countDosen').val(no);
             $('#remove1').addClass('d-none');
+            var changeSKS = Number($('#jumSksMhs').val())/Number($('#countDosen').val());
+            $('.sksSub2').val(changeSKS.toFixed(2));
         })
     }
 
@@ -254,6 +265,7 @@ $(function () {
             var sks = 0;
         }
         $('#jumSKS4').val(Math.ceil(sks));
+        $('.sksSub4').val(Number($('#jumSKS4').val())/2);
     })
     $('#jnsBim').change(function () {
         var jns = $(this).val();
@@ -268,6 +280,16 @@ $(function () {
             var sks = 0;
         }
         $('#jumSKS4').val(Math.ceil(sks));
+        $('.sksSub4').val(Number($('#jumSKS4').val())/2);
+    })
+
+//function for sub unsur 5
+    $('#jumMhsiswa').keyup(function(){
+        var count = $(this).val();
+        $('.sksSub5K').val(Number(count)/4);
+        $('.sksSub5A').val(((Number(count)/4)*0.5).toFixed(2));
+//         sksSub5K
+// sksSub5A
     })
 });
 

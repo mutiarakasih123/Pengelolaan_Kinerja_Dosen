@@ -126,12 +126,20 @@
                     @if ($data->idDosenT !== null)
                         <div class="form-group row">
                             <label for="sksT" class="col-sm-3 col-form-label text-right">Dosen Teori Sesi {{$key+1}}</label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-6">
                                 @foreach ($users as $datax)
                                     @if ($data->idDosenT == $datax->id)
                                         <input type="text" class="form-control" value="{{ $datax->nama }}" disabled>
                                     @endif
                                 @endforeach
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">SKS</div>
+                                    </div>
+                                    <input type="text" class="form-control text-center" placeholder="SKS" disabled value="1">
+                                  </div>
                             </div>
                         </div>
                     @endif
@@ -160,12 +168,20 @@
                     @if ($data->idDosenP !== null)
                         <div class="form-group row">
                             <label for="sksT" class="col-sm-4 col-form-label text-right">Dosen Praktek Sesi {{$key+1}}</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-5">
                                 @foreach ($users as $datax)
                                     @if ($data->idDosenP == $datax->id)
                                         <input type="text" class="form-control" value="{{ $datax->nama }}" disabled>
                                     @endif
                                 @endforeach
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">SKS</div>
+                                    </div>
+                                    <input type="text" class="form-control text-center" placeholder="SKS" disabled value="{{ number_format($unsur->jumSKSP/4,2,'.','') }}">
+                                  </div>
                             </div>
                         </div>
                     @endif
@@ -192,12 +208,20 @@
                 @foreach ($sesi as $key => $item)
                 <div class="form-group row" id="cloneDosenunsur{{ $key+1}}">
                     <label for="dosenU" class="col-sm-3 col-form-label text-right">Nama Dosen Ke {{ $key+1 }}</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-6">
                         @foreach ($users as $data)
                             @if ($item->idDosenG == $data->id)
                                 <input type="text" class="form-control" value="{{$data->nama}}" disabled>
                             @endif
                         @endforeach
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">SKS</div>
+                            </div>
+                            <input type="text" class="form-control text-center sksSub2" placeholder="SKS" readonly value="{{ number_format($unsur->jmlSKS/count($sesi),2,'.','') }}">
+                          </div>
                     </div>
                 </div>
                 @endforeach
@@ -235,22 +259,38 @@
                 </div>
                 <div class="form-group row">
                     <label for="dosenPemb1" class="col-sm-4 col-form-label text-right">Dosen Pembingbing 1</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-5">
                         @foreach ($users as $data)
                             @if ($unsur->idDosen1 == $data->id)
                                 <input type="text" class="form-control" value="{{ $data->nama }}" disabled>
                             @endif
                         @endforeach
                     </div>
+                    <div class="col-sm-3">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">SKS</div>
+                            </div>
+                            <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->jmlSKS/2 }}">
+                          </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label for="dosenPemb2" class="col-sm-4 col-form-label text-right">Dosen Pembingbing 2</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-5">
                         @foreach ($users as $data)
                             @if ($unsur->idDosen2 == $data->id)
                                 <input type="text" class="form-control" value="{{ $data->nama }}" disabled>
                             @endif
                         @endforeach
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">SKS</div>
+                            </div>
+                            <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->jmlSKS/2 }}">
+                          </div>
                     </div>
                 </div>
             </div>
@@ -267,22 +307,38 @@
                 </div>
                 <div class="form-group row">
                     <label for="idDosenK" class="col-sm-4 col-form-label text-right">Ketua Penguji</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-5">
                         @foreach ($users as $data)
                             @if ($unsur->idDosenK == $data->id)
                                 <input type="text" class="form-control" value="{{ $data->nama }}" disabled>
                             @endif
                         @endforeach
                     </div>
+                    <div class="col-sm-3">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">SKS</div>
+                            </div>
+                            <input type="text" class="form-control text-center sksSub5K" placeholder="SKS" readonly value="{{ $unsur->jmlMHS/4 }}">
+                          </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label for="idDosenA" class="col-sm-4 col-form-label text-right">Anggota Penguji</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-5">
                         @foreach ($users as $data)
                             @if ($unsur->idDosenA == $data->id)
                                 <input type="text" class="form-control" value="{{ $data->nama }}" disabled>
                             @endif
                         @endforeach
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">SKS</div>
+                            </div>
+                            <input type="text" class="form-control text-center sksSub5A" placeholder="SKS" readonly value="{{ ($unsur->jmlMHS/4)*0.5 }}">
+                          </div>
                     </div>
                 </div>
             </div>
