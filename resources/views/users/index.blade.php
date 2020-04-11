@@ -12,8 +12,8 @@
                     <th>NAMA</th>
                     <th>NIP</th>
                     <th>JABATAN</th>
-                    <th>JURUSAN</th>
                     <th>PRODI</th>
+                    <th>JURUSAN</th>
                     <th>EMAIL</th>
                     <th>ACTION</th>
                 </tr>
@@ -24,8 +24,20 @@
                         <td>{{ $data->nama }}</td>
                         <td>{{ $data->nip }}</td>
                         <td>{{ $data->jabatan }}</td>
-                        <td>{{ $data->jurusan }}</td>
-                        <td>{{ $data->prodi }}</td>
+                        <td>
+                            @foreach ($kaprodi as $item)
+                                @if ($item->id == $data->prodi)
+                                    {{ $item->nama_prodi }}
+                                @endif
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach ($jurusan as $item)
+                                @if ($item->id == $data->jurusan)
+                                    {{ $item->nama_jurusan }}
+                                @endif
+                            @endforeach    
+                        </td>
                         <td>{{ $data->email }}</td>
                         <td class="text-center" style="width: 150px">
                             <a class="btn btn-outline-info btn-sm" href="/users/show/{{ $data->id }}" role="button">

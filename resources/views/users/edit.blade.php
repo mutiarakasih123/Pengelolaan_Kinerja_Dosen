@@ -51,30 +51,52 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="jurusan" class="col-sm-2 col-form-label text-right">Jurusan</label>
+                        <label for="jakademi" class="col-sm-2 col-form-label text-right">Jabatan Akademi</label>
                         <div class="col-sm-10">
-                            <select class="form-control @if ($errors->has('jurusan')) is-invalid @endif" id="jurusan" name="jurusan">
-                                <option value="">Select Jurusan</option>
-                                <option value="Sistem Informasi" {{ $users->jurusan == "Sistem Informasi" ? "selected" : "" }}>Sistem Informasi</option>
-                                <option value="Sistem Informatika" {{ $users->jurusan == "Sistem Informatika" ? "selected" : "" }}>Sistem Informatika</option>
-                                <option value="Hukum" {{ $users->jurusan == "Hukum" ? "selected" : "" }}>Hukum</option>
+                            <select class="form-control @if ($errors->has('jakademi')) is-invalid @endif" id="jakademi" name="jakademi">
+                                <option value="">Select Jabatan Akademi</option>
+                                <option value="Asisten Ahli" {{ $users->jakademi == "Asisten Ahli" ? "selected" : "" }}>Asisten Ahli</option>
+                                <option value="Lektor" {{ $users->jakademi == "Lektor" ? "selected" : "" }}>Lektor</option>
+                                <option value="TU" {{ $users->jakademi == "TU" ? "selected" : "" }}>TU</option>
                             </select>
                             <div class="invalid-feedback">
-                                {{ $errors->first('jurusan')}}
+                                {{ $errors->first('jakademi')}}
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="prodi" class="col-sm-2 col-form-label text-right">Prodi</label>
                         <div class="col-sm-10">
-                            <select class="form-control @if ($errors->has('prodi')) is-invalid @endif" id="prodi" name="prodi">
+                            <select name="prodi" id="kaprodi" class="form-control @if ($errors->has('prodi')) is-invalid @endif">
                                 <option value="">Select Prodi</option>
-                                <option value="Teknik" {{ $users->prodi == "Teknik" ? "selected" : "" }}>Teknik</option>
-                                <option value="Hukum" {{ $users->prodi == "Hukum" ? "selected" : "" }}>Hukum</option>
-                                <option value="Ekonomi" {{ $users->prodi == "Ekonomi" ? "selected" : "" }}>Ekonomi</option>
+                                @foreach ($kaprodi as $data)
+                                    @if (old('kaprodi') == $data->id || $users->prodi == $data->id)
+                                        <option value="{{ $data->id }}" selected>{{ $data->nama_prodi }}</option>
+                                    @else
+                                        <option value="{{ $data->id }}">{{ $data->nama_prodi }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">
                                 {{ $errors->first('prodi')}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="jurusan" class="col-sm-2 col-form-label text-right">Jurusan</label>
+                        <div class="col-sm-10">
+                            <select name="jurusan" id="jurusan" class="form-control @if ($errors->has('jurusan')) is-invalid @endif">
+                                <option value="">Select Jurusan</option>
+                                @foreach ($jurusan as $data)
+                                    @if (old('jurusan') == $data->id || $users->jurusan == $data->id)
+                                        <option value="{{ $data->id }}" selected class="Sjur{{ $data->idKaprodi }} d-none hideJur">{{ $data->nama_jurusan }}</option>
+                                    @else
+                                        <option value="{{ $data->id }}" class="Sjur{{ $data->idKaprodi }} d-none hideJur">{{ $data->nama_jurusan }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('jurusan')}}
                             </div>
                         </div>
                     </div>
