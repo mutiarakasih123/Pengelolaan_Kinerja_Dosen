@@ -20,6 +20,7 @@ class login extends Controller
             session(['userId' => $users[0]->id ]);
             session(['email' => $users[0]->email ]);
             session(['accessId' => $users[0]->akses]);
+            session(['jakademi' => $users[0]->jakademi]);
             return redirect('/home');
         }else{
             return view('login')->with('message', 'Username tidak terdaftar.');

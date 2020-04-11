@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\users;
+use App\jurusan;
+use App\kaprodi;
 use DataTables;
 use Illuminate\Http\Request;
 
@@ -26,7 +28,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users/create');
+        $kaprodi = kaprodi::all();
+        $jurusan = jurusan::all();
+        return view('users/create',['kaprodi' => $kaprodi, 'jurusan' => $jurusan]);
     }
 
     /**

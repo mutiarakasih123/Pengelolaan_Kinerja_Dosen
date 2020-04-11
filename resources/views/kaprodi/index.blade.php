@@ -3,7 +3,7 @@
 @section('konten')
     <div style="padding-left: 300px; padding-right: 300px;">
         <div class="row mt-4">
-            <div class="col-md-6"><h2>Daftar Kaprodi</h2></div>
+            <div class="col-md-6"><h2>Daftar Prodi</h2></div>
             <div class="col-md-6 text-right"><a href="javascript:void(0)" data-toggle="modal" data-target="#tambah" class="btn btn-outline-primary">Tambah Data</a></div>
         </div>
         <div class="table-responsive mt-4">
@@ -11,7 +11,7 @@
                 <thead>
                     <tr class="text-center">
                         <th style="width: 20px">#</th>
-                        <th>NAMA KAPRODI</th>
+                        <th>NAMA PRODI</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>

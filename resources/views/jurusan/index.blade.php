@@ -12,7 +12,7 @@
                     <tr class="text-center">
                         <th style="width: 20px">#</th>
                         <th>NAMA JURUSAN</th>
-                        <th>NAMA KAPRODI</th>
+                        <th>NAMA PRODI</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>

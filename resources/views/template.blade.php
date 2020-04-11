@@ -18,11 +18,14 @@
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/home">Pengelolaan Kinerja Dosen</a>
         <h5 style="color: #f8f9fa;">Welcome Back <?=session('email')?> </h5>
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a href="/logout" class="btn btn-outline-danger">Sign out</a>
-            </li>
-        </ul>
+        <div class="form-inline">
+            <h6 style="color: #f8f9fa">{{ session('jakademi') }}</h6>
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a href="/logout" class="btn btn-outline-danger">Sign out</a>
+                </li>
+            </ul>
+        </div>
     </nav>
     <div class="container-fluid">
         <div class="row">
@@ -46,7 +49,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/Kaprodi">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                            Daftar Kaprodi
+                            Daftar Prodi
                             </a>
                         </li>
                         <li class="nav-item">
