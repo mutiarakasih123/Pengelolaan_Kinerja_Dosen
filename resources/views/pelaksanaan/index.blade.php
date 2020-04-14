@@ -10,7 +10,7 @@
                 <tr class="text-center text-uppercase">
                     <th>jurusan</th>
                     <th>sub unsur</th>
-                    <th>kaProdi</th>
+                    <th>Prodi</th>
                     <th>tahun ajaran</th>
                     <th>semeter</th>
                     <th>mulai</th>

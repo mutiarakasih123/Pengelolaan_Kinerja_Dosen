@@ -88,16 +88,6 @@
                         <input type="text" class="form-control" value="{{date('d F Y', strtotime($pelaksanaan->tglSelesai))}}" disabled>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-right">File Pendukung</label>
-                    <div class="col-sm-8">
-                        <h3 class="col-form-label">
-                            <a href="../../uploadFiles/{{ $pelaksanaan->filePendukung }}" target="_blank">
-                                <span class="badge badge-primary" style="font-size: 14px">{{ $pelaksanaan->filePendukung }}</span>
-                            </a>
-                        </h3>
-                    </div>
-                </div>
             </div>
 
             <span class="border col-sm-12 mb-3"></span>
@@ -125,21 +115,51 @@
                 @foreach ($sesi as $key => $data)
                     @if ($data->idDosenT !== null)
                         <div class="form-group row">
-                            <label for="sksT" class="col-sm-3 col-form-label text-right">Dosen Teori Sesi {{$key+1}}</label>
-                            <div class="col-sm-6">
+                            <label for="sksT" class="col col-form-label text-right">Sesi {{$key+1}}</label>
+                            <div class="col">
                                 @foreach ($users as $datax)
                                     @if ($data->idDosenT == $datax->id)
                                         <input type="text" class="form-control" value="{{ $datax->nama }}" disabled>
                                     @endif
                                 @endforeach
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                      <div class="input-group-text">SKS</div>
+                                        <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                            BKD SKS
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control text-center" placeholder="SKS" disabled value="1">
-                                  </div>
+                                    @foreach ($users as $datax)
+                                        @if ($data->idDosenT == $datax->id)
+                                            @if ($datax->jakademi == "Lektor")
+                                                <input type="text" class="form-control text-center" placeholder="SKS" disabled value="0.5">
+                                            @endif
+                                            @if ($datax->jakademi == "Asisten Ahli")
+                                                <input type="text" class="form-control text-center" placeholder="SKS" disabled value="1">
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                            SKP SKS
+                                        </div>
+                                    </div>
+                                    @foreach ($users as $datax)
+                                        @if ($data->idDosenT == $datax->id)
+                                            @if ($datax->jakademi == "Lektor")
+                                                <input type="text" class="form-control text-center" placeholder="SKS" disabled value="0.5">
+                                            @endif
+                                            @if ($datax->jakademi == "Asisten Ahli")
+                                                <input type="text" class="form-control text-center" placeholder="SKS" disabled value="1">
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     @endif
@@ -167,21 +187,51 @@
                 @foreach ($sesi as $key => $data)
                     @if ($data->idDosenP !== null)
                         <div class="form-group row">
-                            <label for="sksT" class="col-sm-4 col-form-label text-right">Dosen Praktek Sesi {{$key+1}}</label>
-                            <div class="col-sm-5">
+                            <label for="sksT" class="col col-form-label text-right">Sesi {{$key+1}}</label>
+                            <div class="col">
                                 @foreach ($users as $datax)
                                     @if ($data->idDosenP == $datax->id)
                                         <input type="text" class="form-control" value="{{ $datax->nama }}" disabled>
                                     @endif
                                 @endforeach
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                      <div class="input-group-text">SKS</div>
+                                        <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                            BKD SKS
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control text-center" placeholder="SKS" disabled value="{{ number_format($unsur->jumSKSP/4,2,'.','') }}">
-                                  </div>
+                                    @foreach ($users as $datax)
+                                        @if ($data->idDosenP == $datax->id)
+                                            @if ($datax->jakademi == "Lektor")
+                                            <input type="text" class="form-control text-center" disabled value="{{ number_format(($unsur->jumSKSP/4)*0.5,2,'.','') }}">
+                                            @endif
+                                            @if ($datax->jakademi == "Asisten Ahli")
+                                            <input type="text" class="form-control text-center" disabled value="{{ number_format(($unsur->jumSKSP/4)*1,2,'.','') }}">
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                            SKP SKS
+                                        </div>
+                                    </div>
+                                    @foreach ($users as $datax)
+                                        @if ($data->idDosenP == $datax->id)
+                                            @if ($datax->jakademi == "Lektor")
+                                            <input type="text" class="form-control text-center" disabled value="{{ number_format(($unsur->jumSKSP/4)*0.5,2,'.','') }}">
+                                            @endif
+                                            @if ($datax->jakademi == "Asisten Ahli")
+                                            <input type="text" class="form-control text-center" disabled value="{{ number_format(($unsur->jumSKSP/4)*1,2,'.','') }}">
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     @endif
@@ -191,7 +241,7 @@
 
             {{-- for sub unsur 2 dan 3 --}}
             @if ($pelaksanaan->subUnsur == 2 || $pelaksanaan->subUnsur == 3)
-            <div class="col-sm-6" id="tempatCloneSubUnsur2">
+            <div class="col-sm-8" id="tempatCloneSubUnsur2">
                 <div class="form-group row">
                     <label for="jumMhs" class="col-sm-3 col-form-label text-right">Jumlah Mahasiswa</label>
                     <div class="col-sm-9">
@@ -208,20 +258,32 @@
                 @foreach ($sesi as $key => $item)
                 <div class="form-group row" id="cloneDosenunsur{{ $key+1}}">
                     <label for="dosenU" class="col-sm-3 col-form-label text-right">Nama Dosen Ke {{ $key+1 }}</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         @foreach ($users as $data)
                             @if ($item->idDosenG == $data->id)
                                 <input type="text" class="form-control" value="{{$data->nama}}" disabled>
                             @endif
                         @endforeach
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col">
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
-                              <div class="input-group-text">SKS</div>
+                                <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                    BKD SKS
+                                </div>
                             </div>
                             <input type="text" class="form-control text-center sksSub2" placeholder="SKS" readonly value="{{ number_format($unsur->jmlSKS/count($sesi),2,'.','') }}">
-                          </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                    SKP SKS
+                                </div>
+                            </div>
+                            <input type="text" class="form-control text-center sksSub2" placeholder="SKS" readonly value="{{ number_format($unsur->jmlSKS/count($sesi),2,'.','') }}">
+                        </div>
                     </div>
                 </div>
                 @endforeach
@@ -230,10 +292,10 @@
 
             {{-- for sub unsur 4 --}}
             @if ($pelaksanaan->subUnsur == 4)
-            <div class="col-sm-6" id="subUnsur4">
+            <div class="col-sm-8" id="subUnsur4">
                 <div class="form-group row">
-                    <label for="jnsBim" class="col-sm-4 col-form-label text-right">Jenis Bimbingan</label>
-                    <div class="col-sm-8">
+                    <label for="jnsBim" class="col-sm-3 col-form-label text-right">Jenis Bimbingan</label>
+                    <div class="col-sm-9">
                         @if ($unsur->jnsBimb == 1)
                             <input type="text" class="form-control" value="Desertasi" disabled>
                         @endif
@@ -243,54 +305,75 @@
                         @if ($unsur->jnsBimb == 3)
                             <input type="text" class="form-control" value="Skripsi" disabled>
                         @endif
+                        @if ($unsur->jnsBimb == 4)
+                            <input type="text" class="form-control" value="Laporan Akhir" disabled>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="jumMhsis" class="col-sm-4 col-form-label text-right">Jumlah Mahasiswa</label>
-                    <div class="col-sm-8">
+                    <label for="jumMhsis" class="col-sm-3 col-form-label text-right">Jumlah Mahasiswa</label>
+                    <div class="col-sm-9">
                         <input type="number" class="form-control" id="jumMhsis" name="jumMhsis" value="{{ $unsur->jmlMHS }}" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="jumSKS4" class="col-sm-4 col-form-label text-right">Jumlah SKS</label>
-                    <div class="col-sm-8">
-                        <input type="number" class="form-control" id="jumSKS4" name="jumSKS4" value="{{ $unsur->jmlSKS }}" disabled>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="dosenPemb1" class="col-sm-4 col-form-label text-right">Dosen Pembimbing 1</label>
-                    <div class="col-sm-5">
+                    <label for="dosenPemb1" class="col-sm-3 col-form-label text-right">Pembimbing Utama</label>
+                    <div class="col-sm-4">
                         @foreach ($users as $data)
                             @if ($unsur->idDosen1 == $data->id)
                                 <input type="text" class="form-control" value="{{ $data->nama }}" disabled>
                             @endif
                         @endforeach
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col">
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
-                              <div class="input-group-text">SKS</div>
+                                <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                    BKD SKS
+                                </div>
                             </div>
-                            <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->jmlSKS/2 }}">
-                          </div>
+                            <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->bkd1 }}">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                    SKP SKS
+                                </div>
+                            </div>
+                            <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->skp1 }}">
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="dosenPemb2" class="col-sm-4 col-form-label text-right">Dosen Pembimbing 2</label>
-                    <div class="col-sm-5">
+                    <label for="dosenPemb2" class="col-sm-3 col-form-label text-right">Pembimbing Pendamping</label>
+                    <div class="col-sm-4">
                         @foreach ($users as $data)
                             @if ($unsur->idDosen2 == $data->id)
                                 <input type="text" class="form-control" value="{{ $data->nama }}" disabled>
                             @endif
                         @endforeach
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col">
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
-                              <div class="input-group-text">SKS</div>
+                                <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif"> 
+                                    BKD SKS
+                                </div>
                             </div>
-                            <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->jmlSKS/2 }}">
-                          </div>
+                            <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->bkd2 }}">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif"> 
+                                    SKP SKS
+                                </div>
+                            </div>
+                            <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->skp2 }}">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -298,47 +381,71 @@
 
             {{-- for sub unsur 5 --}}
             @if ($pelaksanaan->subUnsur == 5)
-            <div class="col-sm-6" id="subUnsur5">
+            <div class="col-sm-8" id="subUnsur5">
                 <div class="form-group row">
-                    <label for="jumMhsiswa" class="col-sm-4 col-form-label text-right">Jumlah Mahasiswa</label>
-                    <div class="col-sm-8">
+                    <label for="jumMhsiswa" class="col-sm-3 col-form-label text-right">Jumlah Mahasiswa</label>
+                    <div class="col-sm-9">
                         <input type="number" class="form-control" id="jumMhsiswa" name="jumMhsiswa" value="{{ $unsur->jmlMHS }}" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="idDosenK" class="col-sm-4 col-form-label text-right">Ketua Penguji</label>
-                    <div class="col-sm-5">
+                    <label for="idDosenK" class="col-sm-3 col-form-label text-right">Ketua Penguji</label>
+                    <div class="col-sm-4">
                         @foreach ($users as $data)
                             @if ($unsur->idDosenK == $data->id)
                                 <input type="text" class="form-control" value="{{ $data->nama }}" disabled>
                             @endif
                         @endforeach
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col">
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
-                              <div class="input-group-text">SKS</div>
+                                <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                    BKD SKS
+                                </div>
                             </div>
                             <input type="text" class="form-control text-center sksSub5K" placeholder="SKS" readonly value="{{ $unsur->jmlMHS/4 }}">
-                          </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                    SKP SKS
+                                </div>
+                            </div>
+                            <input type="text" class="form-control text-center sksSub5K" placeholder="SKS" readonly value="{{ $unsur->jmlMHS/4 }}">
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="idDosenA" class="col-sm-4 col-form-label text-right">Anggota Penguji</label>
-                    <div class="col-sm-5">
+                    <label for="idDosenA" class="col-sm-3 col-form-label text-right">Anggota Penguji</label>
+                    <div class="col-sm-4">
                         @foreach ($users as $data)
                             @if ($unsur->idDosenA == $data->id)
                                 <input type="text" class="form-control" value="{{ $data->nama }}" disabled>
                             @endif
                         @endforeach
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col">
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
-                              <div class="input-group-text">SKS</div>
+                                <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                    BKD SKS
+                                </div>
                             </div>
                             <input type="text" class="form-control text-center sksSub5A" placeholder="SKS" readonly value="{{ ($unsur->jmlMHS/4)*0.5 }}">
-                          </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                    SKP SKS
+                                </div>
+                            </div>
+                            <input type="text" class="form-control text-center sksSub5A" placeholder="SKS" readonly value="{{ ($unsur->jmlMHS/4)*0.5 }}">
+                        </div>
                     </div>
                 </div>
             </div>

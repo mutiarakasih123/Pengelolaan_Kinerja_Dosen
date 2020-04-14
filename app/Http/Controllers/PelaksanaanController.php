@@ -58,7 +58,6 @@ class PelaksanaanController extends Controller
             'semester' => 'required',
             'Tmulai' => 'required',
             'Tselesai' => 'required',
-            'filePendukung' => 'required|mimes:doc,docx,xls,xlsx,pdf',
         ]);
         if ($request->subUnsur == 1) {
             $this->validate($request,[
@@ -70,10 +69,6 @@ class PelaksanaanController extends Controller
                 'sksP' => 'required',
             ]);
         }
-        $file = $request->file('filePendukung');
-        $rename = time()."_".$file->getClientOriginalName();
-        $folder = 'uploadFiles';
-        $file->move($folder,$rename);
         $pelaksanaan = pelaksanaan::create([
             'idJurusan' => $request->jurusan,
             'subUnsur' => $request->subUnsur,
@@ -83,7 +78,6 @@ class PelaksanaanController extends Controller
             'semester' => $request->semester,
             'tglMulai' =>$request->Tmulai,
             'tglSelesai' => $request->Tselesai,
-            'filePendukung' => $rename
         ]);
         $idpelaksanaan = $pelaksanaan->id;
         if ($request->subUnsur == 1) {
@@ -143,9 +137,13 @@ class PelaksanaanController extends Controller
                 'idpelaksanaan' => $idpelaksanaan,
                 'jnsBimb' => $request->jnsBim,
                 'jmlMHS' => $request->jumMhsis,
-                'jmlSKS' => $request->jumSKS4,
+                'jmlSKS' => 0,
                 'idDosen1' => $request->dosenPemb1,
+                'bkd1' => $request->sksSub4bkd1,
+                'skp1' => $request->sksSub4skp1,
                 'idDosen2' => $request->dosenPemb2,
+                'bkd2' => $request->sksSub4bkd2,
+                'skp2' => $request->sksSub4skp2,
             ]);
         }elseif ($request->subUnsur == 5) {
             subUnsur5::create([
@@ -354,9 +352,13 @@ class PelaksanaanController extends Controller
             subUnsur4::where('idPelaksanaan',$id)->update([
                 'jnsBimb' => $request->jnsBim,
                 'jmlMHS' => $request->jumMhsis,
-                'jmlSKS' => $request->jumSKS4,
+                'jmlSKS' => 0,
                 'idDosen1' => $request->dosenPemb1,
+                'bkd1' => $request->sksSub4bkd1,
+                'skp1' => $request->sksSub4skp1,
                 'idDosen2' => $request->dosenPemb2,
+                'bkd2' => $request->sksSub4bkd2,
+                'skp2' => $request->sksSub4skp2,
             ]);
 
         }elseif ($request->subUnsur == 5) {
@@ -385,7 +387,6 @@ class PelaksanaanController extends Controller
     public function destroy($id)
     {
         $pelaksanaan = pelaksanaan::find($id);
-        unlink('uploadFiles/'.$pelaksanaan->filePendukung);
         if ($pelaksanaan->subUnsur == 1) {
             $subUnsur1 = subUnsur1::where('idPelaksanaan',$id)->first();
             sesi::where('idUnsur',$subUnsur1->id)->where('unsur', 1)->delete();

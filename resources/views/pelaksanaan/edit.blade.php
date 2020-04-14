@@ -9,9 +9,10 @@
                 {{ method_field('PUT') }}
                 <div class="col-sm-6">
                     <div class="form-group row">
-                        <label for="kaprodi" class="col-sm-2 col-form-label col-form-label  text-right">Kaprodi</label>
+                        <label for="kaprodi" class="col-sm-2 col-form-label col-form-label  text-right">Prodi</label>
                         <div class="col-sm-10">
-                            <select name="kaprodi" id="kaprodi" class="form-control @if ($errors->has('kaprodi')) is-invalid @endif">
+                            <input type="hidden" name="kaprodi" id="kaprodiSend">
+                            <select disabled id="kaprodi" class="form-control @if ($errors->has('kaprodi')) is-invalid @endif">
                                 <option value="">Select Kaprodi</option>
                                 @foreach ($kaprodi as $data)
                                     @if ($pelaksanaan->idProdi == $data->id)
@@ -29,7 +30,8 @@
                     <div class="form-group row">
                         <label for="jurusan" class="col-sm-2 col-form-label col-form-label  text-right">Jurusan</label>
                         <div class="col-sm-10">
-                            <select name="jurusan" id="jurusan" class="form-control @if ($errors->has('jurusan')) is-invalid @endif">
+                            <input type="hidden" name="jurusan" id="jurusanSend">
+                            <select disabled id="jurusan" class="form-control @if ($errors->has('jurusan')) is-invalid @endif">
                                 <option value="">Select Jurusan</option>
                                 @foreach ($jurusan as $data)
                                     @if ($pelaksanaan->idJurusan == $data->id)
@@ -206,7 +208,7 @@
 
                 {{-- for sub unsur 2 dan 3 --}}
                 @if ($pelaksanaan->subUnsur == 2 || $pelaksanaan->subUnsur == 3)
-                <div class="col-sm-6" id="tempatCloneSubUnsur2">
+                <div class="col-sm-8" id="tempatCloneSubUnsur2">
                     <div class="form-group row">
                         <label for="jumMhs" class="col-sm-3 col-form-label text-right">Jumlah Mahasiswa</label>
                         <div class="col-sm-9">
@@ -226,7 +228,7 @@
                     @foreach ($sesi as $key => $item)
                     <div class="form-group row" id="cloneDosenunsur{{ $key+1}}">
                         <label for="dosenU" class="col-sm-3 col-form-label text-right">Nama Dosen Ke {{ $key+1 }}</label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             <select class="form-control" required name="dosenU{{ $key }}">
                                 <option value="">Select Nama Dosen</option>
                                 @foreach ($users as $data)
@@ -234,13 +236,25 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col">
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
-                                  <div class="input-group-text">SKS</div>
+                                    <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                      BKD SKS
+                                    </div>
                                 </div>
-                                <input type="text" class="form-control text-center sksSub2" placeholder="SKS" readonly value="{{ number_format($unsur->jmlSKS/count($sesi),2,'.','') }}">
-                              </div>
+                                <input type="text" class="form-control text-center sksSub2bkd" placeholder="SKS" readonly value="{{ number_format($unsur->jmlSKS/count($sesi),2,'.','') }}">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                      SKP SKS
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control text-center sksSub2skp" placeholder="SKS" readonly value="{{ number_format($unsur->jmlSKS/count($sesi),2,'.','') }}">
+                            </div>
                         </div>
                         <div>
                             @if (($key+1) == 1)
@@ -261,15 +275,16 @@
 
                 {{-- for sub unsur 4 --}}
                 @if ($pelaksanaan->subUnsur == 4)
-                <div class="col-sm-6" id="subUnsur4">
+                <div class="col-sm-8" id="subUnsur4">
                     <div class="form-group row">
-                        <label for="jnsBim" class="col-sm-4 col-form-label text-right">Jenis Bimbingan</label>
-                        <div class="col-sm-8">
+                        <label for="jnsBim" class="col-sm-3 col-form-label text-right">Jenis Bimbingan</label>
+                        <div class="col-sm-9">
                             <select name="jnsBim" id="jnsBim" class="form-control @if ($errors->has('jnsBim')) is-invalid @endif" required>
                                 <option value="">Select Jenis Bimbingan</option>
                                 <option value="1" {{ $unsur->jnsBimb == 1 ? "selected" : "" }}>Desertasi</option>
                                 <option value="2" {{ $unsur->jnsBimb == 2 ? "selected" : "" }}>Tesis</option>
                                 <option value="3" {{ $unsur->jnsBimb == 3 ? "selected" : "" }}>Skripsi</option>
+                                <option value="4" {{ $unsur->jnsBimb == 4 ? "selected" : "" }}>Laporan Akhir</option>
                             </select>
                             <div class="invalid-feedback">
                                 {{ $errors->first('jnsBim')}}
@@ -277,8 +292,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="jumMhsis" class="col-sm-4 col-form-label text-right">Jumlah Mahasiswa</label>
-                        <div class="col-sm-8">
+                        <label for="jumMhsis" class="col-sm-3 col-form-label text-right">Jumlah Mahasiswa</label>
+                        <div class="col-sm-9">
                             <input type="number" required class="form-control @if ($errors->has('jumMhsis')) is-invalid @endif" id="jumMhsis" name="jumMhsis" value="{{ $unsur->jmlMHS }}">
                             <div class="invalid-feedback">
                                 {{ $errors->first('jumMhsis')}}
@@ -286,17 +301,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="jumSKS4" class="col-sm-4 col-form-label text-right">Jumlah SKS</label>
-                        <div class="col-sm-8">
-                            <input type="number" readonly class="form-control @if ($errors->has('jumSKS4')) is-invalid @endif" id="jumSKS4" name="jumSKS4" value="{{ $unsur->jmlSKS }}">
-                            <div class="invalid-feedback">
-                                {{ $errors->first('jumSKS4')}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="dosenPemb1" class="col-sm-4 col-form-label text-right">Dosen Pembimbing 1</label>
-                        <div class="col-sm-5">
+                        <label for="dosenPemb1" class="col-sm-3 col-form-label text-right">Pembimbing Utama</label>
+                        <div class="col-sm-4">
                             <select class="form-control" required name="dosenPemb1">
                                 <option value="">Select Nama Dosen</option>
                                 @foreach ($users as $data)
@@ -304,18 +310,30 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col">
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
-                                  <div class="input-group-text">SKS</div>
+                                    <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                      BKD SKS
+                                    </div>
                                 </div>
-                                <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->jmlSKS/2 }}">
-                              </div>
+                                <input type="text" class="form-control text-center sksSub4bkd1" placeholder="0" readonly value="{{ $unsur->bkd1 }}" name="sksSub4bkd1">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                      SKP SKS
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control text-center sksSub4skp1" placeholder="0" readonly value="{{ $unsur->skp1 }}" name="sksSub4skp1">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="dosenPemb2" class="col-sm-4 col-form-label text-right">Dosen Pembimbing 2</label>
-                        <div class="col-sm-5">
+                        <label for="dosenPemb2" class="col-sm-3 col-form-label text-right">Dosen Pembimbing 2</label>
+                        <div class="col-sm-4">
                             <select class="form-control" required name="dosenPemb2">
                                 <option value="">Select Nama Dosen</option>
                                 @foreach ($users as $data)
@@ -323,13 +341,25 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col">
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
-                                  <div class="input-group-text">SKS</div>
+                                    <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                        BKD SKS
+                                    </div>
                                 </div>
-                                <input type="text" class="form-control text-center sksSub4" placeholder="SKS" readonly value="{{ $unsur->jmlSKS/2 }}">
-                              </div>
+                                <input type="text" class="form-control text-center sksSub4bkd2" placeholder="0" readonly value="{{ $unsur->bkd2 }}" name="sksSub4bkd2">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                        SKP SKS
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control text-center sksSub4skp2" placeholder="0" readonly value="{{ $unsur->skp2 }}" name="sksSub4skp2">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -337,10 +367,10 @@
 
                 {{-- for sub unsur 5 --}}
                 @if ($pelaksanaan->subUnsur == 5)
-                <div class="col-sm-6" id="subUnsur5">
+                <div class="col-sm-8" id="subUnsur5">
                     <div class="form-group row">
-                        <label for="jumMhsiswa" class="col-sm-4 col-form-label text-right">Jumlah Mahasiswa</label>
-                        <div class="col-sm-8">
+                        <label for="jumMhsiswa" class="col-sm-3 col-form-label text-right">Jumlah Mahasiswa</label>
+                        <div class="col-sm-9">
                             <input type="number" required class="form-control @if ($errors->has('jumMhsiswa')) is-invalid @endif" id="jumMhsiswa" name="jumMhsiswa" value="{{ $unsur->jmlMHS }}">
                             <div class="invalid-feedback">
                                 {{ $errors->first('jumMhsiswa')}}
@@ -348,8 +378,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="idDosenK" class="col-sm-4 col-form-label text-right">Ketua Penguji</label>
-                        <div class="col-sm-5">
+                        <label for="idDosenK" class="col-sm-3 col-form-label text-right">Ketua Penguji</label>
+                        <div class="col-sm-4">
                             <select class="form-control" required name="idDosenK">
                                 <option value="">Select Nama Dosen</option>
                                 @foreach ($users as $data)
@@ -357,18 +387,30 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col">
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
-                                  <div class="input-group-text">SKS</div>
+                                    <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                        BKD SKS
+                                    </div>
                                 </div>
                                 <input type="text" class="form-control text-center sksSub5K" placeholder="SKS" readonly value="{{ $unsur->jmlMHS/4 }}">
-                              </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                        SKP SKS
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control text-center sksSub5K" placeholder="SKS" readonly value="{{ $unsur->jmlMHS/4 }}">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="idDosenA" class="col-sm-4 col-form-label text-right">Anggota Penguji</label>
-                        <div class="col-sm-5">
+                        <label for="idDosenA" class="col-sm-3 col-form-label text-right">Anggota Penguji</label>
+                        <div class="col-sm-4">
                             <select class="form-control" required name="idDosenA">
                                 <option value="">Select Nama Dosen</option>
                                 @foreach ($users as $data)
@@ -376,13 +418,25 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col">
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
-                                  <div class="input-group-text">SKS</div>
+                                    <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                        BKD SKS
+                                    </div>
                                 </div>
                                 <input type="text" class="form-control text-center sksSub5A" placeholder="SKS" readonly value="{{ ($unsur->jmlMHS/4)*0.5 }}">
-                              </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
+                                        SKP SKS
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control text-center sksSub5A" placeholder="SKS" readonly value="{{ ($unsur->jmlMHS/4)*0.5 }}">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -422,42 +476,58 @@
 
     {{-- clone for sub unsur 1 --}}
     <div class="form-group row d-none" id="cloneDosenT">
-        <label for="sksT" class="col-sm-3 col-form-label text-right label">Nama Dosen</label>
-        <div class="col-sm-6">
-            <select class="form-control" {{ old('subUnsur') == 1 ? "required" : "" }} name="dosenT">
+        <label for="sksT" class="col col-form-label text-right label">Nama Dosen</label>
+        <div class="col">
+            <select class="form-control cekJakademit" {{ old('subUnsur') == 1 ? "required" : "" }} name="dosenT" >
                 <option value="">Select Nama Dosen</option>
                 @foreach ($users as $data)
-                    <option value="{{ $data->id }}" class="selectDosenT">{{ $data->nama }}</option>
+                    <option value="{{ $data->id }}" class="selectDosenT" jakademi="{{ $data->jakademi }}">{{ $data->nama }}</option>
                 @endforeach
             </select>
             <div class="invalid-feedback"></div>
         </div>
-        <div class="col-sm-3">
+        <div class="col">
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">SKS</div>
+                  <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">BKD SKS</div>
                 </div>
-                <input type="text" class="form-control text-center" placeholder="SKS" readonly value="1">
-              </div>
+                <input type="text" class="form-control text-center bkd" placeholder="SKS" readonly value="0" name="bkd">
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">SKP SKS</div>
+                </div>
+                <input type="text" class="form-control text-center skp" placeholder="SKS" readonly value="0" name="skp">
+            </div>
         </div>
     </div>
     <div class="form-group row d-none" id="cloneDosenP">
-        <label for="sksP" class="col-sm-4 col-form-label text-right label">Nama Dosen</label>
-        <div class="col-sm-5">
-            <select class="form-control" {{ old('subUnsur') == 1 ? "required" : "" }} name="dosenP">
+        <label for="sksP" class="col col-form-label text-right label">Nama Dosen</label>
+        <div class="col">
+            <select class="form-control cekJakademip" {{ old('subUnsur') == 1 ? "required" : "" }} name="dosenP">
                 <option value="">Select Nama Dosen</option>
                 @foreach ($users as $data)
-                    <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                    <option value="{{ $data->id }}" jakademi="{{ $data->jakademi }}">{{ $data->nama }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="col-sm-3">
+        <div class="col">
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">SKS</div>
+                  <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">BKD SKS</div>
                 </div>
-                <input type="text" class="form-control text-center sumSKSP" placeholder="SKS" readonly value="1">
-              </div>
+                <input type="text" class="form-control text-center sumSKSPbkd" readonly value="0">
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">SKP SKS</div>
+                </div>
+                <input type="text" class="form-control text-center sumSKSPskp" readonly value="0">
+            </div>
         </div>
     </div>
 @endsection

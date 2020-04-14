@@ -1,5 +1,7 @@
 $(function () {
     $('#tableUsers').DataTable();
+    $('#kaprodiSend').val($('#kaprodi').val());
+    $('#jurusanSend').val($('#jurusan').val());
     $('.editkaprodi').click(function() {
         var id = $(this).attr('id');
         $.ajax({
@@ -95,8 +97,10 @@ $(function () {
             cloneT.removeClass('d-none');
             cloneT.addClass('forRemoveCloneT');
             cloneT.removeAttr('id');
-            cloneT.children('.label').text('Dosen Teori Sesi ' + n);
-            cloneT.find('select').attr('name', 'dosenT' + n);
+            cloneT.children('.label').text('Sesi ' + n);
+            cloneT.find('select').attr('name', 'dosenT' + n).attr('sendBkd','bkdt'+n).attr('sendSkp','skpt'+n).attr('id','dosenT'+n);
+            cloneT.find('.bkd').attr('name','bkdt'+n).attr('id','bkdt'+n);
+            cloneT.find('.skp').attr('name','skpt'+n).attr('id','skpt'+n);
             var select = cloneT.find('select').children('option');
             select.each(function(){
                 if ($(this).val() !== "") {
@@ -107,7 +111,35 @@ $(function () {
                 }
             });
             cloneT.appendTo('#tempatCloneT');
+            var jakademi = $('#dosenT'+n).children('option').filter(':selected').attr('jakademi');
+            var bkd = $('#dosenT'+n).attr('sendBkd');
+            var skp = $('#dosenT'+n).attr('sendSkp');
+            if (jakademi == 'Lektor') {
+                $('#'+bkd).val(1);
+                $('#'+skp).val(1);
+            }else if (jakademi == 'Asisten Ahli') {
+                $('#'+bkd).val(0.5);
+                $('#'+skp).val(0.5);
+            }else{
+                $('#'+bkd).val(0);
+                $('#'+skp).val(0);
+            }
         }
+        $('.cekJakademit').change(function(){
+            var jakademi = $(this).children('option').filter(':selected').attr('jakademi');
+            var bkd = $(this).attr('sendBkd');
+            var skp = $(this).attr('sendSkp');
+            if (jakademi == 'Lektor') {
+                $('#'+bkd).val(1);
+                $('#'+skp).val(1);
+            }else if (jakademi == 'Asisten Ahli') {
+                $('#'+bkd).val(0.5);
+                $('#'+skp).val(0.5);
+            }else{
+                $('#'+bkd).val(0);
+                $('#'+skp).val(0);
+            }
+        });
     })
     if ($('#sksT').val() > 0) {
         for (let i = 0; i < $('#sksT').val(); i++) {
@@ -117,8 +149,10 @@ $(function () {
             cloneT.removeClass('d-none');
             cloneT.addClass('forRemoveCloneT');
             cloneT.removeAttr('id');
-            cloneT.children('.label').text('Dosen Teori Sesi ' + n);
-            cloneT.find('select').attr('name', 'dosenT' + n);
+            cloneT.children('.label').text('Sesi ' + n);
+            cloneT.find('select').attr('name', 'dosenT' + n).attr('sendBkd','bkdt'+n).attr('sendSkp','skpt'+n).attr('id','dosenT'+n);
+            cloneT.find('.bkd').attr('name','bkdt'+n).attr('id','bkdt'+n);
+            cloneT.find('.skp').attr('name','skpt'+n).attr('id','skpt'+n);
             var select = cloneT.find('select').children('option');
             select.each(function(){
                 if ($(this).val() !== "") {
@@ -129,7 +163,36 @@ $(function () {
                 }
             });
             cloneT.appendTo('#tempatCloneT');
+            var jakademi = $('#dosenT'+n).children('option').filter(':selected').attr('jakademi');
+            var bkd = $('#dosenT'+n).attr('sendBkd');
+            var skp = $('#dosenT'+n).attr('sendSkp');
+            if (jakademi == 'Lektor') {
+                $('#'+bkd).val(1);
+                $('#'+skp).val(1);
+            }else if (jakademi == 'Asisten Ahli') {
+                $('#'+bkd).val(0.5);
+                $('#'+skp).val(0.5);
+            }else{
+                $('#'+bkd).val(0);
+                $('#'+skp).val(0);
+            }
         }
+        $('.cekJakademit').change(function(){
+            var jakademi = $(this).children('option').filter(':selected').attr('jakademi');
+            var bkd = $(this).attr('sendBkd');
+            var skp = $(this).attr('sendSkp');
+            if (jakademi == 'Lektor') {
+                $('#'+bkd).val(1);
+                $('#'+skp).val(1);
+            }else if (jakademi == 'Asisten Ahli') {
+                $('#'+bkd).val(0.5);
+                $('#'+skp).val(0.5);
+            }else{
+                $('#'+bkd).val(0);
+                $('#'+skp).val(0);
+            }
+        });
+        
     }
 
     $('#sksP').keyup(function () {
@@ -143,9 +206,11 @@ $(function () {
                 cloneT.removeClass('d-none');
                 cloneT.addClass('forRemoveCloneP');
                 cloneT.removeAttr('id');
-                cloneT.children('.label').text('Dosen Prakter Sesi ' + n);
-                cloneT.find('select').attr('name', 'dosenP' + n);
-                cloneT.find('.sumSKSP').val(Number(count)/4);
+                cloneT.children('.label').text('Sesi ' + n);
+                cloneT.find('select').attr('name', 'dosenP' + n).attr('sendBkd','bkdp'+n).attr('sendSkp','skpp'+n).attr('id','dosenP'+n);
+                cloneT.find('.sumSKSPbkd').attr('name','bkdp'+n).attr('id','bkdp'+n);
+                cloneT.find('.sumSKSPskp').attr('name','skpp'+n).attr('id','skpp'+n);
+                // cloneT.find('.sumSKSP').val(Number(count)/4);
                 var select = cloneT.find('select').children('option');
                 select.each(function(){
                     if ($(this).val() !== "") {
@@ -155,12 +220,45 @@ $(function () {
                     }
                 });
                 cloneT.appendTo('#tempatCloneP');
+                var jakademi = $('#dosenP'+n).children('option').filter(':selected').attr('jakademi');
+                var bkd = $('#dosenP'+n).attr('sendBkd');
+                var skp = $('#dosenP'+n).attr('sendSkp');
+                var lektor = (Number(count)/4)*1;
+                var ahli = (Number(count)/4)*0.5;
+                if (jakademi == 'Lektor') {
+                    $('#'+bkd).val(lektor);
+                    $('#'+skp).val(lektor);
+                }else if (jakademi == 'Asisten Ahli') {
+                    $('#'+bkd).val(ahli);
+                    $('#'+skp).val(ahli);
+                }else{
+                    $('#'+bkd).val(0);
+                    $('#'+skp).val(0);
+                }
             }
+            $('.cekJakademip').change(function(){
+                var jakademi = $(this).children('option').filter(':selected').attr('jakademi');
+                var bkd = $(this).attr('sendBkd');
+                var skp = $(this).attr('sendSkp');
+                var lektor = (Number(count)/4)*1;
+                var ahli = (Number(count)/4)*0.5;
+                if (jakademi == 'Lektor') {
+                    $('#'+bkd).val(lektor);
+                    $('#'+skp).val(lektor);
+                }else if (jakademi == 'Asisten Ahli') {
+                    $('#'+bkd).val(ahli);
+                    $('#'+skp).val(ahli);
+                }else{
+                    $('#'+bkd).val(0);
+                    $('#'+skp).val(0);
+                }
+            });
         } else {
             $('.forRemoveCloneP').remove();
         }
     })
     if ($('#sksP').val() > 0) {
+        var count = $('#sksP').val();
         for (let i = 0; i < 4; i++) {
             var sesi = $('#sesiKe'+i);
             let n = i + 1;
@@ -168,9 +266,11 @@ $(function () {
             cloneT.removeClass('d-none');
             cloneT.addClass('forRemoveCloneP');
             cloneT.removeAttr('id');
-            cloneT.children('.label').text('Dosen Prakter Sesi ' + n);
-            cloneT.find('select').attr('name', 'dosenP' + n);
-            cloneT.find('.sumSKSP').val(Number($('#sksP').val())/4);
+            cloneT.children('.label').text('Sesi ' + n);
+            cloneT.find('select').attr('name', 'dosenP' + n).attr('sendBkd','bkd'+n).attr('sendSkp','skp'+n).attr('id','dosenP'+n);
+            cloneT.find('.sumSKSPbkd').attr('name','bkd'+n).attr('id','bkd'+n);
+            cloneT.find('.sumSKSPskp').attr('name','skp'+n).attr('id','skp'+n);
+            // cloneT.find('.sumSKSP').val(Number($('#sksP').val())/4);
             var select = cloneT.find('select').children('option');
             select.each(function(){
                 if ($(this).val() !== "") {
@@ -180,7 +280,39 @@ $(function () {
                 }
             });
             cloneT.appendTo('#tempatCloneP');
+            var jakademi = $('#dosenP'+n).children('option').filter(':selected').attr('jakademi');
+            var bkd = $('#dosenP'+n).attr('sendBkd');
+            var skp = $('#dosenP'+n).attr('sendSkp');
+            var lektor = (Number(count)/4)*1;
+            var ahli = (Number(count)/4)*0.5;
+            if (jakademi == 'Lektor') {
+                $('#'+bkd).val(lektor);
+                $('#'+skp).val(lektor);
+            }else if (jakademi == 'Asisten Ahli') {
+                $('#'+bkd).val(ahli);
+                $('#'+skp).val(ahli);
+            }else{
+                $('#'+bkd).val(0);
+                $('#'+skp).val(0);
+            }
         }
+        $('.cekJakademip').change(function(){
+            var jakademi = $(this).children('option').filter(':selected').attr('jakademi');
+            var bkd = $(this).attr('sendBkd');
+            var skp = $(this).attr('sendSkp');
+            var lektor = (Number(count)/4)*1;
+            var ahli = (Number(count)/4)*0.5;
+            if (jakademi == 'Lektor') {
+                $('#'+bkd).val(lektor);
+                $('#'+skp).val(lektor);
+            }else if (jakademi == 'Asisten Ahli') {
+                $('#'+bkd).val(ahli);
+                $('#'+skp).val(ahli);
+            }else{
+                $('#'+bkd).val(0);
+                $('#'+skp).val(0);
+            }
+        });
     }
 
 // function for sub unsur 2 dan 3
@@ -189,7 +321,9 @@ $(function () {
         var sks = Number(sum) / 25;
         var coun = Number($('#countDosen').val());
         $('#jumSksMhs').val(Math.ceil(sks));
-        $('.sksSub2').val(Number($('#jumSksMhs').val())/coun);
+        var skssesi = Number($('#jumSksMhs').val())/coun;
+        $('.sksSub2bkd').val(skssesi.toFixed(2));
+        $('.sksSub2skp').val(skssesi.toFixed(2));
     })
     $('.btnplus').click(function () {
         var n = $(this).attr('sum');
@@ -211,7 +345,8 @@ $(function () {
         }
         $('#countDosen').val(no);
         var changeSKS = Number($('#jumSksMhs').val())/Number($('#countDosen').val());
-        $('.sksSub2').val(changeSKS.toFixed(2));
+        $('.sksSub2bkd').val(changeSKS.toFixed(2));
+        $('.sksSub2skp').val(changeSKS.toFixed(2));
         minus();
     })
     $('.btnplusEdit').click(function(){
@@ -232,7 +367,8 @@ $(function () {
         $('#remove'+no).removeClass('d-none');
         $('#countDosen').val(no);
         var changeSKS = Number($('#jumSksMhs').val())/Number($('#countDosen').val());
-        $('.sksSub2').val(changeSKS.toFixed(2));
+        $('.sksSub2bkd').val(changeSKS.toFixed(2));
+        $('.sksSub2skp').val(changeSKS.toFixed(2));
         minus();
     })
     minus();
@@ -247,7 +383,8 @@ $(function () {
             $('#countDosen').val(no);
             $('#remove1').addClass('d-none');
             var changeSKS = Number($('#jumSksMhs').val())/Number($('#countDosen').val());
-            $('.sksSub2').val(changeSKS.toFixed(2));
+            $('.sksSub2skp').val(changeSKS.toFixed(2));
+            $('.sksSub2bkd').val(changeSKS.toFixed(2));
         })
     }
 
@@ -256,31 +393,63 @@ $(function () {
         var jns = $('#jnsBim').val();
         var sum = $(this).val();
         if (jns == 1) {
-            var sks = Number(sum) / 2;
-        }else if (jns == 2) {
-            var sks = Number(sum) / 3;
+            var sksBkdU = (Number(sum) / 4)*5;
+            var sksSkpU = (Number(sum) / 4)*8;
+            var sksBkdP = (Number(sum) / 4)*4;
+            var sksSkpP = (Number(sum) / 4)*6;
+        } else if (jns == 2) {
+            var sksBkdU = (Number(sum) / 6)*3;
+            var sksSkpU = (Number(sum) / 6)*3;
+            var sksBkdP = (Number(sum) / 6)*2;
+            var sksSkpP = (Number(sum) / 6)*2;
         } else if (jns == 3) {
-            var sks = Number(sum) / 6;
+            var sksBkdU = (Number(sum) / 8)*2;
+            var sksSkpU = (Number(sum) / 8)*1;
+            var sksBkdP = (Number(sum) / 8)*1;
+            var sksSkpP = (Number(sum) / 8)*0.5;
+        } else if (jns == 4) {
+            var sksBkdU = (Number(sum) / 10)*1;
+            var sksSkpU = (Number(sum) / 10)*1;
+            var sksBkdP = (Number(sum) / 10)*1;
+            var sksSkpP = (Number(sum) / 10)*0.5;
         } else {
             var sks = 0;
         }
-        $('#jumSKS4').val(Math.ceil(sks));
-        $('.sksSub4').val(Number($('#jumSKS4').val())/2);
+        $('.sksSub4bkd1').val(sksBkdU);
+        $('.sksSub4skp1').val(sksSkpU);
+        $('.sksSub4bkd2').val(sksBkdP);
+        $('.sksSub4skp2').val(sksSkpP);
     })
     $('#jnsBim').change(function () {
         var jns = $(this).val();
         var sum = $('#jumMhsis').val();
         if (jns == 1) {
-            var sks = Number(sum) / 2;
+            var sksBkdU = (Number(sum) / 4)*5;
+            var sksSkpU = (Number(sum) / 4)*8;
+            var sksBkdP = (Number(sum) / 4)*4;
+            var sksSkpP = (Number(sum) / 4)*6;
         } else if (jns == 2) {
-            var sks = Number(sum) / 3;
+            var sksBkdU = (Number(sum) / 6)*3;
+            var sksSkpU = (Number(sum) / 6)*3;
+            var sksBkdP = (Number(sum) / 6)*2;
+            var sksSkpP = (Number(sum) / 6)*2;
         } else if (jns == 3) {
-            var sks = Number(sum) / 6;
+            var sksBkdU = (Number(sum) / 8)*2;
+            var sksSkpU = (Number(sum) / 8)*1;
+            var sksBkdP = (Number(sum) / 8)*1;
+            var sksSkpP = (Number(sum) / 8)*0.5;
+        } else if (jns == 4) {
+            var sksBkdU = (Number(sum) / 10)*1;
+            var sksSkpU = (Number(sum) / 10)*1;
+            var sksBkdP = (Number(sum) / 10)*1;
+            var sksSkpP = (Number(sum) / 10)*0.5;
         } else {
             var sks = 0;
         }
-        $('#jumSKS4').val(Math.ceil(sks));
-        $('.sksSub4').val(Number($('#jumSKS4').val())/2);
+        $('.sksSub4bkd1').val(sksBkdU);
+        $('.sksSub4skp1').val(sksSkpU);
+        $('.sksSub4bkd2').val(sksBkdP);
+        $('.sksSub4skp2').val(sksSkpP);
     })
 
 //function for sub unsur 5
