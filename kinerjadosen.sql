@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2020 at 03:12 AM
+-- Generation Time: Apr 15, 2020 at 05:03 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -44,12 +44,6 @@ CREATE TABLE `countsks` (
 --
 
 INSERT INTO `countsks` (`id`, `pelaksanaan`, `sesi`, `dosen`, `countBkd`, `countSkp`, `created_at`, `updated_at`) VALUES
-(37, 49, 1, 32, '1', '1', '2020-04-14 07:30:04', '2020-04-14 07:30:04'),
-(38, 49, 2, 28, '0.5', '0.5', '2020-04-14 07:30:04', '2020-04-14 07:30:04'),
-(39, 49, 1, 28, '0.125', '0.125', '2020-04-14 07:30:04', '2020-04-14 07:30:04'),
-(40, 49, 2, 32, '0.25', '0.25', '2020-04-14 07:30:05', '2020-04-14 07:30:05'),
-(41, 49, 3, 28, '0.125', '0.125', '2020-04-14 07:30:05', '2020-04-14 07:30:05'),
-(42, 49, 4, 32, '0.25', '0.25', '2020-04-14 07:30:05', '2020-04-14 07:30:05'),
 (52, 50, 1, 28, '1.50', '1.50', '2020-04-14 17:31:22', '2020-04-14 17:31:22'),
 (53, 50, 2, 32, '1.50', '1.50', '2020-04-14 17:31:22', '2020-04-14 17:31:22'),
 (57, 51, 1, 32, '1.33', '1.33', '2020-04-14 17:56:33', '2020-04-14 17:56:33'),
@@ -59,7 +53,17 @@ INSERT INTO `countsks` (`id`, `pelaksanaan`, `sesi`, `dosen`, `countBkd`, `count
 (63, 52, 2, 32, '9', '13.5', '2020-04-14 18:02:18', '2020-04-14 18:02:18'),
 (66, 53, 1, 28, '12.5', '12.5', '2020-04-14 18:08:08', '2020-04-14 18:08:08'),
 (67, 53, 2, 32, '6.25', '6.25', '2020-04-14 18:08:08', '2020-04-14 18:08:08'),
-(69, 54, 1, 28, '3', '3', '2020-04-14 18:10:57', '2020-04-14 18:10:57');
+(69, 54, 1, 28, '3', '3', '2020-04-14 18:10:57', '2020-04-14 18:10:57'),
+(70, 55, 1, 28, '2', '1', '2020-04-15 07:38:13', '2020-04-15 07:38:13'),
+(71, 56, 1, 28, '2', '1', '2020-04-15 07:40:15', '2020-04-15 07:40:15'),
+(73, 57, 1, 28, '2', '4', '2020-04-15 07:41:37', '2020-04-15 07:41:37'),
+(89, 58, 1, 28, '0.5', '0.5', '2020-04-15 07:55:09', '2020-04-15 07:55:09'),
+(90, 58, 1, 32, '0.5', '0.5', '2020-04-15 07:55:09', '2020-04-15 07:55:09'),
+(91, 58, 2, 28, '0.25', '0.25', '2020-04-15 07:55:09', '2020-04-15 07:55:09'),
+(92, 58, 3, 32, '0.5', '0.5', '2020-04-15 07:55:09', '2020-04-15 07:55:09'),
+(93, 58, 4, 28, '0.25', '0.25', '2020-04-15 07:55:09', '2020-04-15 07:55:09'),
+(94, 59, 1, 28, '5', '8', '2020-04-15 07:56:24', '2020-04-15 07:56:24'),
+(95, 59, 2, 32, '4', '6', '2020-04-15 07:56:24', '2020-04-15 07:56:24');
 
 -- --------------------------------------------------------
 
@@ -103,6 +107,7 @@ CREATE TABLE `pelaksanaan` (
   `semester` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tglMulai` date NOT NULL,
   `tglSelesai` date NOT NULL,
+  `filePendukung` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -111,13 +116,10 @@ CREATE TABLE `pelaksanaan` (
 -- Dumping data for table `pelaksanaan`
 --
 
-INSERT INTO `pelaksanaan` (`id`, `idJurusan`, `subUnsur`, `kegiatan`, `idProdi`, `thnAjaran`, `semester`, `tglMulai`, `tglSelesai`, `created_at`, `updated_at`) VALUES
-(49, 6, 1, 'Melaksanakan perkulihan / tutorial dan membimbing, menguji serta menyelenggarakan pendidikan di laboratorium, praktik keguruan bengkel / studio / kebun pada fakultas / sekolah tinggi / Akademik / Politeknik sendiri, pada fakultas lain dalam lingkungan Universitas / Institut sendiri, maupun di luar perguruan tinggi sendiri secara melembaga tiap sks(paling banyak 12 sks) per semester', 2, '2019/2020', 'Genap', '2020-04-14', '2020-04-15', '2020-04-14 07:23:56', '2020-04-14 07:23:56'),
-(50, 6, 2, 'Membimbing mahasiswa seminar', 2, '2019/2020', 'Genap', '2020-04-16', '2020-04-24', '2020-04-14 17:26:14', '2020-04-14 17:26:14'),
-(51, 6, 3, 'Membimbing mahasiswa kuliah kerja nyata, pratek kerja nyata, praktek kerja lapangan', 2, '2019/2020', 'Genap', '2020-04-24', '2020-04-25', '2020-04-14 17:56:25', '2020-04-14 17:56:25'),
-(52, 6, 4, 'Membimbing dan ikut membimbing dalam menghasilkan disertasi, tesis, skripsi dan laporan akhir studi', 2, '2019/2020', 'Genap', '2020-04-17', '2020-04-25', '2020-04-14 18:00:56', '2020-04-14 18:00:56'),
-(53, 6, 5, 'Menguji mahasiswa yang mengikuti ujian akhir', 2, '2019/2020', 'Genap', '2020-04-23', '2020-04-25', '2020-04-14 18:07:50', '2020-04-14 18:07:50'),
-(54, 6, 6, 'Melakukan pembinaan kegiatan mahasiswa di bidang Akademik dan kemahasiswaan', 2, '2019/2020', 'Genap', '2020-04-17', '2020-04-24', '2020-04-14 18:10:44', '2020-04-14 18:10:44');
+INSERT INTO `pelaksanaan` (`id`, `idJurusan`, `subUnsur`, `kegiatan`, `idProdi`, `thnAjaran`, `semester`, `tglMulai`, `tglSelesai`, `filePendukung`, `created_at`, `updated_at`) VALUES
+(57, 6, 6, 'Melakukan pembinaan kegiatan mahasiswa di bidang Akademik dan kemahasiswaan', 2, '2019/2020', 'Genap', '2020-04-16', '2020-04-25', '', '2020-04-15 07:41:29', '2020-04-15 07:41:29'),
+(58, 6, 1, 'Melaksanakan perkulihan / tutorial dan membimbing, menguji serta menyelenggarakan pendidikan di laboratorium, praktik keguruan bengkel / studio / kebun pada fakultas / sekolah tinggi / Akademik / Politeknik sendiri, pada fakultas lain dalam lingkungan Universitas / Institut sendiri, maupun di luar perguruan tinggi sendiri secara melembaga tiap sks(paling banyak 12 sks) per semester', 2, '2019/2020', 'Genap', '2020-04-16', '2020-04-16', '1586962136_Download 15 Template CV Word Gratis Delight Resume.docx', '2020-04-15 07:48:56', '2020-04-15 07:48:56'),
+(59, 6, 4, 'Membimbing dan ikut membimbing dalam menghasilkan disertasi, tesis, skripsi dan laporan akhir studi', 2, '2019/2020', 'Ganjil', '2020-04-16', '2020-04-18', '1586962584_Download 15 Template CV Word Gratis Maroon.docx', '2020-04-15 07:56:24', '2020-04-15 07:56:24');
 
 -- --------------------------------------------------------
 
@@ -142,15 +144,10 @@ CREATE TABLE `sesi` (
 --
 
 INSERT INTO `sesi` (`id`, `idUnsur`, `unsur`, `sesiKe`, `idDosenG`, `idDosenT`, `idDosenP`, `created_at`, `updated_at`) VALUES
-(142, 12, 1, '1', NULL, 32, 28, '2020-04-14 07:30:04', '2020-04-14 07:30:04'),
-(143, 12, 1, '2', NULL, 28, 32, '2020-04-14 07:30:04', '2020-04-14 07:30:04'),
-(144, 12, 1, '3', NULL, NULL, 28, '2020-04-14 07:30:04', '2020-04-14 07:30:04'),
-(145, 12, 1, '4', NULL, NULL, 32, '2020-04-14 07:30:04', '2020-04-14 07:30:04'),
-(158, 12, 2, NULL, 28, NULL, NULL, '2020-04-14 17:31:22', '2020-04-14 17:31:22'),
-(159, 12, 2, NULL, 32, NULL, NULL, '2020-04-14 17:31:22', '2020-04-14 17:31:22'),
-(163, 13, 3, NULL, 32, NULL, NULL, '2020-04-14 17:56:33', '2020-04-14 17:56:33'),
-(164, 13, 3, NULL, 28, NULL, NULL, '2020-04-14 17:56:33', '2020-04-14 17:56:33'),
-(165, 13, 3, NULL, 28, NULL, NULL, '2020-04-14 17:56:34', '2020-04-14 17:56:34');
+(186, 13, 1, '1', NULL, 28, 32, '2020-04-15 07:55:09', '2020-04-15 07:55:09'),
+(187, 13, 1, '2', NULL, NULL, 28, '2020-04-15 07:55:09', '2020-04-15 07:55:09'),
+(188, 13, 1, '3', NULL, NULL, 32, '2020-04-15 07:55:09', '2020-04-15 07:55:09'),
+(189, 13, 1, '4', NULL, NULL, 28, '2020-04-15 07:55:09', '2020-04-15 07:55:09');
 
 -- --------------------------------------------------------
 
@@ -176,7 +173,7 @@ CREATE TABLE `subunsur1` (
 --
 
 INSERT INTO `subunsur1` (`id`, `idPelaksanaan`, `kodeMK`, `namaMK`, `jumSKS`, `kelas`, `jumSKST`, `jumSKSP`, `created_at`, `updated_at`) VALUES
-(12, 49, 'asdasdas', 'adasda', 3, 'pagi', 2, 1, '2020-04-14 07:23:56', '2020-04-14 07:23:56');
+(13, 58, 'dasda', 'adas', 2, 'pagi', 1, 2, '2020-04-15 07:48:56', '2020-04-15 07:55:09');
 
 -- --------------------------------------------------------
 
@@ -205,7 +202,7 @@ CREATE TABLE `subunsur4` (
 --
 
 INSERT INTO `subunsur4` (`id`, `idpelaksanaan`, `jnsBimb`, `jmlMHS`, `jmlSKS`, `idDosen1`, `bkd1`, `skp1`, `idDosen2`, `bkd2`, `skp2`, `created_at`, `updated_at`) VALUES
-(6, 52, 1, 9, 0, 28, '11.25', '18', 32, '9', '13.5', '2020-04-14 18:00:56', '2020-04-14 18:02:17');
+(7, 59, 1, 4, 0, 28, '5', '8', 32, '4', '6', '2020-04-15 07:56:24', '2020-04-15 07:56:24');
 
 -- --------------------------------------------------------
 
@@ -223,13 +220,6 @@ CREATE TABLE `subunsur5` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `subunsur5`
---
-
-INSERT INTO `subunsur5` (`id`, `idpelaksanaan`, `jmlMHS`, `idDosenK`, `idDosenA`, `created_at`, `updated_at`) VALUES
-(5, 53, 50, 28, 32, '2020-04-14 18:07:50', '2020-04-14 18:08:08');
-
 -- --------------------------------------------------------
 
 --
@@ -241,7 +231,8 @@ CREATE TABLE `subunsur6` (
   `idpelaksanaan` int(11) NOT NULL,
   `idDosen` int(11) NOT NULL,
   `jmlKeg` int(11) NOT NULL,
-  `jmlSKS` int(11) NOT NULL,
+  `jmlSKSbkd` int(11) NOT NULL,
+  `jmlSKSskp` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -250,8 +241,8 @@ CREATE TABLE `subunsur6` (
 -- Dumping data for table `subunsur6`
 --
 
-INSERT INTO `subunsur6` (`id`, `idpelaksanaan`, `idDosen`, `jmlKeg`, `jmlSKS`, `created_at`, `updated_at`) VALUES
-(5, 54, 28, 3, 3, '2020-04-14 18:10:45', '2020-04-14 18:10:57');
+INSERT INTO `subunsur6` (`id`, `idpelaksanaan`, `idDosen`, `jmlKeg`, `jmlSKSbkd`, `jmlSKSskp`, `created_at`, `updated_at`) VALUES
+(8, 57, 28, 3, 2, 4, '2020-04-15 07:41:29', '2020-04-15 07:41:36');
 
 -- --------------------------------------------------------
 
@@ -267,14 +258,6 @@ CREATE TABLE `subunsur23` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `subunsur23`
---
-
-INSERT INTO `subunsur23` (`id`, `idPelaksanaan`, `jmlMHS`, `jmlSKS`, `created_at`, `updated_at`) VALUES
-(12, 50, 67, 3, '2020-04-14 17:26:14', '2020-04-14 17:26:14'),
-(13, 51, 98, 4, '2020-04-14 17:56:25', '2020-04-14 17:56:25');
 
 -- --------------------------------------------------------
 
@@ -489,7 +472,7 @@ ALTER TABLE `tbluser`
 -- AUTO_INCREMENT for table `countsks`
 --
 ALTER TABLE `countsks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -501,25 +484,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pelaksanaan`
 --
 ALTER TABLE `pelaksanaan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `sesi`
 --
 ALTER TABLE `sesi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
 
 --
 -- AUTO_INCREMENT for table `subunsur1`
 --
 ALTER TABLE `subunsur1`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `subunsur4`
 --
 ALTER TABLE `subunsur4`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `subunsur5`
@@ -531,7 +514,7 @@ ALTER TABLE `subunsur5`
 -- AUTO_INCREMENT for table `subunsur6`
 --
 ALTER TABLE `subunsur6`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `subunsur23`
