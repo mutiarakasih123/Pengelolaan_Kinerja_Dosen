@@ -55,3 +55,4 @@ Route::get('/Pelaksanaan/edit/{id}', 'PelaksanaanController@edit');
 Route::put('/Pelaksanaan/update/{id}', 'PelaksanaanController@update');
 Route::get('/Pelaksanaan/destroy/{id}', 'PelaksanaanController@destroy');
 Route::get('/Pelaksanaan/show/{id}', 'PelaksanaanController@show');
+Route::get('export/{id}/{status}', 'PelaksanaanController@export');

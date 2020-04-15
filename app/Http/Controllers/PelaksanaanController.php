@@ -12,8 +12,11 @@ use App\subUnsur4;
 use App\subUnsur5;
 use App\subUnsur6;
 use App\sesi;
+use App\countSks;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Exports\PelaksanaanExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PelaksanaanController extends Controller
 {
@@ -114,6 +117,29 @@ class PelaksanaanController extends Controller
                     ]);
                 }
             }
+
+            // for add to count sks
+            for ($i=0; $i < $request->sksT; $i++) { 
+                $n = $i+1;
+                countSks::create([
+                    'pelaksanaan' => $pelaksanaan->id,
+                    'sesi' => $n,
+                    'dosen' => $request['dosenT'.$n],
+                    'countBkd' => $request['bkdt'.$n],
+                    'countSkp' => $request['skpt'.$n],
+                ]);
+            }
+            for ($i=0; $i < 4; $i++) { 
+                $n = $i+1;
+                countSks::create([
+                    'pelaksanaan' => $pelaksanaan->id,
+                    'sesi' => $n,
+                    'dosen' => $request['dosenP'.$n],
+                    'countBkd' => $request['bkdp'.$n],
+                    'countSkp' => $request['skpp'.$n],
+                ]);
+            }
+            
         }elseif ($request->subUnsur == 2 || $request->subUnsur == 3) {
             $subUnsur23 = subUnsur23::create([
                 'idPelaksanaan' => $idpelaksanaan,
@@ -122,6 +148,7 @@ class PelaksanaanController extends Controller
             ]);
             $idSubUnsur23 = $subUnsur23->id;
             for ($i=0; $i < $request->countDosen ; $i++) {
+                $n = $i+1;
                 $idDosenG = $request['dosenU'.$i];
                 sesi::create([
                     'idUnsur' => $idSubUnsur23,
@@ -130,6 +157,13 @@ class PelaksanaanController extends Controller
                     'idDosenG' => $idDosenG,
                     'idDosenT' => null,
                     'idDosenP' => null
+                ]);
+                countSks::create([
+                    'pelaksanaan' => $pelaksanaan->id,
+                    'sesi' => $n,
+                    'dosen' => $idDosenG,
+                    'countBkd' => $request['bkd'.$n],
+                    'countSkp' => $request['skp'.$n],
                 ]);
             }
         }elseif ($request->subUnsur == 4) {
@@ -145,6 +179,16 @@ class PelaksanaanController extends Controller
                 'bkd2' => $request->sksSub4bkd2,
                 'skp2' => $request->sksSub4skp2,
             ]);
+            for ($i=0; $i < 2 ; $i++) { 
+                $n = $i+1;
+                countSks::create([
+                    'pelaksanaan' => $pelaksanaan->id,
+                    'sesi' => $n,
+                    'dosen' => $request['dosenPemb'.$n],
+                    'countBkd' => $request['sksSub4bkd'.$n],
+                    'countSkp' => $request['sksSub4skp'.$n],
+                ]);
+            }
         }elseif ($request->subUnsur == 5) {
             subUnsur5::create([
                 'idpelaksanaan' => $idpelaksanaan,
@@ -152,12 +196,33 @@ class PelaksanaanController extends Controller
                 'idDosenK' => $request->idDosenK,
                 'idDosenA' => $request->idDosenA
             ]);
+            countSks::create([
+                'pelaksanaan' => $pelaksanaan->id,
+                'sesi' => 1,
+                'dosen' => $request->idDosenK,
+                'countBkd' => $request->bkd1,
+                'countSkp' => $request->skp1,
+            ]);
+            countSks::create([
+                'pelaksanaan' => $pelaksanaan->id,
+                'sesi' => 2,
+                'dosen' => $request->idDosenA,
+                'countBkd' => $request->bkd2,
+                'countSkp' => $request->skp2,
+            ]);
         }elseif ($request->subUnsur == 6) {
             subUnsur6::create([
                 'idpelaksanaan' => $idpelaksanaan,
                 'idDosen' => session('userId'),
                 'jmlKeg' => $request->jumKeg,
                 'jmlSKS' => $request->jumSKSU6
+            ]);
+            countSks::create([
+                'pelaksanaan' => $pelaksanaan->id,
+                'sesi' => 1,
+                'dosen' => session('userId'),
+                'countBkd' => $request->jumSKSU6,
+                'countSkp' => $request->jumSKSU6,
             ]);
         }
         return redirect('/Pelaksanaan');
@@ -175,6 +240,8 @@ class PelaksanaanController extends Controller
         $kaprodi = kaprodi::all();
         $jurusan = jurusan::all();
         $users = DB::select('SELECT * from tbluser WHERE akses = 2 ');
+        $dosen = DB::select('SELECT * FROM countsks WHERE pelaksanaan=? GROUP BY dosen',[$id]);
+        $sks = DB::select('SELECT * FROM countsks WHERE pelaksanaan=?',[$id]);
         $idP = $pelaksanaan->subUnsur;
         if ($idP == 1) {
             $unsur = subUnsur1::where('idPelaksanaan', $id)->first();
@@ -206,6 +273,8 @@ class PelaksanaanController extends Controller
             'users' => $users,
             'unsur' => $unsur,
             'sesi' => $sesi,
+            'dosen' => $dosen,
+            'sks' => $sks,
         ]);
     }
 
@@ -329,6 +398,28 @@ class PelaksanaanController extends Controller
                     ]);
                 }
             }
+            // for edit to count sks
+            countSks::where('pelaksanaan',$id)->delete();
+            for ($i=0; $i < $request->sksT; $i++) { 
+                $n = $i+1;
+                countSks::create([
+                    'pelaksanaan' => $pelaksanaan->id,
+                    'sesi' => $n,
+                    'dosen' => $request['dosenT'.$n],
+                    'countBkd' => $request['bkdt'.$n],
+                    'countSkp' => $request['skpt'.$n],
+                ]);
+            }
+            for ($i=0; $i < 4; $i++) { 
+                $n = $i+1;
+                countSks::create([
+                    'pelaksanaan' => $pelaksanaan->id,
+                    'sesi' => $n,
+                    'dosen' => $request['dosenP'.$n],
+                    'countBkd' => $request['bkd'.$n],
+                    'countSkp' => $request['skp'.$n],
+                ]);
+            }
         }elseif ($request->subUnsur == 2 || $request->subUnsur == 3) {
             $subUnsur23 = subUnsur23::where('idPelaksanaan',$id)->first();
             $subUnsur23->update([
@@ -337,8 +428,10 @@ class PelaksanaanController extends Controller
             ]);
             $idSubUnsur23 = $subUnsur23->id;
             sesi::where('idUnsur',$idSubUnsur23)->where('unsur',$request->subUnsur)->delete();
+            countSks::where('pelaksanaan',$id)->delete();
             for ($i=0; $i < $request->countDosen ; $i++) {
                 $idDosenG = $request['dosenU'.$i];
+                $n = $i + 1;
                 sesi::create([
                     'idUnsur' => $idSubUnsur23,
                     'unsur' => $request->subUnsur,
@@ -346,6 +439,13 @@ class PelaksanaanController extends Controller
                     'idDosenG' => $idDosenG,
                     'idDosenT' => null,
                     'idDosenP' => null
+                ]);
+                countSks::create([
+                    'pelaksanaan' => $pelaksanaan->id,
+                    'sesi' => $n,
+                    'dosen' => $idDosenG,
+                    'countBkd' => $request['bkd'.$n],
+                    'countSkp' => $request['skp'.$n],
                 ]);
             }
         }elseif ($request->subUnsur == 4) {
@@ -360,6 +460,17 @@ class PelaksanaanController extends Controller
                 'bkd2' => $request->sksSub4bkd2,
                 'skp2' => $request->sksSub4skp2,
             ]);
+            countSks::where('pelaksanaan',$id)->delete();
+            for ($i=0; $i < 2 ; $i++) { 
+                $n = $i+1;
+                countSks::create([
+                    'pelaksanaan' => $pelaksanaan->id,
+                    'sesi' => $n,
+                    'dosen' => $request['dosenPemb'.$n],
+                    'countBkd' => $request['sksSub4bkd'.$n],
+                    'countSkp' => $request['sksSub4skp'.$n],
+                ]);
+            }
 
         }elseif ($request->subUnsur == 5) {
             subUnsur5::where('idPelaksanaan',$id)->update([
@@ -367,11 +478,34 @@ class PelaksanaanController extends Controller
                 'idDosenK' => $request->idDosenK,
                 'idDosenA' => $request->idDosenA
             ]);
+            countSks::where('pelaksanaan',$id)->delete();
+            countSks::create([
+                'pelaksanaan' => $pelaksanaan->id,
+                'sesi' => 1,
+                'dosen' => $request->idDosenK,
+                'countBkd' => $request->bkd1,
+                'countSkp' => $request->skp1,
+            ]);
+            countSks::create([
+                'pelaksanaan' => $pelaksanaan->id,
+                'sesi' => 2,
+                'dosen' => $request->idDosenA,
+                'countBkd' => $request->bkd2,
+                'countSkp' => $request->skp2,
+            ]);
         }elseif ($request->subUnsur == 6) {
             subUnsur6::where('idPelaksanaan',$id)->update([
                 'idDosen' => session('userId'),
                 'jmlKeg' => $request->jumKeg,
                 'jmlSKS' => $request->jumSKSU6
+            ]);
+            countSks::where('pelaksanaan',$id)->delete();
+            countSks::create([
+                'pelaksanaan' => $pelaksanaan->id,
+                'sesi' => 1,
+                'dosen' => session('userId'),
+                'countBkd' => $request->jumSKSU6,
+                'countSkp' => $request->jumSKSU6,
             ]);
         }
 
@@ -391,6 +525,7 @@ class PelaksanaanController extends Controller
             $subUnsur1 = subUnsur1::where('idPelaksanaan',$id)->first();
             sesi::where('idUnsur',$subUnsur1->id)->where('unsur', 1)->delete();
             $subUnsur1->delete();
+            countSks::where('pelaksanaan',$id)->delete();
         }elseif ($pelaksanaan->subUnsur == 2) {
             $subUnsur23 = subUnsur23::where('idPelaksanaan',$id)->first();
             sesi::where('idUnsur',$subUnsur23->id)->where('unsur', 2)->delete();
@@ -409,5 +544,75 @@ class PelaksanaanController extends Controller
         $pelaksanaan->delete();
 
         return redirect('/Pelaksanaan');
+    }
+
+    public function export($id, $status)
+    {
+        $bkd = 0;
+        $skp = 0;
+        $nama='';
+        $subUnsur = '';
+        $users = DB::select('SELECT * from tbluser WHERE akses = 2 ');
+        $dosen = DB::select('SELECT * FROM countsks WHERE pelaksanaan=? GROUP BY dosen',[$id]);
+        $sks = DB::select('SELECT * FROM countsks WHERE pelaksanaan=?',[$id]);
+        $pelaksanaan = pelaksanaan::find($id);
+        $dataArrayBkd[] = array('SUB UNSUR', 'KEGIATAN', 'NAMA DOSEN','BKD');
+        $dataArraySkp[] = array('SUB UNSUR', 'KEGIATAN', 'NAMA DOSEN','SKP');
+        foreach ($dosen as $value) {
+            $subU = $pelaksanaan->subUnsur;
+            //kita jumlahkan berdasarkan dosennya
+            $sumBkd = DB::select('SELECT SUM(countBkd) as jumlah FROM countsks WHERE pelaksanaan=? AND dosen=?',[$id,$value->dosen]);
+            foreach ($sumBkd as $datax) {
+                $bkd = $datax->jumlah;
+            }
+            $sumSkp = DB::select('SELECT SUM(countSkp) as jumlah FROM countsks WHERE pelaksanaan=? AND dosen=?',[$id,$value->dosen]);
+            foreach ($sumSkp as $datax) {
+                $skp = $datax->jumlah;
+            }
+            
+            //kita ambil nama dosennya
+            foreach ($users as $item) {
+                if ($value->dosen == $item->id) {
+                    $nama = $item->nama;
+                }
+            }
+            if ($subU == 1) {
+                $subUnsur = 'Melaksanakan perkuliahan/tutorial dan membimbing';
+            } else if ($subU == 2) {
+                $subUnsur = 'Membimbing seminar';
+            } else if ($subU == 3) {
+                $subUnsur = 'Membimbing kuliah kerja nyata';
+            } else if ($subU == 4) {
+                $subUnsur = 'Membimbing disertasi, tesis, skripsi dan laporan akhir studi';
+            } else if ($subU == 5) {
+                $subUnsur = 'Bertugas sebagai penguji pada ujian akhir';
+            } else if ($subU == 6) {
+                $subUnsur = 'Membina kegiatan mahasiswa';
+            }
+            
+            if ($status == 'bkd') {
+                $dataArrayBkd[] = array(
+                    'SUB UNSUR' => $subUnsur,
+                    'KEGIATAN' => $pelaksanaan->kegiatan,
+                    'NAMA DOSEN' => $nama,
+                    'BKD' => $bkd 
+                );
+            }
+            if ($status == 'skp') {
+                $dataArraySkp[] = array(
+                    'SUB UNSUR' => $subUnsur,
+                    'KEGIATAN' => $pelaksanaan->kegiatan,
+                    'NAMA DOSEN' => $nama,
+                    'SKP' => $skp 
+                );
+            }
+        }
+        if ($status == 'bkd') {
+            return Excel::download(new PelaksanaanExport($dataArrayBkd), 'pelaksanaan-BKD.xlsx');
+        }
+        if ($status == 'skp') {
+            return Excel::download(new PelaksanaanExport($dataArraySkp), 'pelaksanaan-SKP.xlsx');
+        }
+        
     }
 }

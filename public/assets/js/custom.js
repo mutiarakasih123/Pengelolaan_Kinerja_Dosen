@@ -338,6 +338,8 @@ $(function () {
         clone.find('#btnminus').attr('id', 'remove'+no);
         clone.find('.btnplus').addClass('d-none');
         clone.find('.btnminus').attr('minus',no);
+        clone.find('.sksSub2bkd').attr('name','bkd'+no);
+        clone.find('.sksSub2skp').attr('name','skp'+no);
         clone.appendTo('#tempatCloneSubUnsur2');
         $('#btnminus').addClass('d-none');
         for (let i = 1; i < no; i++) {
@@ -362,6 +364,8 @@ $(function () {
         clone.find('#remove'+n).attr('id', 'remove'+no);
         clone.find('.btnminus').attr('minus',no);
         clone.find('.btnplusEdit').remove();
+        clone.find('.sksSub2bkd').attr('name','bkd'+no);
+        clone.find('.sksSub2skp').attr('name','skp'+no);
         clone.appendTo('#tempatCloneSubUnsur2');
         $('#remove'+n).addClass('d-none');
         $('#remove'+no).removeClass('d-none');

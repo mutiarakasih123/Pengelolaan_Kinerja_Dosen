@@ -243,7 +243,7 @@
                                       BKD SKS
                                     </div>
                                 </div>
-                                <input type="text" class="form-control text-center sksSub2bkd" placeholder="SKS" readonly value="{{ number_format($unsur->jmlSKS/count($sesi),2,'.','') }}">
+                                <input type="text" class="form-control text-center sksSub2bkd" name="bkd{{ $key+1}}" readonly value="{{ number_format($unsur->jmlSKS/count($sesi),2,'.','') }}" >
                             </div>
                         </div>
                         <div class="col">
@@ -253,7 +253,7 @@
                                       SKP SKS
                                     </div>
                                 </div>
-                                <input type="text" class="form-control text-center sksSub2skp" placeholder="SKS" readonly value="{{ number_format($unsur->jmlSKS/count($sesi),2,'.','') }}">
+                                <input type="text" class="form-control text-center sksSub2skp" name="skp{{ $key+1}}" readonly value="{{ number_format($unsur->jmlSKS/count($sesi),2,'.','') }}">
                             </div>
                         </div>
                         <div>
@@ -394,7 +394,7 @@
                                         BKD SKS
                                     </div>
                                 </div>
-                                <input type="text" class="form-control text-center sksSub5K" placeholder="SKS" readonly value="{{ $unsur->jmlMHS/4 }}">
+                                <input type="text" class="form-control text-center sksSub5K" placeholder="SKS" readonly value="{{ $unsur->jmlMHS/4 }}" name="bkd1">
                             </div>
                         </div>
                         <div class="col">
@@ -404,7 +404,7 @@
                                         SKP SKS
                                     </div>
                                 </div>
-                                <input type="text" class="form-control text-center sksSub5K" placeholder="SKS" readonly value="{{ $unsur->jmlMHS/4 }}">
+                                <input type="text" class="form-control text-center sksSub5K" placeholder="SKS" readonly value="{{ $unsur->jmlMHS/4 }}" name="skp1">
                             </div>
                         </div>
                     </div>
@@ -425,7 +425,7 @@
                                         BKD SKS
                                     </div>
                                 </div>
-                                <input type="text" class="form-control text-center sksSub5A" placeholder="SKS" readonly value="{{ ($unsur->jmlMHS/4)*0.5 }}">
+                                <input type="text" class="form-control text-center sksSub5A" placeholder="SKS" readonly value="{{ ($unsur->jmlMHS/4)*0.5 }}" name="bkd2">
                             </div>
                         </div>
                         <div class="col">
@@ -435,7 +435,7 @@
                                         SKP SKS
                                     </div>
                                 </div>
-                                <input type="text" class="form-control text-center sksSub5A" placeholder="SKS" readonly value="{{ ($unsur->jmlMHS/4)*0.5 }}">
+                                <input type="text" class="form-control text-center sksSub5A" placeholder="SKS" readonly value="{{ ($unsur->jmlMHS/4)*0.5 }}" name="skp2">
                             </div>
                         </div>
                     </div>

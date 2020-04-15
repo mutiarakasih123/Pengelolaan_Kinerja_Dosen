@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body row" style="padding-left: 50px; padding-right: 50px">
+        <div class="card-body row {{ session('accessId') == 2 ? 'd-none' : '' }}" style="padding-left: 50px; padding-right: 50px">
             <div class="col-sm-6">
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label col-form-label text-right">Kaprodi</label>
@@ -468,6 +468,62 @@
                 </div>
             </div>
             @endif
+        </div>
+        <div class="card-body {{ session('accessId') == 3 ? 'd-none' : '' }}" style="padding-left: 50px; padding-right: 50px">
+            <div class="text-right mb-3">
+                <a href="/export/{{ $pelaksanaan->id }}/bkd" target="_blank" class="btn btn-success">
+                    <i class="fas fa-download"></i>
+                    BKD
+                </a>
+                <a href="/export/{{ $pelaksanaan->id }}/skp" target="_blank" class="btn btn-success">
+                    <i class="fas fa-download"></i>
+                    SKP
+                </a>
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr class="text-center text-uppercase">
+                        <th rowspan="2" class="align-middle">sub unsur</th>
+                        <th rowspan="2" class="align-middle" style="width: 600px">kegiatan</th>
+                        <th rowspan="2" class="align-middle">nama dosen</th>
+                    </tr>
+                    <tr class="text-center text-uppercase">
+                        <th>bkd</th>
+                        <th>skp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($dosen as $data)
+                        <?php
+                            $bkd = 0;
+                            $skp = 0;
+                            foreach ($sks as $item) {
+                                if ($data->dosen == $item->dosen) {
+                                    $bkd = $bkd + $item->countBkd;
+                                    $skp = $skp + $item->countSkp;
+                                }
+                            }
+                        ?>
+                        <tr>
+                            <td class="align-middle">
+                                {{
+                                    $pelaksanaan->subUnsur == 1 ? "Melaksanakan perkuliahan/tutorial dan membimbing" : ($pelaksanaan->subUnsur == 2 ? "Membimbing seminar" : ($pelaksanaan->subUnsur == 3 ? "Membimbing kuliah kerja nyata" : ($pelaksanaan->subUnsur == 4 ? "Membimbing disertasi, tesis, skripsi dan laporan akhir studi" : ($pelaksanaan->subUnsur == 5 ? "Bertugas sebagai penguji pada ujian akhir" : ($pelaksanaan->subUnsur == 6 ? "Membina kegiatan mahasiswa" : "")))))
+                                }}
+                            </td>
+                            <td class="align-middle">{{ $pelaksanaan->kegiatan }}</td>
+                            <td class="align-middle text-center">
+                                @foreach ($users as $datax)
+                                    @if ($data->dosen == $datax->id)
+                                        {{ $datax->nama }}
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td class="align-middle text-center">{{ $bkd }}</td>
+                            <td class="align-middle text-center">{{ $skp }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection
