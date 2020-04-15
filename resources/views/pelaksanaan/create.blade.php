@@ -135,6 +135,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="filePendukung" class="col-sm-4 col-form-label text-right">File Pendukung</label>
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control @if ($errors->has('filePendukung')) is-invalid @endif" id="filePendukung" name="filePendukung">
+                            <div class="invalid-feedback">
+                                {{ $errors->first('filePendukung')}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <span class="border col-sm-12 mb-3"></span>
@@ -434,9 +443,18 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="jumSKSU6" class="col-sm-4 col-form-label text-right">Jumlah SKS</label>
+                        <label for="jumSKSU6bkd" class="col-sm-4 col-form-label text-right">Jumlah SKS BKD</label>
                         <div class="col-sm-8">
-                            <input type="number" {{ old('subUnsur') == 6 ? "required" : "" }} class="form-control @if ($errors->has('jumSKSU6')) is-invalid @endif" id="jumSKSU6" name="jumSKSU6" value="{{ old('jumSKSU6') }}">
+                            <input type="number" {{ old('subUnsur') == 6 ? "required" : "" }} class="form-control @if ($errors->has('jumSKSU6')) is-invalid @endif" id="jumSKSU6bkd" name="jumSKSU6bkd" value="{{ old('jumSKSU6') }}">
+                            <div class="invalid-feedback">
+                                {{ $errors->first('jumSKSU6')}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="jumSKSU6skp" class="col-sm-4 col-form-label text-right">Jumlah SKS SKP</label>
+                        <div class="col-sm-8">
+                            <input type="number" {{ old('subUnsur') == 6 ? "required" : "" }} class="form-control @if ($errors->has('jumSKSU6')) is-invalid @endif" id="jumSKSU6skp" name="jumSKSU6skp" value="{{ old('jumSKSU6') }}">
                             <div class="invalid-feedback">
                                 {{ $errors->first('jumSKSU6')}}
                             </div>

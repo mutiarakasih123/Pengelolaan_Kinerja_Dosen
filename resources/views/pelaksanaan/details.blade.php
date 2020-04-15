@@ -461,9 +461,16 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="jumSKSU6" class="col-sm-4 col-form-label text-right">Jumlah SKS</label>
+                    <label for="jumSKSU6" class="col-sm-4 col-form-label text-right">Jumlah SKS BKD</label>
                     <div class="col-sm-8">
-                        <input type="number" required class="form-control" id="jumSKSU6" name="jumSKSU6" value="{{ $unsur->jmlSKS }}" disabled>
+                        <input type="number" required class="form-control" id="jumSKSU6" name="jumSKSU6" value="{{ $unsur->jmlSKSbkd }}" disabled>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label for="jumSKSU6" class="col-sm-4 col-form-label text-right">Jumlah SKS SKP</label>
+                    <div class="col-sm-8">
+                        <input type="number" required class="form-control" id="jumSKSU6" name="jumSKSU6" value="{{ $unsur->jmlSKSskp }}" disabled>
                     </div>
                 </div>
             </div>
@@ -484,7 +491,8 @@
                 <thead>
                     <tr class="text-center text-uppercase">
                         <th rowspan="2" class="align-middle">sub unsur</th>
-                        <th rowspan="2" class="align-middle" style="width: 600px">kegiatan</th>
+                        <th rowspan="2" class="align-middle" style="width: 500px">kegiatan</th>
+                        <th rowspan="2" class="align-middle {{ $pelaksanaan->subUnsur != 4 ? "d-none" : "" }}">jenis bimbingan</th>
                         <th rowspan="2" class="align-middle">nama dosen</th>
                     </tr>
                     <tr class="text-center text-uppercase">
@@ -511,6 +519,9 @@
                                 }}
                             </td>
                             <td class="align-middle">{{ $pelaksanaan->kegiatan }}</td>
+                            <td class="align-middle text-center {{ $pelaksanaan->subUnsur != 4 ? "d-none" : "" }} ">
+                                {{ $unsur->jnsBimb == 1 ? "Desertasi" : ($unsur->jnsBimb == 2 ? "Tesis" : ($unsur->jnsBimb == 3 ? "Skripsi" : ($unsur->jnsBimb == 4 ? "Laporan Akhir" : ""))) }}
+                            </td>
                             <td class="align-middle text-center">
                                 @foreach ($users as $datax)
                                     @if ($data->dosen == $datax->id)

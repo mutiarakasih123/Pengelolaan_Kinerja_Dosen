@@ -455,9 +455,19 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="jumSKSU6" class="col-sm-4 col-form-label text-right">Jumlah SKS</label>
+                        <label for="jumSKSU6bkd" class="col-sm-4 col-form-label text-right">Jumlah SKS BKD</label>
                         <div class="col-sm-8">
-                            <input type="number" required class="form-control @if ($errors->has('jumSKSU6')) is-invalid @endif" id="jumSKSU6" name="jumSKSU6" value="{{ $unsur->jmlSKS }}">
+                            <input type="number" required class="form-control @if ($errors->has('jumSKSU6')) is-invalid @endif" id="jumSKSU6bkd" name="jumSKSU6bkd" value="{{ $unsur->jmlSKSbkd }}">
+                            <div class="invalid-feedback">
+                                {{ $errors->first('jumSKSU6')}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="jumSKSU6skp" class="col-sm-4 col-form-label text-right">Jumlah SKS SKP</label>
+                        <div class="col-sm-8">
+                            <input type="number" required class="form-control @if ($errors->has('jumSKSU6')) is-invalid @endif" id="jumSKSU6skp" name="jumSKSU6skp" value="{{ $unsur->jmlSKSskp }}">
                             <div class="invalid-feedback">
                                 {{ $errors->first('jumSKSU6')}}
                             </div>
