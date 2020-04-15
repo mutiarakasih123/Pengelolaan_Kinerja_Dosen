@@ -244,7 +244,7 @@
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text" style="font-size: 10px; font-family: 'Times New Roman', Times, serif">
-                                        BKD SKS
+                                        SKP SKS
                                     </div>
                                 </div>
                                 <input type="text" class="form-control text-center sksSub2skp" readonly value="0" name="skp1">
