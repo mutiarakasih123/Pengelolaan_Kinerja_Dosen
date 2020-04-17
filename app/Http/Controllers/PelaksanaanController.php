@@ -13,10 +13,13 @@ use App\subUnsur5;
 use App\subUnsur6;
 use App\sesi;
 use App\countSks;
+use ZipArchive;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Exports\PelaksanaanExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class PelaksanaanController extends Controller
 {
@@ -617,10 +620,28 @@ class PelaksanaanController extends Controller
             }
         }
         if ($status == 'bkd') {
-            return Excel::download(new PelaksanaanExport($dataArrayBkd), 'pelaksanaan-BKD.xlsx');
+            $get = Excel::store(new PelaksanaanExport($dataArrayBkd), 'pelaksanaan-BKD.xlsx','public2' );
+            $zip = new ZipArchive;
+            $zipName = 'pelaksanaan-BKD.zip';
+            if ($zip->open('uploadFiles/'.$zipName, ZipArchive::CREATE) == TRUE) {
+                $zip->addFile('uploadFiles/'.$pelaksanaan->filePendukung);
+                $zip->addFile('uploadFiles/pelaksanaan-BKD.xlsx');    
+                $zip->close();
+            }
+            unlink('uploadFiles/pelaksanaan-BKD.xlsx');
+            return response()->download('uploadFiles/'.$zipName)->deleteFileAfterSend(true);
         }
         if ($status == 'skp') {
-            return Excel::download(new PelaksanaanExport($dataArraySkp), 'pelaksanaan-SKP.xlsx');
+            $get = Excel::store(new PelaksanaanExport($dataArraySkp), 'pelaksanaan-SKP.xlsx','public2' );
+            $zip = new ZipArchive;
+            $zipName = 'pelaksanaan-SKP.zip';
+            if ($zip->open('uploadFiles/'.$zipName, ZipArchive::CREATE) == TRUE) {
+                $zip->addFile('uploadFiles/'.$pelaksanaan->filePendukung);
+                $zip->addFile('uploadFiles/pelaksanaan-SKP.xlsx');    
+                $zip->close();
+            }
+            unlink('uploadFiles/pelaksanaan-SKP.xlsx');
+            return response()->download('uploadFiles/'.$zipName)->deleteFileAfterSend(true);
         }
         
     }
