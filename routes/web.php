@@ -56,3 +56,7 @@ Route::put('/Pelaksanaan/update/{id}', 'PelaksanaanController@update');
 Route::get('/Pelaksanaan/destroy/{id}', 'PelaksanaanController@destroy');
 Route::get('/Pelaksanaan/show/{id}', 'PelaksanaanController@show');
 Route::get('export/{id}/{status}', 'PelaksanaanController@export');
+
+Route::get('/testing', function () {
+    return view('export.export');
+});

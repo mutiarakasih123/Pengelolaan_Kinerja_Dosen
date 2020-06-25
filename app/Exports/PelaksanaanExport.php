@@ -3,17 +3,19 @@
 namespace App\Exports;
 
 use App\pelaksanaan;
+use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class PelaksanaanExport implements FromArray
+class PelaksanaanExport implements FromView
 {
-    protected $data;
-    public function __construct(array $data)
+    public function __construct($id)
     {
-        $this->data = $data;
+        $this->id = $id;
     }
-    public function array(): array
+    public function view(): View
     {
-        return $this->data;
+        $data = pelaksanaan::find($this->id);
+        return view('export.export', compact('data'));
     }
 }
