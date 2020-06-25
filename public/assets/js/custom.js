@@ -49,8 +49,10 @@ $(function () {
             $content = 'Menguji mahasiswa yang mengikuti ujian akhir';
         } else if (id == 6) {
             $content = 'Melakukan pembinaan kegiatan mahasiswa di bidang Akademik dan kemahasiswaan';
+            $('#showMutu').removeClass('d-none');
         } else {
             $content = '';
+            $('#showMutu').addClass('d-none');
         }
         $('#kegiatan').val($content);
     })
@@ -463,6 +465,17 @@ $(function () {
         $('.sksSub5A').val(((Number(count)/4)*0.5).toFixed(2));
 //         sksSub5K
 // sksSub5A
+    })
+    $('#jumKeg').keyup(function(){
+        $val = $(this).val();
+        if ($val != '') {
+            $('#jumSKSU6bkd').val(1);
+            $('#jumSKSU6skp').val(1);
+        }else{
+            $('#jumSKSU6bkd').val('');
+            $('#jumSKSU6skp').val('');
+        }
+
     })
 });
 

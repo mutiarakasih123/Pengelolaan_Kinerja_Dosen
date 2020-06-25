@@ -135,6 +135,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row {{ old('subUnsur') == 6 ? "" : "d-none" }}" id="showMutu">
+                        <label for="mutu" class="col-sm-4 col-form-label text-right">Mutu</label>
+                        <div class="col-sm-8">
+                            <select class="form-control @if ($errors->has('mutu')) is-invalid @endif" id="mutu" name="mutu" value="{{ old('mutu') }}" {{ old('subUnsur') == 6 ? "required" : "" }}>
+                                <option value="">select Mutu</option>
+                                <option value="50%">50%</option>
+                                <option value="100%">100%</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('mutu')}}
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label for="filePendukung" class="col-sm-4 col-form-label text-right">File Pendukung</label>
                         <div class="col-sm-8">
@@ -445,7 +458,7 @@
                     <div class="form-group row">
                         <label for="jumSKSU6bkd" class="col-sm-4 col-form-label text-right">Jumlah SKS BKD</label>
                         <div class="col-sm-8">
-                            <input type="number" {{ old('subUnsur') == 6 ? "required" : "" }} class="form-control @if ($errors->has('jumSKSU6')) is-invalid @endif" id="jumSKSU6bkd" name="jumSKSU6bkd" value="{{ old('jumSKSU6') }}">
+                            <input type="number" readonly class="form-control @if ($errors->has('jumSKSU6')) is-invalid @endif" id="jumSKSU6bkd" name="jumSKSU6bkd" value="{{ old('jumSKSU6') }}">
                             <div class="invalid-feedback">
                                 {{ $errors->first('jumSKSU6')}}
                             </div>
@@ -454,7 +467,7 @@
                     <div class="form-group row">
                         <label for="jumSKSU6skp" class="col-sm-4 col-form-label text-right">Jumlah SKS SKP</label>
                         <div class="col-sm-8">
-                            <input type="number" {{ old('subUnsur') == 6 ? "required" : "" }} class="form-control @if ($errors->has('jumSKSU6')) is-invalid @endif" id="jumSKSU6skp" name="jumSKSU6skp" value="{{ old('jumSKSU6') }}">
+                            <input type="number" readonly class="form-control @if ($errors->has('jumSKSU6')) is-invalid @endif" id="jumSKSU6skp" name="jumSKSU6skp" value="{{ old('jumSKSU6') }}">
                             <div class="invalid-feedback">
                                 {{ $errors->first('jumSKSU6')}}
                             </div>
@@ -463,7 +476,7 @@
                 </div>
 
                 <div class="form-group text-center col-sm-12 mt-4">
-                    <button type="submit" class="btn btn-success">Sumbit</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                     <a href="/Pelaksanaan" class="btn btn-info ml-4">Kembali</a>
                 </div>
             </form>
@@ -527,5 +540,9 @@
         </div>
     </div>
     {{-- cone for sub unsur 2 --}}
+
+    {{-- <script>
+        
+    </script> --}}
 @endsection
 

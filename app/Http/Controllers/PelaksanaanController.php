@@ -80,17 +80,21 @@ class PelaksanaanController extends Controller
         $rename = time()."_".$file->getClientOriginalName();
         $folder = 'uploadFiles';
         $file->move($folder,$rename);
-        $pelaksanaan = pelaksanaan::create([
-            'idJurusan' => $request->jurusan,
-            'subUnsur' => $request->subUnsur,
-            'kegiatan' => $request->kegiatan,
-            'idProdi' => $request->kaprodi,
-            'thnAjaran' => $request->tahunAjaran,
-            'semester' => $request->semester,
-            'tglMulai' =>$request->Tmulai,
-            'tglSelesai' => $request->Tselesai,
-            'filePendukung' => $rename
-        ]);
+        $pelaksanaan = new pelaksanaan;
+        $pelaksanaan->idJurusan = $request->jurusan;
+        $pelaksanaan->subUnsur = $request->subUnsur;
+        $pelaksanaan->kegiatan = $request->kegiatan;
+        $pelaksanaan->idProdi = $request->kaprodi;
+        $pelaksanaan->thnAjaran = $request->tahunAjaran;
+        $pelaksanaan->semester = $request->semester;
+        $pelaksanaan->tglMulai =$request->Tmulai;
+        $pelaksanaan->tglSelesai = $request->Tselesai;
+        $pelaksanaan->filePendukung = $rename;
+        if ($request->subUnsur == 6) {
+            $pelaksanaan->mutu = $request->mutu;
+        }
+        $pelaksanaan->save();
+            
         $idpelaksanaan = $pelaksanaan->id;
         if ($request->subUnsur == 1) {
             $subUnsur1 = subUnsur1::create([
