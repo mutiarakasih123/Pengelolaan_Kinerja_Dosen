@@ -2,20 +2,28 @@
 
 namespace App\Exports;
 
-use App\pelaksanaan;
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromArray;
-use Maatwebsite\Excel\Concerns\FromView;
+use App\users;
 
-class PelaksanaanExport implements FromView
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+
+class PelaksanaanExport implements WithMultipleSheets
 {
-    public function __construct($id)
+    use Exportable;
+
+    /**
+     * @return array
+     */
+    public function sheets(): array
     {
-        $this->id = $id;
+        $user = users::where('akses',2)->get();
+        $sheets = [];
+
+        foreach ($user as $key => $data) {
+            $sheets[] = new sheetUsers($data->nama, $data->nip, $data->jakademi);
+        }
+
+        return $sheets;
     }
-    public function view(): View
-    {
-        $data = pelaksanaan::find($this->id);
-        return view('export.export', compact('data'));
-    }
+    
 }
