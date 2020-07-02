@@ -16,8 +16,9 @@ class sheetUsers implements WithEvents, ShouldAutoSize, WithTitle
     private $nama;
     private $nip;
     private $jabatan;
+    private $kuant;
 
-    public function __construct(string $nama, string $nip, string $jabatan)
+    public function __construct(string $nama, string $nip, string $jabatan, string $kuant)
     {
         $this->nama = $nama;
         $this->nip = $nip;
