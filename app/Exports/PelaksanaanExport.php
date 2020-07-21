@@ -22,10 +22,12 @@ use DB;
 class PelaksanaanExport implements WithEvents, WithTitle
 {
     private $id;
+    private $status;
 
-    public function __construct(int $id)
+    public function __construct(int $id, $status)
     {
         $this->id = $id;
+        $this->status = $status;
     }
 
     /**
@@ -33,6 +35,7 @@ class PelaksanaanExport implements WithEvents, WithTitle
      */
     public function registerEvents(): array
     {
+        $status = $this->status;
         $idUser = session::get('userId');
         $user = users::find($idUser);
         $Kuant = 0;
@@ -43,6 +46,8 @@ class PelaksanaanExport implements WithEvents, WithTitle
         $kegiatan = $pelaksanaan->kegiatan;
         $mulai = date('m',strtotime($pelaksanaan->tglMulai));
         $selesai = date('m',strtotime($pelaksanaan->tglSelesai));
+        $penugasan = $pelaksanaan->penugasan;
+        $dokumen = $pelaksanaan->dokumen;
         $waktu = $selesai - $mulai;
         if ($waktu == 0) {
             $mulai = date('d',strtotime($pelaksanaan->tglMulai));
@@ -52,7 +57,12 @@ class PelaksanaanExport implements WithEvents, WithTitle
             $waktu = $waktu. ' Bulan';
         }
         
-        $getCount = countSks::where('pelaksanaan',$this->id)->where('dosen',$idUser)->sum('countSkp');
+        if ($status == 'skp') {
+            $getCount = countSks::where('pelaksanaan',$this->id)->where('dosen',$idUser)->sum('countSkp');
+        }
+        if ($status == 'bkd') {
+            $getCount = countSks::where('pelaksanaan',$this->id)->where('dosen',$idUser)->sum('countBkd');
+        }
         if ($pelaksanaan->subUnsur == 1) {
             $Kuant = $getCount.' SKS';
             if ($user->jakademi == 'Asisten Ahli') {
@@ -68,7 +78,11 @@ class PelaksanaanExport implements WithEvents, WithTitle
             $countUser = sesi::where('idUnsur',$getSiswa->id)->where('unsur',$pelaksanaan->subUnsur)->where('idDosenG',$idUser)->get()->count();
             $Kuant = $getSiswa->jmlMHS;
             $AK = (($getSiswa->jmlSKS/$count)*$Kuant)*$countUser;
-            $Kuant = $Kuant.' Mahasiswa';
+            if ($status == 'skp') {
+                $Kuant = $Kuant.' Mahasiswa';
+            }else{
+                $Kuant = $getCount.' SKS';
+            }
         }
         if ($pelaksanaan->subUnsur == 4) {
             $getSiswa = subUnsur4::where('idpelaksanaan',$pelaksanaan->id)->first();
@@ -98,12 +112,16 @@ class PelaksanaanExport implements WithEvents, WithTitle
         ];
         return [
             // Handle by a closure.
-            BeforeSheet::class => function(BeforeSheet $event) use ($user,$Kuant,$AK,$waktu,$kegiatan,$mutu) {
+            BeforeSheet::class => function(BeforeSheet $event) use ($user,$Kuant,$AK,$waktu,$kegiatan,$mutu,$status,$penugasan,$dokumen) {
                 $event->sheet->mergeCells('A1:G1');
-                $event->sheet->mergeCells('A2:G2');
-                $event->sheet->setCellValue('A1','DATA SASARAN KERJA');
-                $event->sheet->setCellValue('A2','PEGAWAI NEGERI SIPIL');
-
+                if ($status == 'skp') {
+                    $event->sheet->mergeCells('A2:G2');
+                    $event->sheet->setCellValue('A1','DATA SASARAN KERJA');
+                    $event->sheet->setCellValue('A2','PEGAWAI NEGERI SIPIL');
+                } else {
+                    $event->sheet->setCellValue('A1','KINERJA BIDANG PELAKSANAAN PENDIDIKAN');
+                }
+                
                 $event->sheet->setCellValue('A4','Nama');
                 $event->sheet->setCellValue('A5','NIP');
                 $event->sheet->setCellValue('A6','Jabatan');
@@ -114,25 +132,42 @@ class PelaksanaanExport implements WithEvents, WithTitle
 
                 $event->sheet->mergeCells('A8:A9');
                 $event->sheet->mergeCells('B8:B9');
-                $event->sheet->mergeCells('C8:C9');
-                $event->sheet->mergeCells('D8:G8');
                 $event->sheet->setCellValue('A8','NO');
-                $event->sheet->setCellValue('B8','Kegiatan Tugas Jabatan');
-                $event->sheet->setCellValue('C8','AK');
-                $event->sheet->setCellValue('D8','TARGET');
-                $event->sheet->setCellValue('D9','Kuant / Output');
-                $event->sheet->setCellValue('E9','Kual / Mutu');
-                $event->sheet->setCellValue('F9','Waktu');
-                $event->sheet->setCellValue('G9','Biaya');
-
+                if ($status == 'skp') {
+                    $event->sheet->mergeCells('D8:G8');
+                    $event->sheet->mergeCells('C8:C9');
+                    $event->sheet->setCellValue('B8','Kegiatan Tugas Jabatan');
+                    $event->sheet->setCellValue('C8','AK');
+                    $event->sheet->setCellValue('D8','TARGET');
+                    $event->sheet->setCellValue('D9','Kuant / Output');
+                    $event->sheet->setCellValue('E9','Kual / Mutu');
+                    $event->sheet->setCellValue('F9','Waktu');
+                    $event->sheet->setCellValue('G9','Biaya');
+                    $event->sheet->setCellValue('C11',$AK); // untuk AK
+                    $event->sheet->setCellValue('F11',$waktu);
+                    $event->sheet->setCellValue('D11',$Kuant); // untuk Kuant atau output
+                    $event->sheet->setCellValue('E11',$mutu); // untuk Mutu
+                } else {
+                    $event->sheet->mergeCells('C8:D8');
+                    $event->sheet->mergeCells('E8:E9');
+                    $event->sheet->mergeCells('F8:G8');
+                    $event->sheet->setCellValue('B8','Jenis Kegiatan');
+                    $event->sheet->setCellValue('C8','Beban Kegiatan');
+                    $event->sheet->setCellValue('C9','Bukti Penugasan');
+                    $event->sheet->setCellValue('D9','SKS');
+                    $event->sheet->setCellValue('E8','Masa Penugasan');
+                    $event->sheet->setCellValue('F8','Kinerja');
+                    $event->sheet->setCellValue('F9','Bukti Dokumen');
+                    $event->sheet->setCellValue('G9','SKS');
+                    $event->sheet->setCellValue('C11',$penugasan);
+                    $event->sheet->setCellValue('D11',$Kuant);
+                    $event->sheet->setCellValue('E11',$waktu);
+                    $event->sheet->setCellValue('F11',$dokumen);
+                    $event->sheet->setCellValue('G11',$Kuant);
+                }
                 $event->sheet->setCellValue('B10','Unsur Utama: Pelaksanaan Pendidikan');
-
                 $event->sheet->setCellValue('A11','1');
                 $event->sheet->setCellValue('B11',$kegiatan);
-                $event->sheet->setCellValue('C11',$AK); // untuk AK
-                $event->sheet->setCellValue('D11',$Kuant); // untuk Kuant atau output
-                $event->sheet->setCellValue('E11',$mutu); // untuk Mutu
-                $event->sheet->setCellValue('F11',$waktu);
             },
 
             AfterSheet::class => function(AfterSheet $event) use ($styleArray) {
@@ -194,9 +229,10 @@ class PelaksanaanExport implements WithEvents, WithTitle
                     )
                 );
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(100);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(17);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(17);
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(15);
                 $event->sheet->getStyle('B11')->getAlignment()->setWrapText(true);
                 $event->sheet->setShowGridlines(false);

@@ -65,6 +65,8 @@ class PelaksanaanController extends Controller
             'semester' => 'required',
             'Tmulai' => 'required',
             'Tselesai' => 'required',
+            'penugasan' => 'required',
+            'dokumen' => 'required',
             'filePendukung' => 'required|mimes:doc,docx,xls,xlsx,pdf',
         ]);
         if ($request->subUnsur == 1) {
@@ -81,166 +83,176 @@ class PelaksanaanController extends Controller
         $rename = time()."_".$file->getClientOriginalName();
         $folder = 'uploadFiles';
         $file->move($folder,$rename);
-        $pelaksanaan = new pelaksanaan;
-        $pelaksanaan->idJurusan = $request->jurusan;
-        $pelaksanaan->subUnsur = $request->subUnsur;
-        $pelaksanaan->kegiatan = $request->kegiatan;
-        $pelaksanaan->idProdi = $request->kaprodi;
-        $pelaksanaan->thnAjaran = $request->tahunAjaran;
-        $pelaksanaan->semester = $request->semester;
-        $pelaksanaan->tglMulai =$request->Tmulai;
-        $pelaksanaan->tglSelesai = $request->Tselesai;
-        $pelaksanaan->filePendukung = $rename;
-        if ($request->subUnsur == 6) {
-            $pelaksanaan->mutu = $request->mutu;
-        }
-        $pelaksanaan->save();
-            
-        $idpelaksanaan = $pelaksanaan->id;
-        if ($request->subUnsur == 1) {
-            $subUnsur1 = subUnsur1::create([
-                'idPelaksanaan' => $idpelaksanaan,
-                'kodeMK' => $request->kodeMK,
-                'namaMK' => $request->namaMK,
-                'jumSKS' => $request->jumSks,
-                'kelas' => $request->kelas,
-                'jumSKST' => $request->sksT,
-                'jumSKSP' =>$request->sksP
-            ]);
-            $idSubUnsur1 = $subUnsur1->id;
-            if ($request->sksT > 4) {
-                for ($i=0; $i < $request->sksT ; $i++) {
-                    $n = $i+1;
-                    $sesi = sesi::create([
-                        'idUnsur' => $idSubUnsur1,
-                        'unsur' => $request->subUnsur,
-                        'sesiKe' => $n,
-                        'idDosenT' => $request['dosenT'.$n],
-                        'idDosenP' => $request['dosenP'.$n]
-                    ]);
-                }
-            }else{
-                for ($i=0; $i < 4 ; $i++) {
-                    $n = $i+1;
-                    $sesi = sesi::create([
-                        'idUnsur' => $idSubUnsur1,
-                        'unsur' => $request->subUnsur,
-                        'sesiKe' => $n,
-                        'idDosenT' => $request['dosenT'.$n],
-                        'idDosenP' => $request['dosenP'.$n]
-                    ]);
-                }
-            }
 
-            // for add to count sks
-            for ($i=0; $i < $request->sksT; $i++) { 
-                $n = $i+1;
+        DB::beginTransaction();
+        try {
+            $pelaksanaan = new pelaksanaan;
+            $pelaksanaan->idJurusan = $request->jurusan;
+            $pelaksanaan->subUnsur = $request->subUnsur;
+            $pelaksanaan->kegiatan = $request->kegiatan;
+            $pelaksanaan->idProdi = $request->kaprodi;
+            $pelaksanaan->thnAjaran = $request->tahunAjaran;
+            $pelaksanaan->semester = $request->semester;
+            $pelaksanaan->tglMulai =$request->Tmulai;
+            $pelaksanaan->tglSelesai = $request->Tselesai;
+            $pelaksanaan->filePendukung = $rename;
+            $pelaksanaan->penugasan = $request->penugasan;
+            $pelaksanaan->dokumen = $request->dokumen;
+            if ($request->subUnsur == 6) {
+                $pelaksanaan->mutu = $request->mutu;
+            }
+            $pelaksanaan->save();
+                
+            $idpelaksanaan = $pelaksanaan->id;
+            if ($request->subUnsur == 1) {
+                $subUnsur1 = subUnsur1::create([
+                    'idPelaksanaan' => $idpelaksanaan,
+                    'kodeMK' => $request->kodeMK,
+                    'namaMK' => $request->namaMK,
+                    'jumSKS' => $request->jumSks,
+                    'kelas' => $request->kelas,
+                    'jumSKST' => $request->sksT,
+                    'jumSKSP' =>$request->sksP
+                ]);
+                $idSubUnsur1 = $subUnsur1->id;
+                if ($request->sksT > 4) {
+                    for ($i=0; $i < $request->sksT ; $i++) {
+                        $n = $i+1;
+                        $sesi = sesi::create([
+                            'idUnsur' => $idSubUnsur1,
+                            'unsur' => $request->subUnsur,
+                            'sesiKe' => $n,
+                            'idDosenT' => $request['dosenT'.$n],
+                            'idDosenP' => $request['dosenP'.$n]
+                        ]);
+                    }
+                }else{
+                    for ($i=0; $i < 4 ; $i++) {
+                        $n = $i+1;
+                        $sesi = sesi::create([
+                            'idUnsur' => $idSubUnsur1,
+                            'unsur' => $request->subUnsur,
+                            'sesiKe' => $n,
+                            'idDosenT' => $request['dosenT'.$n],
+                            'idDosenP' => $request['dosenP'.$n]
+                        ]);
+                    }
+                }
+    
+                // for add to count sks
+                for ($i=0; $i < $request->sksT; $i++) { 
+                    $n = $i+1;
+                    countSks::create([
+                        'pelaksanaan' => $pelaksanaan->id,
+                        'sesi' => $n,
+                        'dosen' => $request['dosenT'.$n],
+                        'countBkd' => $request['bkdt'.$n],
+                        'countSkp' => $request['skpt'.$n],
+                    ]);
+                }
+                for ($i=0; $i < 4; $i++) { 
+                    $n = $i+1;
+                    countSks::create([
+                        'pelaksanaan' => $pelaksanaan->id,
+                        'sesi' => $n,
+                        'dosen' => $request['dosenP'.$n],
+                        'countBkd' => $request['bkdp'.$n],
+                        'countSkp' => $request['skpp'.$n],
+                    ]);
+                }
+                
+            }elseif ($request->subUnsur == 2 || $request->subUnsur == 3) {
+                $subUnsur23 = subUnsur23::create([
+                    'idPelaksanaan' => $idpelaksanaan,
+                    'jmlMHS' => $request->jumMhs,
+                    'jmlSKS' => $request->jumSksMhs
+                ]);
+                $idSubUnsur23 = $subUnsur23->id;
+                for ($i=0; $i < $request->countDosen ; $i++) {
+                    $n = $i+1;
+                    $idDosenG = $request['dosenU'.$i];
+                    sesi::create([
+                        'idUnsur' => $idSubUnsur23,
+                        'unsur' => $request->subUnsur,
+                        'sesiKe' => null,
+                        'idDosenG' => $idDosenG,
+                        'idDosenT' => null,
+                        'idDosenP' => null
+                    ]);
+                    countSks::create([
+                        'pelaksanaan' => $pelaksanaan->id,
+                        'sesi' => $n,
+                        'dosen' => $idDosenG,
+                        'countBkd' => $request->jumSksMhs/$request->countDosen,
+                        'countSkp' => $request->jumSksMhs/$request->countDosen,
+                    ]);
+                }
+            }elseif ($request->subUnsur == 4) {
+                subUnsur4::create([
+                    'idpelaksanaan' => $idpelaksanaan,
+                    'jnsBimb' => $request->jnsBim,
+                    'jmlMHS' => $request->jumMhsis,
+                    'jmlSKS' => 0,
+                    'idDosen1' => $request->dosenPemb1,
+                    'bkd1' => $request->sksSub4bkd1,
+                    'skp1' => $request->sksSub4skp1,
+                    'idDosen2' => $request->dosenPemb2,
+                    'bkd2' => $request->sksSub4bkd2,
+                    'skp2' => $request->sksSub4skp2,
+                ]);
+                for ($i=0; $i < 2 ; $i++) { 
+                    $n = $i+1;
+                    countSks::create([
+                        'pelaksanaan' => $pelaksanaan->id,
+                        'sesi' => $n,
+                        'dosen' => $request['dosenPemb'.$n],
+                        'countBkd' => $request['sksSub4bkd'.$n],
+                        'countSkp' => $request['sksSub4skp'.$n],
+                    ]);
+                }
+            }elseif ($request->subUnsur == 5) {
+                subUnsur5::create([
+                    'idpelaksanaan' => $idpelaksanaan,
+                    'jmlMHS' => $request->jumMhsiswa,
+                    'idDosenK' => $request->idDosenK,
+                    'idDosenA' => $request->idDosenA
+                ]);
                 countSks::create([
                     'pelaksanaan' => $pelaksanaan->id,
-                    'sesi' => $n,
-                    'dosen' => $request['dosenT'.$n],
-                    'countBkd' => $request['bkdt'.$n],
-                    'countSkp' => $request['skpt'.$n],
-                ]);
-            }
-            for ($i=0; $i < 4; $i++) { 
-                $n = $i+1;
-                countSks::create([
-                    'pelaksanaan' => $pelaksanaan->id,
-                    'sesi' => $n,
-                    'dosen' => $request['dosenP'.$n],
-                    'countBkd' => $request['bkdp'.$n],
-                    'countSkp' => $request['skpp'.$n],
-                ]);
-            }
-            
-        }elseif ($request->subUnsur == 2 || $request->subUnsur == 3) {
-            $subUnsur23 = subUnsur23::create([
-                'idPelaksanaan' => $idpelaksanaan,
-                'jmlMHS' => $request->jumMhs,
-                'jmlSKS' => $request->jumSksMhs
-            ]);
-            $idSubUnsur23 = $subUnsur23->id;
-            for ($i=0; $i < $request->countDosen ; $i++) {
-                $n = $i+1;
-                $idDosenG = $request['dosenU'.$i];
-                sesi::create([
-                    'idUnsur' => $idSubUnsur23,
-                    'unsur' => $request->subUnsur,
-                    'sesiKe' => null,
-                    'idDosenG' => $idDosenG,
-                    'idDosenT' => null,
-                    'idDosenP' => null
+                    'sesi' => 1,
+                    'dosen' => $request->idDosenK,
+                    'countBkd' => $request->bkd1,
+                    'countSkp' => $request->skp1,
                 ]);
                 countSks::create([
                     'pelaksanaan' => $pelaksanaan->id,
-                    'sesi' => $n,
-                    'dosen' => $idDosenG,
-                    'countBkd' => $request['bkd'.$n],
-                    'countSkp' => $request['skp'.$n],
+                    'sesi' => 2,
+                    'dosen' => $request->idDosenA,
+                    'countBkd' => $request->bkd2,
+                    'countSkp' => $request->skp2,
                 ]);
-            }
-        }elseif ($request->subUnsur == 4) {
-            subUnsur4::create([
-                'idpelaksanaan' => $idpelaksanaan,
-                'jnsBimb' => $request->jnsBim,
-                'jmlMHS' => $request->jumMhsis,
-                'jmlSKS' => 0,
-                'idDosen1' => $request->dosenPemb1,
-                'bkd1' => $request->sksSub4bkd1,
-                'skp1' => $request->sksSub4skp1,
-                'idDosen2' => $request->dosenPemb2,
-                'bkd2' => $request->sksSub4bkd2,
-                'skp2' => $request->sksSub4skp2,
-            ]);
-            for ($i=0; $i < 2 ; $i++) { 
-                $n = $i+1;
+            }elseif ($request->subUnsur == 6) {
+                subUnsur6::create([
+                    'idpelaksanaan' => $idpelaksanaan,
+                    'idDosen' => session('userId'),
+                    'jmlKeg' => $request->jumKeg,
+                    'jmlSKSbkd' => $request->jumSKSU6bkd,
+                    'jmlSKSskp' => $request->jumSKSU6skp
+                ]);
                 countSks::create([
                     'pelaksanaan' => $pelaksanaan->id,
-                    'sesi' => $n,
-                    'dosen' => $request['dosenPemb'.$n],
-                    'countBkd' => $request['sksSub4bkd'.$n],
-                    'countSkp' => $request['sksSub4skp'.$n],
+                    'sesi' => 1,
+                    'dosen' => session('userId'),
+                    'countBkd' => $request->jumSKSU6bkd,
+                    'countSkp' => $request->jumSKSU6skp,
                 ]);
             }
-        }elseif ($request->subUnsur == 5) {
-            subUnsur5::create([
-                'idpelaksanaan' => $idpelaksanaan,
-                'jmlMHS' => $request->jumMhsiswa,
-                'idDosenK' => $request->idDosenK,
-                'idDosenA' => $request->idDosenA
-            ]);
-            countSks::create([
-                'pelaksanaan' => $pelaksanaan->id,
-                'sesi' => 1,
-                'dosen' => $request->idDosenK,
-                'countBkd' => $request->bkd1,
-                'countSkp' => $request->skp1,
-            ]);
-            countSks::create([
-                'pelaksanaan' => $pelaksanaan->id,
-                'sesi' => 2,
-                'dosen' => $request->idDosenA,
-                'countBkd' => $request->bkd2,
-                'countSkp' => $request->skp2,
-            ]);
-        }elseif ($request->subUnsur == 6) {
-            subUnsur6::create([
-                'idpelaksanaan' => $idpelaksanaan,
-                'idDosen' => session('userId'),
-                'jmlKeg' => $request->jumKeg,
-                'jmlSKSbkd' => $request->jumSKSU6bkd,
-                'jmlSKSskp' => $request->jumSKSU6skp
-            ]);
-            countSks::create([
-                'pelaksanaan' => $pelaksanaan->id,
-                'sesi' => 1,
-                'dosen' => session('userId'),
-                'countBkd' => $request->jumSKSU6bkd,
-                'countSkp' => $request->jumSKSU6skp,
-            ]);
+            DB::commit();
+            return redirect('/Pelaksanaan');
+        } catch (\Throwable $e) {
+            DB::rollback();
+            print_r($e);
         }
-        return redirect('/Pelaksanaan');
     }
 
     /**
@@ -635,10 +647,10 @@ class PelaksanaanController extends Controller
             // }
             // unlink('uploadFiles/pelaksanaan-BKD.xlsx');
             // return response()->download('uploadFiles/'.$zipName)->deleteFileAfterSend(true);
-            return Excel::download(new PelaksanaanExport($id), 'invoices.xlsx');
+            return Excel::download(new PelaksanaanExport($id,'bkd'), 'invoices.xlsx');
         }
         if ($status == 'skp') {
-            $get = Excel::store(new PelaksanaanExport($id), 'pelaksanaan-SKP.xlsx','public2' );
+            $get = Excel::store(new PelaksanaanExport($id,'skp'), 'pelaksanaan-SKP.xlsx','public2' );
             $zip = new ZipArchive;
             $zipName = 'pelaksanaan-SKP.zip';
             if ($zip->open('uploadFiles/'.$zipName, ZipArchive::CREATE) == TRUE) {

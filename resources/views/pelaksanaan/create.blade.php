@@ -75,6 +75,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="kegiatan" class="col-sm-2 col-form-label text-right">Bukti Penugasan</label>
+                        <div class="col-sm-10">
+                            <textarea name="penugasan" class="form-control text-justify @if ($errors->has('penugasan')) is-invalid @endif" rows="1" >{{ old('penugasan') }}</textarea>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('penugasan')}}
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="col-sm-6">
@@ -154,6 +163,15 @@
                             <input type="file" class="form-control @if ($errors->has('filePendukung')) is-invalid @endif" id="filePendukung" name="filePendukung">
                             <div class="invalid-feedback">
                                 {{ $errors->first('filePendukung')}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="kegiatan" class="col-sm-4 col-form-label text-right">Bukti Dokumen</label>
+                        <div class="col-sm-8">
+                            <textarea name="dokumen" class="form-control text-justify @if ($errors->has('dokumen')) is-invalid @endif" rows="1" >{{ old('dokumen') }}</textarea>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('dokumen')}}
                             </div>
                         </div>
                     </div>
