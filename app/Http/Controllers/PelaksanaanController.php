@@ -637,17 +637,16 @@ class PelaksanaanController extends Controller
             }
         }
         if ($status == 'bkd') {
-            // $get = Excel::store(new PelaksanaanExport($dataArrayBkd), 'pelaksanaan-BKD.xlsx','public2' );
-            // $zip = new ZipArchive;
-            // $zipName = 'pelaksanaan-BKD.zip';
-            // if ($zip->open('uploadFiles/'.$zipName, ZipArchive::CREATE) == TRUE) {
-            //     $zip->addFile('uploadFiles/'.$pelaksanaan->filePendukung);
-            //     $zip->addFile('uploadFiles/pelaksanaan-BKD.xlsx');    
-            //     $zip->close();
-            // }
-            // unlink('uploadFiles/pelaksanaan-BKD.xlsx');
-            // return response()->download('uploadFiles/'.$zipName)->deleteFileAfterSend(true);
-            return Excel::download(new PelaksanaanExport($id,'bkd'), 'invoices.xlsx');
+            $get = Excel::store(new PelaksanaanExport($id,'bkd'), 'pelaksanaan-BKD.xlsx','public2' );
+            $zip = new ZipArchive;
+            $zipName = 'pelaksanaan-BKD.zip';
+            if ($zip->open('uploadFiles/'.$zipName, ZipArchive::CREATE) == TRUE) {
+                $zip->addFile('uploadFiles/'.$pelaksanaan->filePendukung);
+                $zip->addFile('uploadFiles/pelaksanaan-BKD.xlsx');    
+                $zip->close();
+            }
+            unlink('uploadFiles/pelaksanaan-BKD.xlsx');
+            return response()->download('uploadFiles/'.$zipName)->deleteFileAfterSend(true);
         }
         if ($status == 'skp') {
             $get = Excel::store(new PelaksanaanExport($id,'skp'), 'pelaksanaan-SKP.xlsx','public2' );
